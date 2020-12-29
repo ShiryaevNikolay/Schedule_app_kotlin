@@ -6,11 +6,12 @@
     <string name="notes">Notes</string>
 
     <string-array name="days_of_week">
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
-        <item></item>
+        <item>MON</item>
+        <item>TUES</item>
+        <item>WED</item>
+        <item>THURS</item>
+        <item>FRI</item>
+        <item>SAT</item>
+        <item>SUN</item>
     </string-array>
 </resources>
