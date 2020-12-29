@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+
+    <item
+        android:icon="@drawable/ic_home"
+        android:title="@string/home_screen" />
+
+    <item
+        android:icon="@drawable/ic_calendar_edit"
+        android:title="@string/edit" />
+
+    <item
+        android:icon="@drawable/ic_notebook"
+        android:title="@string/notes" />
+</menu>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Schedule</string>
+    <string name="settings">Settings</string>
+    <string name="home_screen">Home screen</string>
+    <string name="edit">Edit</string>
+    <string name="notes">Notes</string>
+
+    <string-array name="days_of_week">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+</resources>

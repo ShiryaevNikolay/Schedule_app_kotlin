@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BNViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@drawable/bnv_background</item>
+    </style>
+
+    <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar">
+        <item name="colorAccent">@color/gray_900</item>
+        <item name="colorPrimary">@color/gray_900</item>
+        <item name="colorSecondary">@color/gray_900</item>
+    </style>
+</resources>
