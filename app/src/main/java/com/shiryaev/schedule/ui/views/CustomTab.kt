@@ -25,12 +25,11 @@ class CustomTab @JvmOverloads constructor(
         inflate(context, R.layout.custom_tab, this)
         this.findViewById<MaterialCardView>(R.id.tab_card).setOnClickListener { onTabClickListener?.invoke() }
 
-        val param = LinearLayout.LayoutParams(
+        this.layoutParams = LinearLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT,
-                1.0f
+//                1.0f
         )
-        this.layoutParams = param
 
         attrs.let {
             val a = context.theme.obtainStyledAttributes(
@@ -40,8 +39,6 @@ class CustomTab @JvmOverloads constructor(
             a.recycle()
             setText(text)
         }
-
-        setUnselectedColor()
     }
 
     fun setUnselectedColor() {
@@ -64,7 +61,7 @@ class CustomTab @JvmOverloads constructor(
         this.findViewById<MaterialCardView>(R.id.tab_card).setCardBackgroundColor(myList)
     }
 
-    private fun setText(text: String) {
+    fun setText(text: String) {
         this.findViewById<TextView>(R.id.tab_tv).text = text
     }
 }

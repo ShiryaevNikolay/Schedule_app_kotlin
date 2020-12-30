@@ -7,9 +7,9 @@
 
     <string-array name="days_of_week">
         <item>MON</item>
-        <item>TUES</item>
+        <item>TU</item>
         <item>WED</item>
-        <item>THURS</item>
+        <item>TH</item>
         <item>FRI</item>
         <item>SAT</item>
         <item>SUN</item>

@@ -6,18 +6,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TableLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.shiryaev.schedule.R
 
 class CustomTabLayout(
         context: Context?,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+        attrs: AttributeSet? = null
+) : LinearLayout(context, attrs) {
+
+    private var selectedItem = 0
+
     init {
         orientation = HORIZONTAL
-        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        this.layoutParams = LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT
+        )
+        val listItems = ArrayList<CustomTab>()
+        val arrayTextTab = context?.resources?.getStringArray(R.array.days_of_week)
+        if (arrayTextTab != null) {
+            for (item in arrayTextTab) {
+                listItems.add(CustomTab(context).apply { setText(item) })
+            }
+        }
+        initItems(listItems)
     }
 
-    fun addItems(listItems: ArrayList<CustomTab>) {
+    private fun initItems(listItems: ArrayList<CustomTab>) {
         val lenList = listItems.size
         for (i in 0 until lenList) {
             this.addView(listItems[i])
