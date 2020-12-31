@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
 <!--    <fragment-->
 <!--        android:id="@+id/nav_host_fragment"-->
@@ -18,7 +18,15 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <include layout="@layout/fr_home_schedule"/>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment"
+        android:name="com.shiryaev.schedule.ui.fragments.HomeScheduleFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/home_screen_bnv"

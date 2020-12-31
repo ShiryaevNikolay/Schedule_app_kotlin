@@ -9,4 +9,8 @@
         <item name="colorPrimary">@color/gray_900</item>
         <item name="colorSecondary">@color/gray_900</item>
     </style>
+
+    <style name="CardStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">?android:attr/windowBackground</item>
+    </style>
 </resources>
