@@ -1,14 +1,21 @@
 package com.shiryaev.schedule.ui.views
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
 import com.shiryaev.schedule.R
+import com.shiryaev.schedule.tools.adapters.CustomTabAdapter
+import com.shiryaev.schedule.tools.interfaces.OnClickCustomTabListener
+import com.shiryaev.schedule.ui.views.utils.fetchColorBackground
+import com.shiryaev.schedule.ui.views.utils.fetchColorPrimary
+import com.shiryaev.schedule.ui.views.utils.fetchColorText
 
 
 class CustomTab @JvmOverloads constructor(
@@ -17,18 +24,26 @@ class CustomTab @JvmOverloads constructor(
         defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var onTabClickListener: (() -> Unit)? = null
+    var positionItem = 0
 
+    private var selectedItem = 0
     private var text: String = ""
+    private val cardTab: MaterialCardView
+    private val textTab: AppCompatTextView
+
+    private lateinit var onClickTab: OnClickCustomTabListener
 
     init {
         inflate(context, R.layout.custom_tab, this)
-        this.findViewById<MaterialCardView>(R.id.tab_card).setOnClickListener { onTabClickListener?.invoke() }
+
+        cardTab = this.findViewById(R.id.tab_card)
+        textTab = this.findViewById(R.id.tab_tv)
+
+        cardTab.setOnClickListener { onClickTab.onClickCustomTab(positionItem) }
 
         this.layoutParams = LinearLayout.LayoutParams(
                 LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT,
-//                1.0f
         )
 
         attrs.let {
@@ -41,27 +56,45 @@ class CustomTab @JvmOverloads constructor(
         }
     }
 
-    fun setUnselectedColor() {
-        val states = arrayOf(
-                intArrayOf(android.R.attr.state_enabled),
-                intArrayOf(android.R.attr.state_enabled),
-                intArrayOf(android.R.attr.state_checked),
-                intArrayOf(android.R.attr.state_pressed)
-        )
+    fun setText(text: String) { textTab.text = text }
 
-        val colors = intArrayOf(
-                Color.TRANSPARENT,
-                Color.RED,
-                Color.GREEN,
-                Color.BLUE
-        )
+    fun setPosition(position: Int) { this.positionItem = position }
 
-        val myList = ColorStateList(states, colors)
-
-        this.findViewById<MaterialCardView>(R.id.tab_card).setCardBackgroundColor(myList)
+    fun setSelectedItem(selected: Int) {
+        this.selectedItem = selected
+        if (this.selectedItem == positionItem) {
+            setSelectedColor()
+        } else {
+            setUnselectedColor()
+        }
     }
 
-    fun setText(text: String) {
-        this.findViewById<TextView>(R.id.tab_tv).text = text
+    fun serAdapter(adapter: CustomTabAdapter) {
+        onClickTab = adapter
+    }
+
+    @SuppressLint("ResourceType")
+    private fun setSelectedColor() {
+        // СДЕЛАТЬ ИВЕРСИЮ ЦВЕТА ТЕКСТА!
+//        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+//        paint.style = Paint.Style.FILL_AND_STROKE
+//        val cmData = floatArrayOf(
+//                -1f, 0f, 0f, 0f, 255f,
+//                0f, -1f, 0f, 0f, 255f,
+//                0f, 0f, -1f, 0f, 255f,
+//                0f, 0f, 0f, 1f, 0f)
+//        val cm = ColorMatrix(cmData)
+//        val filter = ColorMatrixColorFilter(cm)
+//        paint.colorFilter = filter
+
+        cardTab.setCardBackgroundColor(fetchColorPrimary(context))
+//        textTab.setTextColor(fetchColorText(context))
+//        textTab.setTextColor(paint.color)
+    }
+
+    @SuppressLint("ResourceType")
+    private fun setUnselectedColor() {
+        cardTab.setCardBackgroundColor(fetchColorBackground(context))
+        textTab.setTextColor(fetchColorText(context))
     }
 }

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.shiryaev.schedule.databinding.FrHomeScheduleBinding
-import com.shiryaev.schedule.tools.ViewPagerAdapter
+import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
 
 class HomeScheduleFragment : Fragment() {
 

@@ -8,6 +8,7 @@ import android.widget.TableLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.shiryaev.schedule.R
+import com.shiryaev.schedule.tools.adapters.CustomTabAdapter
 
 class CustomTabLayout(
         context: Context?,
@@ -16,6 +17,7 @@ class CustomTabLayout(
 
     private var selectedItem = 0
     private var viewPager2: ViewPager2? = null
+    private lateinit var adapter: CustomTabAdapter
 
     init {
         orientation = HORIZONTAL
@@ -25,46 +27,8 @@ class CustomTabLayout(
                 ConstraintLayout.LayoutParams.WRAP_CONTENT
         )
 
-        if (context != null) { initItems(context) }
-    }
-
-//    fun setupWithViewPager(viewPager: ViewPager2) { setupWithViewPager(viewPager, false) }
-
-//    fun setupWithViewPager(viewPager: ViewPager2, autoRefresh: Boolean) {
-//        setupWithViewPager(viewPager, false, false)
-//    }
-
-//    private fun setupWithViewPager(viewPager: ViewPager2, autoRefresh: Boolean, implicitSetup: Boolean) {
-//        if (this.viewPager2 != null) {
-//            // Если мы уже настроили ViewPager, удалите нас из него
-//            if (pageChangeListener != null) {
-//                this.viewPager2.removeOnPageChangeListener(pageChangeListener)
-//            }
-//            if (adapterChangeListener != null) {
-//                this.viewPager2.removeOnAdapterChangeListener(adapterChangeListener)
-//            }
-//        }
-//    }
-
-    private fun initItems(context: Context) {
-        val listItems = ArrayList<CustomTab>()
-        val arrayTextTab = context.resources.getStringArray(R.array.days_of_week)
-        for (item in arrayTextTab) {
-            listItems.add(CustomTab(context).apply { setText(item) })
-        }
-        addItems(listItems)
-    }
-
-    private fun addItems(listItems: ArrayList<CustomTab>) {
-        val lenList = listItems.size
-        for (i in 0 until lenList) {
-            this.addView(listItems[i])
-            if (lenList > 1 && i != lenList - 1) {
-                val newView = View(context)
-                val param = TableLayout.LayoutParams(0, 0, 1f)
-                newView.layoutParams = param
-                this.addView(newView)
-            }
+        if (context != null) {
+            adapter = CustomTabAdapter(context).apply { setLayout(this@CustomTabLayout) }
         }
     }
 }
