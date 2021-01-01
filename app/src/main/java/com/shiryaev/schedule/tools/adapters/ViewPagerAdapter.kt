@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.shiryaev.schedule.ui.fragments.PageScheduleFragment
+import com.shiryaev.schedule.utils.UtilsKeys
 
 class ViewPagerAdapter(
         fragment: Fragment
@@ -13,7 +14,7 @@ class ViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment = PageScheduleFragment().apply {
         arguments = bundleOf(
-                "position" to position
+                UtilsKeys.POSITION_PAGE.key to position
         )
     }
 
