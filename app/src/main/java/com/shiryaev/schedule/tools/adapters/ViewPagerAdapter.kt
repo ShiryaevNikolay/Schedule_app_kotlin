@@ -1,26 +1,25 @@
 package com.shiryaev.schedule.tools.adapters
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.shiryaev.schedule.databinding.FrPageScheduleBinding
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.shiryaev.schedule.ui.fragments.PageScheduleFragment
 
-class ViewPagerAdapter : RecyclerView.Adapter<ViewPagerAdapter.PagerVH>() {
+class ViewPagerAdapter(
+        fragment: Fragment
+) : FragmentStateAdapter(fragment) {
 
-    private var listPage = ArrayList<PageScheduleFragment>()
+    private var countPage = 0
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerVH {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val itemView = FrPageScheduleBinding.inflate(layoutInflater, parent, false)
-        return PagerVH(itemView)
+    override fun createFragment(position: Int): Fragment = PageScheduleFragment().apply {
+        arguments = bundleOf(
+                "position" to position
+        )
     }
 
-    override fun onBindViewHolder(holder: PagerVH, position: Int) = holder.itemView.run {
-        // Todo
+    override fun getItemCount(): Int = countPage
+
+    fun setCountPage(count: Int) {
+        this.countPage = count
     }
-
-    override fun getItemCount(): Int = 3
-
-    inner class PagerVH(private val itemView: FrPageScheduleBinding) : RecyclerView.ViewHolder(itemView.root)
 }

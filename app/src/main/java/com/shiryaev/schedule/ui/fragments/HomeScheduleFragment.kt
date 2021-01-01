@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.shiryaev.schedule.databinding.FrHomeScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
 
@@ -28,7 +30,12 @@ class HomeScheduleFragment : Fragment() {
 
     private fun initViewPager(_binding: FrHomeScheduleBinding) {
         _binding.homeScreenVp.apply {
-            adapter = ViewPagerAdapter()
+            adapter = ViewPagerAdapter(this@HomeScheduleFragment).apply { setCountPage(6) }
+            registerOnPageChangeCallback(object : OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+
+                }
+            })
         }
     }
 }
