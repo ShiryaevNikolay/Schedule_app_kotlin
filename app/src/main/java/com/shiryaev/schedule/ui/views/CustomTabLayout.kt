@@ -9,14 +9,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.tools.adapters.CustomTabAdapter
+import com.shiryaev.schedule.tools.interfaces.OnClickCustomTabListener
 
 class CustomTabLayout(
         context: Context?,
         attrs: AttributeSet? = null
-) : LinearLayout(context, attrs) {
+) : LinearLayout(context, attrs), OnClickCustomTabListener {
+
+    var setSelectedPage: ((selectedTab: Int) -> Unit)? = null
 
     private var selectedItem = 0
-    private var viewPager2: ViewPager2? = null
     private lateinit var adapter: CustomTabAdapter
 
     init {
@@ -28,7 +30,16 @@ class CustomTabLayout(
         )
 
         if (context != null) {
-            adapter = CustomTabAdapter(context).apply { setLayout(this@CustomTabLayout) }
+            adapter = CustomTabAdapter(context, this, selectedItem).apply { setLayout(this@CustomTabLayout) }
         }
+    }
+
+    override fun onClickCustomTab(positionTab: Int) {
+        this.selectedItem = positionTab
+        setSelectedPage?.invoke(positionTab)
+    }
+
+    fun setSelectedTab(positionPage: Int) {
+        adapter.setSelectedTab(positionPage)
     }
 }

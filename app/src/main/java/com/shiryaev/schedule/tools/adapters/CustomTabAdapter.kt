@@ -9,8 +9,9 @@ import com.shiryaev.schedule.ui.views.CustomTab
 import com.shiryaev.schedule.ui.views.CustomTabLayout
 
 class CustomTabAdapter(
-    private val context: Context,
-    private var selectedTab: Int = 0
+        private val context: Context,
+        private val onClickTab: OnClickCustomTabListener,
+        private var selectedTab: Int = 0
 ) : OnClickCustomTabListener {
 
     private val tabs = ArrayList<CustomTab>()
@@ -18,9 +19,16 @@ class CustomTabAdapter(
     fun setLayout(rootLayout: CustomTabLayout) { initTabs(rootLayout) }
 
     override fun onClickCustomTab(positionTab: Int) {
-        tabs[selectedTab].setSelectedItem(positionTab)
-        selectedTab = positionTab
-        tabs[positionTab].setSelectedItem(positionTab)
+        setSelectedTab(positionTab)
+
+        onClickTab.onClickCustomTab(positionTab)
+    }
+
+    fun setSelectedTab(selectedTab: Int) {
+        // Меняем индикатор выбранного таба
+        tabs[this.selectedTab].setSelectedItem(selectedTab)
+        this.selectedTab = selectedTab
+        tabs[this.selectedTab].setSelectedItem(selectedTab)
     }
 
     private fun initTabs(rootLayout: CustomTabLayout) {
