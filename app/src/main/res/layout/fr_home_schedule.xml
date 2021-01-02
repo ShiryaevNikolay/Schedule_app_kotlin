@@ -48,7 +48,7 @@
                         android:id="@+id/top_bar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textColor="?android:attr/colorPrimary"
                         android:text="Понедельник"/>
 
@@ -75,7 +75,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/default_dimen"/>
+                android:layout_marginTop="@dimen/default_dimen"
+                android:visibility="gone"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

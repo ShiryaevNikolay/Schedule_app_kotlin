@@ -17,6 +17,7 @@ class CustomTabLayout(
 ) : LinearLayout(context, attrs), OnClickCustomTabListener {
 
     var setSelectedPage: ((selectedTab: Int) -> Unit)? = null
+    var getSelectedTab: ((selectedTab: Int) -> Unit)? = null
 
     private var selectedItem = 0
     private var countTab = 0
@@ -33,6 +34,7 @@ class CustomTabLayout(
 
     fun setSelectedTab(positionPage: Int) {
         adapter.setSelectedTab(positionPage)
+        getSelectedTab?.invoke(positionPage)
     }
 
     fun setCountTab(countTab: Int) {
@@ -50,5 +52,6 @@ class CustomTabLayout(
     override fun onClickCustomTab(positionTab: Int) {
         this.selectedItem = positionTab
         setSelectedPage?.invoke(positionTab)
+        getSelectedTab?.invoke(positionTab)
     }
 }

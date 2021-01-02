@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrHomeScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
 import com.shiryaev.schedule.ui.views.CustomTabLayout
+import com.shiryaev.schedule.ui.views.utils.*
 
-class HomeScheduleFragment : Fragment() {
+class HomeScheduleFragment : Fragment(), View.OnClickListener {
 
     private var countPage = 0
+    private var showCalendar = false
+    private var showTabs = false
     private var _binding: FrHomeScheduleBinding? = null
     private val binding get() = _binding!!
 
@@ -37,8 +42,11 @@ class HomeScheduleFragment : Fragment() {
         _binding  = FrHomeScheduleBinding.inflate(inflater, container, false)
 
         initTabLayout(binding.customTabLayout)
-
         initViewPager(binding)
+
+        binding.topBarShowTabsBtn.setOnClickListener(this)
+        binding.topBarTitle.setOnClickListener(this)
+        binding.changeViewBtn.setOnClickListener(this)
 
         return binding.root
     }
@@ -48,11 +56,26 @@ class HomeScheduleFragment : Fragment() {
         _binding = null
     }
 
+    override fun onClick(v: View) {
+        when(v.id) {
+            R.id.top_bar_show_tabs_btn, R.id.top_bar_title -> {
+                context?.let { showTabs = showTabs(it, binding.topBarShowTabsBtn, !showTabs) }
+                binding.customTabLayout.isVisible = showTabs
+            }
+            R.id.change_view_btn -> {
+                context?.let { showCalendar = changeIconCalendar(it, binding.changeViewBtn, !showCalendar) }
+            }
+        }
+    }
+
     private fun initTabLayout(tabLayout: CustomTabLayout) {
         tabLayout.run {
             setCountTab(countPage)
             setSelectedPage = { selectedTab ->
                 binding.homeScreenVp.currentItem = selectedTab
+            }
+            getSelectedTab = { selectedTab ->
+                setTextTitle(selectedTab)
             }
         }
     }
@@ -67,5 +90,10 @@ class HomeScheduleFragment : Fragment() {
                 }
             })
         }
+    }
+
+    private fun setTextTitle(position: Int) {
+        val arrayTextTitle = context?.resources?.getStringArray(R.array.full_days_of_week)
+        binding.topBarTitle.text = arrayTextTitle?.get(position)
     }
 }

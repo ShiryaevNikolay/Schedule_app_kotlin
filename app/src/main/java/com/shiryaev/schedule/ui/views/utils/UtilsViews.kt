@@ -1,30 +1,24 @@
 package com.shiryaev.schedule.ui.views.utils
 
 import android.content.Context
-import android.content.res.TypedArray
-import android.util.TypedValue
+import android.widget.ImageButton
+import androidx.core.content.ContextCompat
 import com.shiryaev.schedule.R
 
-fun fetchColorPrimary(mContext: Context) : Int {
-    val typedValue = TypedValue()
-    val a: TypedArray = mContext.obtainStyledAttributes(typedValue.data, intArrayOf(android.R.attr.colorPrimary))
-    val color = a.getColor(0, 0)
-    a.recycle()
-    return color
+fun changeIconCalendar(context: Context, iconBtn: ImageButton, calendar: Boolean) : Boolean {
+    if (calendar) {
+        iconBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_format_list_bulleted))
+    } else {
+        iconBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_calendar_month))
+    }
+    return calendar
 }
 
-fun fetchColorBackground(mContext: Context) : Int {
-    val typedValue = TypedValue()
-    val a: TypedArray = mContext.obtainStyledAttributes(typedValue.data, intArrayOf(android.R.attr.colorBackground))
-    val color = a.getColor(0, 0)
-    a.recycle()
-    return color
-}
-
-fun fetchColorText(mContext: Context) : Int {
-    val typedValue = TypedValue()
-    val a: TypedArray = mContext.obtainStyledAttributes(typedValue.data, intArrayOf(android.R.attr.textColorPrimary))
-    val color = a.getColor(0, 0)
-    a.recycle()
-    return color
+fun showTabs(context: Context, iconBtn: ImageButton, show: Boolean) : Boolean {
+    if (show) {
+        iconBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_chevron_up))
+    } else {
+        iconBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_chevron_down))
+    }
+    return show
 }

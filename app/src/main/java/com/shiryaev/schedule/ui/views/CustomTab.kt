@@ -11,9 +11,7 @@ import com.google.android.material.card.MaterialCardView
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.tools.adapters.CustomTabAdapter
 import com.shiryaev.schedule.tools.interfaces.OnClickCustomTabListener
-import com.shiryaev.schedule.ui.views.utils.fetchColorBackground
-import com.shiryaev.schedule.ui.views.utils.fetchColorPrimary
-import com.shiryaev.schedule.ui.views.utils.fetchColorText
+import com.shiryaev.schedule.ui.views.utils.*
 
 class CustomTab @JvmOverloads constructor(
         context: Context,
