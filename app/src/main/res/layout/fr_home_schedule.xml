@@ -52,12 +52,13 @@
                         android:textColor="?android:attr/colorPrimary"
                         android:text="Понедельник"/>
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <ImageButton
                         android:id="@+id/top_bar_show_tabs_btn"
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
-                        android:layout_marginStart="@dimen/default_dimen"
-                        app:srcCompat="@drawable/ic_chevron_down"/>
+                        android:background="?android:attr/actionBarItemBackground"
+                        app:srcCompat="@drawable/ic_chevron_down"
+                        tools:ignore="ContentDescription" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <ImageButton
