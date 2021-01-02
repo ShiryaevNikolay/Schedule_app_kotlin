@@ -1,11 +1,11 @@
 package com.shiryaev.schedule.ui.fragments
 
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -44,9 +44,12 @@ class HomeScheduleFragment : Fragment(), View.OnClickListener {
         initTabLayout(binding.customTabLayout)
         initViewPager(binding)
 
-        binding.topBarShowTabsBtn.setOnClickListener(this)
-        binding.topBarTitle.setOnClickListener(this)
-        binding.changeViewBtn.setOnClickListener(this)
+
+        binding.apply {
+            topBarShowTabsBtn.setOnClickListener(this@HomeScheduleFragment)
+            topBarTitle.setOnClickListener(this@HomeScheduleFragment)
+            changeViewBtn.setOnClickListener(this@HomeScheduleFragment)
+        }
 
         return binding.root
     }

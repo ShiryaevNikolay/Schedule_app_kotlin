@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
@@ -68,26 +69,17 @@ class CustomTab @JvmOverloads constructor(
 
     @SuppressLint("ResourceType")
     private fun setSelectedColor() {
-        // СДЕЛАТЬ ИВЕРСИЮ ЦВЕТА ТЕКСТА!
-//        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
-//        paint.style = Paint.Style.FILL_AND_STROKE
-//        val cmData = floatArrayOf(
-//                -1f, 0f, 0f, 0f, 255f,
-//                0f, -1f, 0f, 0f, 255f,
-//                0f, 0f, -1f, 0f, 255f,
-//                0f, 0f, 0f, 1f, 0f)
-//        val cm = ColorMatrix(cmData)
-//        val filter = ColorMatrixColorFilter(cm)
-//        paint.colorFilter = filter
+        val invertedRed = 255 - Color.red(textTab.textColors.defaultColor)
+        val invertedGreen = 255 - Color.green(textTab.textColors.defaultColor)
+        val invertedBlue = 255 - Color.blue(textTab.textColors.defaultColor)
 
         cardTab.setCardBackgroundColor(fetchColorPrimary(context))
-//        textTab.setTextColor(fetchColorText(context))
-//        textTab.setTextColor(paint.color)
+        textTab.setTextColor(Color.rgb(invertedRed, invertedGreen, invertedBlue))
     }
 
     @SuppressLint("ResourceType")
     private fun setUnselectedColor() {
         cardTab.setCardBackgroundColor(Color.TRANSPARENT)
-//        textTab.setTextColor(fetchColorText(context))
+        textTab.setTextColor(fetchColorText(context))
     }
 }

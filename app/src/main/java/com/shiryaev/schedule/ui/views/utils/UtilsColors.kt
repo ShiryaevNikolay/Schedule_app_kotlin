@@ -12,3 +12,11 @@ fun fetchColorPrimary(mContext: Context) : Int {
     a.recycle()
     return color
 }
+
+fun fetchColorText(mContext: Context) : Int {
+    val typedValue = TypedValue()
+    val a: TypedArray = mContext.obtainStyledAttributes(typedValue.data, intArrayOf(android.R.attr.textColorSecondary))
+    val color = a.getColor(0, 0)
+    a.recycle()
+    return color
+}
