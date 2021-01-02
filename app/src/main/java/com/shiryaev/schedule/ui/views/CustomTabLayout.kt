@@ -12,13 +12,14 @@ import com.shiryaev.schedule.tools.adapters.CustomTabAdapter
 import com.shiryaev.schedule.tools.interfaces.OnClickCustomTabListener
 
 class CustomTabLayout(
-        context: Context?,
+        context: Context,
         attrs: AttributeSet? = null
 ) : LinearLayout(context, attrs), OnClickCustomTabListener {
 
     var setSelectedPage: ((selectedTab: Int) -> Unit)? = null
 
     private var selectedItem = 0
+    private var countTab = 0
     private lateinit var adapter: CustomTabAdapter
 
     init {
@@ -28,18 +29,26 @@ class CustomTabLayout(
                 ConstraintLayout.LayoutParams.MATCH_PARENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT
         )
+    }
 
-        if (context != null) {
-            adapter = CustomTabAdapter(context, this, selectedItem).apply { setLayout(this@CustomTabLayout) }
+    fun setSelectedTab(positionPage: Int) {
+        adapter.setSelectedTab(positionPage)
+    }
+
+    fun setCountTab(countTab: Int) {
+        this.countTab = countTab
+        initAdapter()
+    }
+
+    private fun initAdapter() {
+        adapter = CustomTabAdapter(context, this, selectedItem).apply {
+            setCountTab(countTab)
+            setLayout(this@CustomTabLayout)
         }
     }
 
     override fun onClickCustomTab(positionTab: Int) {
         this.selectedItem = positionTab
         setSelectedPage?.invoke(positionTab)
-    }
-
-    fun setSelectedTab(positionPage: Int) {
-        adapter.setSelectedTab(positionPage)
     }
 }

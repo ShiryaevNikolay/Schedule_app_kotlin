@@ -11,9 +11,10 @@ import com.shiryaev.schedule.ui.views.CustomTabLayout
 class CustomTabAdapter(
         private val context: Context,
         private val onClickTab: OnClickCustomTabListener,
-        private var selectedTab: Int = 0
+        private var selectedTab: Int = 0,
 ) : OnClickCustomTabListener {
 
+    private var countTab = 0
     private val tabs = ArrayList<CustomTab>()
 
     fun setLayout(rootLayout: CustomTabLayout) { initTabs(rootLayout) }
@@ -31,10 +32,11 @@ class CustomTabAdapter(
         tabs[this.selectedTab].setSelectedItem(selectedTab)
     }
 
+    fun setCountTab(countTab: Int) { this.countTab = countTab }
+
     private fun initTabs(rootLayout: CustomTabLayout) {
         val arrayTextTab = context.resources.getStringArray(R.array.days_of_week)
-        val lenList = arrayTextTab.size
-        for (i in arrayTextTab.indices) {
+        for (i in 0 until countTab) {
             rootLayout.addView(CustomTab(context).apply {
                 setText(arrayTextTab[i])
                 setPosition(i)
@@ -42,7 +44,7 @@ class CustomTabAdapter(
                 serAdapter(this@CustomTabAdapter)
                 tabs.add(this)
             })
-            if (lenList > 1 && i != lenList - 1) {
+            if (countTab > 1 && i != countTab - 1) {
                 rootLayout.addView(View(context).apply { layoutParams = TableLayout.LayoutParams(0, 0, 1f) })
             }
         }

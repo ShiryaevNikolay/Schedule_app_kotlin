@@ -2,9 +2,6 @@ package com.shiryaev.schedule.ui.views
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
-import android.graphics.Paint
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
@@ -17,17 +14,14 @@ import com.shiryaev.schedule.ui.views.utils.fetchColorBackground
 import com.shiryaev.schedule.ui.views.utils.fetchColorPrimary
 import com.shiryaev.schedule.ui.views.utils.fetchColorText
 
-
 class CustomTab @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var positionItem = 0
-
+    private var positionItem = 0
     private var selectedItem = 0
-    private var text: String = ""
     private val cardTab: MaterialCardView
     private val textTab: AppCompatTextView
 
@@ -50,7 +44,7 @@ class CustomTab @JvmOverloads constructor(
             val a = context.theme.obtainStyledAttributes(
                     attrs, R.styleable.CustomTab, 0, 0
             )
-            text = a.getString(R.styleable.CustomTab_text).toString()
+            val text = a.getString(R.styleable.CustomTab_text).toString()
             a.recycle()
             setText(text)
         }

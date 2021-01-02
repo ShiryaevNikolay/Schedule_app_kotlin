@@ -21,6 +21,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tab_tv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:textAllCaps="true"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </com.google.android.material.card.MaterialCardView>
