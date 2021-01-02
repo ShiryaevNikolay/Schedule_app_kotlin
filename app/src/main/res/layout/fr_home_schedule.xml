@@ -15,12 +15,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.shiryaev.schedule.ui.views.CustomTabLayout
-        android:id="@+id/custom_tab_layout"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_margin="@dimen/default_dimen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardElevation="@dimen/elevation_dimen"
+        app:cardCornerRadius="@dimen/corner">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/default_dimen">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical|start"
+                    android:layout_weight="1">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/top_bar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="?android:attr/colorPrimary"
+                        android:text="Понедельник"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/top_bar_show_tabs_btn"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_marginStart="@dimen/default_dimen"
+                        app:srcCompat="@drawable/ic_chevron_down"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <ImageButton
+                    android:id="@+id/change_view_btn"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:background="?android:attr/actionBarItemBackground"
+                    app:srcCompat="@drawable/ic_calendar_month"
+                    tools:ignore="ContentDescription" />
+            </TableRow>
+
+            <com.shiryaev.schedule.ui.views.CustomTabLayout
+                android:id="@+id/custom_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/default_dimen"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

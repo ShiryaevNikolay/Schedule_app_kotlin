@@ -2,6 +2,7 @@ package com.shiryaev.schedule.ui.views
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
@@ -88,7 +89,7 @@ class CustomTab @JvmOverloads constructor(
 
     @SuppressLint("ResourceType")
     private fun setUnselectedColor() {
-        cardTab.setCardBackgroundColor(fetchColorBackground(context))
-        textTab.setTextColor(fetchColorText(context))
+        cardTab.setCardBackgroundColor(Color.TRANSPARENT)
+//        textTab.setTextColor(fetchColorText(context))
     }
 }

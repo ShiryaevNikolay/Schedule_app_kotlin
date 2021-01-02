@@ -15,7 +15,6 @@
         <item name="android:navigationBarColor" tools:targetApi="1">?android:attr/windowBackground</item>
         <item name="android:windowBackground">@color/black_background</item>
         <item name="bottomNavigationStyle">@style/BNViewStyle</item>
-        <item name="materialCardViewStyle">@style/CardStyle</item>
-        <item name="android:colorAccent">@color/amber_500</item>
+<!--        <item name="materialCardViewStyle">@style/CardStyle</item>-->
     </style>
 </resources>
