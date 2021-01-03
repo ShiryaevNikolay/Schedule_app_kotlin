@@ -1,6 +1,5 @@
 package com.shiryaev.schedule.ui.fragments
 
-import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
