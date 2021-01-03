@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_dimen">10dp</dimen>
+    <dimen name="half_default_dimen">5dp</dimen>
     <dimen name="elevation_dimen">5dp</dimen>
     <dimen name="icon_size">36dp</dimen>
     <dimen name="corner">15dp</dimen>
