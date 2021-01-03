@@ -3,10 +3,10 @@ package com.shiryaev.schedule.tools.adapters
 import android.content.Context
 import android.view.View
 import android.widget.TableLayout
-import com.shiryaev.schedule.R
 import com.shiryaev.schedule.tools.interfaces.OnClickCustomTabListener
 import com.shiryaev.schedule.ui.views.CustomTab
 import com.shiryaev.schedule.ui.views.CustomTabLayout
+import com.shiryaev.schedule.ui.views.DayTab
 
 class CustomTabAdapter(
         private val context: Context,
@@ -35,13 +35,11 @@ class CustomTabAdapter(
     fun setCountTab(countTab: Int) { this.countTab = countTab }
 
     private fun initTabs(rootLayout: CustomTabLayout) {
-        val arrayTextTab = context.resources.getStringArray(R.array.days_of_week)
         for (i in 0 until countTab) {
-            rootLayout.addView(CustomTab(context).apply {
-                setText(arrayTextTab[i])
+            rootLayout.addView(DayTab(context).apply {
                 setPosition(i)
                 setSelectedItem(selectedTab)
-                serAdapter(this@CustomTabAdapter)
+                setAdapter(this@CustomTabAdapter)
                 tabs.add(this)
             })
             if (countTab > 1 && i != countTab - 1) {
