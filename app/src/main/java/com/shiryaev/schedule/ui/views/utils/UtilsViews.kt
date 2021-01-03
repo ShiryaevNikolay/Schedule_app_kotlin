@@ -5,14 +5,14 @@ import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import com.shiryaev.schedule.R
 
-fun changeIconCalendar(context: Context, iconBtn: ImageButton, calendar: Boolean) : Boolean {
-    if (calendar) {
-        iconBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_format_list_bulleted))
-    } else {
-        iconBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_calendar_month))
-    }
-    return calendar
-}
+//fun changeIconCalendar(context: Context, iconBtn: ImageButton, calendar: Boolean) : Boolean {
+//    if (calendar) {
+//        iconBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_format_list_bulleted))
+//    } else {
+//        iconBtn.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_calendar_month))
+//    }
+//    return calendar
+//}
 
 fun showTabs(context: Context, iconBtn: ImageButton, show: Boolean) : Boolean {
     if (show) {

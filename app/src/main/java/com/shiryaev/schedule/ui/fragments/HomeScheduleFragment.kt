@@ -66,7 +66,7 @@ class HomeScheduleFragment : Fragment(), View.OnClickListener {
                 binding.customTabLayout.isVisible = showTabs
             }
             R.id.change_view_btn -> {
-                context?.let { showCalendar = changeIconCalendar(it, binding.changeViewBtn, !showCalendar) }
+                context?.let { showCalendar = !showCalendar }
             }
         }
     }
