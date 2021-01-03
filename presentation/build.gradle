@@ -38,6 +38,9 @@ android {
 }
 
 dependencies {
+    implementation project(":domain")
+    implementation project(":data")
+
     def nav_version = '2.3.2'
     def room_version = '2.2.6'
     def lifecycle_version = '2.2.0'
@@ -83,4 +86,6 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     // EasyAdapter
     implementation 'ru.surfstudio.android:easyadapter:2.0.0'
+    // RxJava
+    implementation "io.reactivex.rxjava3:rxjava:3.0.9"
 }
