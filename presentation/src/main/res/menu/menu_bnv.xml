@@ -5,10 +5,12 @@
         android:title="@string/settings" />
 
     <item
+        android:id="@+id/homeSchedule"
         android:icon="@drawable/ic_home"
         android:title="@string/home_screen" />
 
     <item
+        android:id="@+id/editSchedule"
         android:icon="@drawable/ic_calendar_edit"
         android:title="@string/edit" />
 
