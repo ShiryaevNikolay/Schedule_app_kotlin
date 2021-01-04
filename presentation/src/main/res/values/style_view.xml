@@ -13,4 +13,9 @@
     <style name="CardStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">?android:attr/windowBackground</item>
     </style>
+
+    <style name="CardCornerWeek" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/default_dimen</item>
+    </style>
 </resources>

@@ -43,6 +43,32 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_margin="@dimen/default_dimen" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/default_dimen">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:text="Все недели"/>
+                    </FrameLayout>
+
+                    <ImageButton
+                        android:id="@+id/change_view_btn"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:background="?android:attr/actionBarItemBackground"
+                        app:srcCompat="@drawable/ic_form_dropdown"
+                        android:layout_marginBottom="@dimen/half_default_dimen"
+                        android:layout_marginEnd="@dimen/elevation_dimen"
+                        tools:ignore="ContentDescription" />
+                </TableRow>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </com.google.android.material.card.MaterialCardView>
 
