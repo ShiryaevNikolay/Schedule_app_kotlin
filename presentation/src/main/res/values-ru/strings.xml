@@ -6,6 +6,9 @@
     <string name="edit">Редактировать</string>
     <string name="notes">Заметки</string>
     <string name="add_schedule">Добавить занятие</string>
+    <string name="lesson">Занятие</string>
+    <string name="teacher">Учитель</string>
+    <string name="audit">Аудитория</string>
 
     <string-array name="days_of_week">
         <item>ПН</item>

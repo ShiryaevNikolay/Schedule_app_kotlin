@@ -5,6 +5,9 @@
     <string name="edit">Edit</string>
     <string name="notes">Notes</string>
     <string name="add_schedule">add_schedule</string>
+    <string name="lesson">Lesson</string>
+    <string name="teacher">Teacher</string>
+    <string name="audit">Auditorium</string>
 
     <string-array name="days_of_week">
         <item>MN</item>

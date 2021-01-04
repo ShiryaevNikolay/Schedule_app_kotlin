@@ -5,14 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.shiryaev.data.common.Transfer
+import com.shiryaev.data.utils.UtilsIntent
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrEditScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
+import com.shiryaev.schedule.ui.AddScheduleActivity
 import com.shiryaev.schedule.ui.views.CustomTabLayout
 
-class EditScheduleFragment : Fragment() {
+class EditScheduleFragment : Fragment(), View.OnClickListener {
 
     private var countPage = 0
     private var _binding: FrEditScheduleBinding? = null
@@ -39,12 +43,20 @@ class EditScheduleFragment : Fragment() {
         initTabLayout(binding.customTabLayout)
         initViewPager(binding)
 
+        binding.fab.setOnClickListener(this)
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(v: View) {
+        when(v.id) {
+            R.id.fab -> run { Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), UtilsIntent.CREATE_SCHEDULE.key) }
+        }
     }
 
     private fun initTabLayout(tabLayout: CustomTabLayout) {
