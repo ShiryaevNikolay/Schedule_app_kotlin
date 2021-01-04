@@ -5,4 +5,5 @@
     <dimen name="elevation_dimen">5dp</dimen>
     <dimen name="icon_size">40dp</dimen>
     <dimen name="corner">15dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -5,6 +5,7 @@
     <string name="home_screen">Главный экран</string>
     <string name="edit">Редактировать</string>
     <string name="notes">Заметки</string>
+    <string name="add_schedule">Добавить занятие</string>
 
     <string-array name="days_of_week">
         <item>ПН</item>

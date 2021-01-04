@@ -4,6 +4,7 @@
     <string name="home_screen">Home screen</string>
     <string name="edit">Edit</string>
     <string name="notes">Notes</string>
+    <string name="add_schedule">add_schedule</string>
 
     <string-array name="days_of_week">
         <item>MN</item>
