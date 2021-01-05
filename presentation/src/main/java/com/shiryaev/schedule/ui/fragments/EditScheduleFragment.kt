@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.shiryaev.data.common.Transfer
-import com.shiryaev.data.utils.UtilsIntent
+import com.shiryaev.domain.utils.UtilsIntent
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrEditScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
