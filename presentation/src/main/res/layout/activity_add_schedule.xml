@@ -52,7 +52,7 @@
                     android:id="@+id/teacher_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_dimen"
+                    android:layout_marginTop="@dimen/margin_vertical"
                     app:labelText="@string/teacher">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -66,7 +66,7 @@
                     android:id="@+id/audit_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_dimen"
+                    android:layout_marginTop="@dimen/margin_vertical"
                     app:labelText="@string/audit">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -74,7 +74,84 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_baseline_access_time"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/time_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/default_dimen"
+                        android:hint="@string/time_start"/>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/time_list_btn"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:background="?android:attr/actionBarItemBackground"
+                        android:src="@drawable/ic_baseline_notes"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_notebook_check_outline"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/exam_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/default_dimen"
+                        android:hint="@string/type_of_certification"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_ballot_recount_outline"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/week_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/default_dimen"
+                        android:hint="@string/every_week"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/create_a_schedule" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,7 +5,7 @@ import android.graphics.Color
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.shiryaev.schedule.R
-import com.shiryaev.schedule.ui.views.utils.fetchColorText
+import com.shiryaev.data.utils.fetchColorText
 
 class DayTab(context: Context) : CustomTab(context) {
 

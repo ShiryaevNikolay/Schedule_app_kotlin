@@ -64,7 +64,7 @@
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
                         android:background="?android:attr/actionBarItemBackground"
-                        app:srcCompat="@drawable/ic_form_dropdown"
+                        app:srcCompat="@drawable/ic_form_select"
                         android:layout_marginBottom="@dimen/half_default_dimen"
                         android:layout_marginEnd="@dimen/elevation_dimen"
                         tools:ignore="ContentDescription" />

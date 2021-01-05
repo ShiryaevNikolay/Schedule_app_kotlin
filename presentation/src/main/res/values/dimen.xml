@@ -6,4 +6,5 @@
     <dimen name="icon_size">40dp</dimen>
     <dimen name="corner">15dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="margin_vertical">15dp</dimen>
 </resources>

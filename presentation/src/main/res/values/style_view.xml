@@ -18,4 +18,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">@dimen/default_dimen</item>
     </style>
+
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="cornerRadius">@dimen/default_dimen</item>
+    </style>
 </resources>

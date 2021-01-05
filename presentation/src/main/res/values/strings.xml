@@ -8,6 +8,10 @@
     <string name="lesson">Lesson</string>
     <string name="teacher">Teacher</string>
     <string name="audit">Auditorium</string>
+    <string name="time_start">Start</string>
+    <string name="type_of_certification">Type of certification</string>
+    <string name="every_week">Every week</string>
+    <string name="create_a_schedule">Create a schedule</string>
 
     <string-array name="days_of_week">
         <item>MN</item>

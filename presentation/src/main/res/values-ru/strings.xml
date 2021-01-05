@@ -7,8 +7,11 @@
     <string name="notes">Заметки</string>
     <string name="add_schedule">Добавить занятие</string>
     <string name="lesson">Занятие</string>
-    <string name="teacher">Учитель</string>
+    <string name="teacher">Преподаватель</string>
     <string name="audit">Аудитория</string>
+    <string name="time_start">Начало</string>
+    <string name="type_of_certification">Тип аттестации</string>
+    <string name="every_week">Каждую неделю</string>
 
     <string-array name="days_of_week">
         <item>ПН</item>

@@ -68,7 +68,7 @@
                             tools:ignore="ContentDescription" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <ImageButton
+                    <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/change_view_btn"
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"

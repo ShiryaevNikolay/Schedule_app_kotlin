@@ -1,9 +1,8 @@
-package com.shiryaev.schedule.ui.views.utils
+package com.shiryaev.data.utils
 
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.TypedValue
-import com.shiryaev.schedule.R
 
 fun fetchColorPrimary(mContext: Context) : Int {
     val typedValue = TypedValue()

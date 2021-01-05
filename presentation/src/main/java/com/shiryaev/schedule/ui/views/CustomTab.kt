@@ -5,13 +5,12 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.card.MaterialCardView
+import com.shiryaev.data.utils.fetchColorPrimary
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.tools.adapters.CustomTabAdapter
 import com.shiryaev.schedule.tools.interfaces.OnClickCustomTabListener
-import com.shiryaev.schedule.ui.views.utils.*
 
 abstract class CustomTab @JvmOverloads constructor(
         context: Context,
