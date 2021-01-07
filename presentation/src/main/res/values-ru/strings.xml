@@ -12,6 +12,14 @@
     <string name="time_start">Начало</string>
     <string name="type_of_certification">Тип аттестации</string>
     <string name="every_week">Каждую неделю</string>
+    <string name="create_a_schedule">Создать занятие</string>
+    <string name="obligatory_field">Обязательное поле</string>
+
+    <!--  Диалог при нажатии на занятие  -->
+    <string-array name="dialog_schedule">
+        <item>Изменить</item>
+        <item>Удалить</item>
+    </string-array>
 
     <string-array name="days_of_week">
         <item>ПН</item>

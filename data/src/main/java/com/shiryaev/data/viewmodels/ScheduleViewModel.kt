@@ -12,9 +12,9 @@ class ScheduleViewModel : ViewModel() {
     private val mIsLoading = MutableLiveData<Boolean>()
     private val mIsErrorVisible = MutableLiveData<Boolean>()
     private val mSchedules = MutableLiveData<List<Schedule>>()
-    private val mLessonFiled = MutableLiveData<String>()
-    private val mTeacherFiled = MutableLiveData<String>()
-    private val mAuditFiled = MutableLiveData<String>()
+//    private val mLessonFiled = MutableLiveData<String>()
+//    private val mTeacherFiled = MutableLiveData<String>()
+//    private val mAuditFiled = MutableLiveData<String>()
 
     @Inject
     lateinit var mRepository: Repository
@@ -28,11 +28,11 @@ class ScheduleViewModel : ViewModel() {
 
     fun getIsErrorVisible() = mIsErrorVisible
 
-    fun setLessonText(text: String) {
-        mLessonFiled.value = text
-    }
+//    fun setLessonText(text: String) {
+//        mLessonFiled.value = text
+//    }
 
-    fun getLessonText() = mLessonFiled
+//    fun getLessonText() = mLessonFiled
 
 //    override fun onCleared() {
 //
