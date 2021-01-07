@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation project(":domain")
+    implementation 'android.arch.lifecycle:reactivestreams:1.1.1'
 
 //    def nav_version = '2.3.2'
     def room_version = '2.2.6'
@@ -82,5 +83,6 @@ dependencies {
 //    // EasyAdapter
 //    implementation 'ru.surfstudio.android:easyadapter:2.0.0'
     // RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation "io.reactivex.rxjava3:rxjava:3.0.9"
 }

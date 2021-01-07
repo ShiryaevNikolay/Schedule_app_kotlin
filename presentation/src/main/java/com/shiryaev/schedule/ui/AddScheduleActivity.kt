@@ -2,6 +2,8 @@ package com.shiryaev.schedule.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.shiryaev.data.AppDelegate
 import com.shiryaev.data.common.CustomFactory
@@ -18,15 +20,22 @@ class AddScheduleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddScheduleBinding.inflate(layoutInflater)
+        mScheduleViewModel = ViewModelProvider(this, CustomFactory()).get(ScheduleViewModel::class.java)
+        binding = ActivityAddScheduleBinding.inflate(layoutInflater).apply {
+            vm = mScheduleViewModel
+            lifecycleOwner = this@AddScheduleActivity
+        }
         setContentView(binding.root)
 
-        val factory = CustomFactory()
-        mScheduleViewModel = ViewModelProvider(this, factory).get(ScheduleViewModel::class.java)
 
-        binding.lifecycleOwner = this
-
-        binding.toolbar.setNavigationOnClickListener { finishActivity() }
+        binding.apply {
+//            vm = mScheduleViewModel
+//            lifecycleOwner = this@AddScheduleActivity
+            toolbar.setNavigationOnClickListener { finishActivity() }
+            lessonField.setSimpleTextChangeWatcher { theNewText, isError ->
+                mScheduleViewModel.setLessonText(theNewText)
+            }
+        }
     }
 
     private fun finishActivity() { finish() }

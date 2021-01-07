@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="VM"
+            type="com.shiryaev.data.viewmodels.ScheduleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,8 +46,7 @@
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                         android:id="@+id/lesson_edit_text"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="wrap_content"/>
                 </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                 <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
@@ -59,7 +60,7 @@
                         android:id="@+id/teacher_edit_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        />
+                        android:text="@{VM.lessonText}"/>
                 </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                 <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
@@ -127,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="@dimen/margin_vertical">
+                    android:layout_marginVertical="@dimen/margin_vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
