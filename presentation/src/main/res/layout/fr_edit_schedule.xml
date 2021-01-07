@@ -61,8 +61,8 @@
 
                     <ImageButton
                         android:id="@+id/change_view_btn"
-                        android:layout_width="@dimen/icon_size"
-                        android:layout_height="@dimen/icon_size"
+                        android:layout_width="@dimen/icon_button_size"
+                        android:layout_height="@dimen/icon_button_size"
                         android:background="?android:attr/actionBarItemBackground"
                         app:srcCompat="@drawable/ic_form_select"
                         android:layout_marginBottom="@dimen/half_default_dimen"

@@ -1,4 +1,4 @@
-package com.shiryaev.schedule.tools.common.controllers
+package com.shiryaev.schedule.common.controllers
 
 import android.view.ViewGroup
 import com.shiryaev.domain.model.Schedule

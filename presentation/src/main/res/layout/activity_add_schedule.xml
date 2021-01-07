@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="VM"
+            type="com.shiryaev.data.viewmodels.ScheduleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,13 +41,14 @@
                     android:id="@+id/lesson_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:labelText="@string/lesson">
+                    app:useDenseSpacing="true"
+                    app:labelText="@string/lesson"
+                    app:helperText="@string/obligatory_field">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                         android:id="@+id/lesson_edit_text"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="wrap_content"/>
                 </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                 <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
@@ -53,13 +56,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical"
+                    app:useDenseSpacing="true"
                     app:labelText="@string/teacher">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                         android:id="@+id/teacher_edit_text"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="wrap_content"/>
                 </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                 <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
@@ -67,6 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_vertical"
+                    app:useDenseSpacing="true"
                     app:labelText="@string/audit">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -76,6 +80,33 @@
                 </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/margin_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:layout_marginEnd="@dimen/default_dimen"
+                        app:srcCompat="@drawable/ic_notebook_check_outline"/>
+
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/exam_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:useDenseSpacing="true"
+                        app:labelText="@string/type_of_certification">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/exam_edit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -83,8 +114,8 @@
                     android:layout_marginTop="@dimen/margin_vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
                         app:srcCompat="@drawable/ic_baseline_access_time"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -96,42 +127,42 @@
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/time_list_btn"
-                        android:layout_width="@dimen/icon_size"
-                        android:layout_height="@dimen/icon_size"
+                        android:layout_width="@dimen/icon_button_size"
+                        android:layout_height="@dimen/icon_button_size"
                         android:background="?android:attr/actionBarItemBackground"
                         android:src="@drawable/ic_baseline_notes"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
+<!--                <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:layout_marginTop="@dimen/margin_vertical">-->
+
+<!--                    <androidx.appcompat.widget.AppCompatImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:srcCompat="@drawable/ic_notebook_check_outline"/>-->
+
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:id="@+id/exam_btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginHorizontal="@dimen/default_dimen"-->
+<!--                        android:hint="@string/type_of_certification"/>-->
+<!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
+
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="@dimen/margin_vertical">
+                    android:layout_marginVertical="@dimen/margin_vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_notebook_check_outline"/>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/exam_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/default_dimen"
-                        android:hint="@string/type_of_certification"/>
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="@dimen/margin_vertical">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
                         app:srcCompat="@drawable/ic_ballot_recount_outline"/>
 
                     <com.google.android.material.button.MaterialButton

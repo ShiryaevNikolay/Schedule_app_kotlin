@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.shiryaev.schedule.databinding.FrPageScheduleBinding
-import com.shiryaev.schedule.tools.common.controllers.ItemScheduleController
-import com.shiryaev.schedule.utils.UtilsKeys
+import com.shiryaev.schedule.common.controllers.ItemScheduleController
+import com.shiryaev.domain.utils.UtilsKeys
 import ru.surfstudio.android.easyadapter.EasyAdapter
 
 class PageScheduleFragment : Fragment() {

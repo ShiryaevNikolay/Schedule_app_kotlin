@@ -1,4 +1,4 @@
-package com.shiryaev.schedule.utils
+package com.shiryaev.domain.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

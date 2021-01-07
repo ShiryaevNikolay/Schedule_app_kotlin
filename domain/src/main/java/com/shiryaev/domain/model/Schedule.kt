@@ -3,35 +3,35 @@ package com.shiryaev.domain.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.shiryaev.domain.utils.UtilsDb
+import com.shiryaev.domain.utils.UtilsTableScheulde
 
-@Entity(tableName = UtilsDb.TABLE_SCHEDULE)
+@Entity(tableName = UtilsTableScheulde.TABLE_SCHEDULE)
 class Schedule(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_ID)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_ID)
     var mId: Long = 0,
 
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_LESSON)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_LESSON)
     var mLesson: String,
 
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_TEACHER)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TEACHER)
     var mTeacher: String,
 
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_AUDIT)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_AUDIT)
     var mAudit: String,
 
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_TIMESTART)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TIMESTART)
     var mTimeStart: Int,
 
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_TIMEEND)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TIMEEND)
     var mTimeEnd: Int,
 
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_WEEK)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_WEEK)
     var mWeek: Int,
 
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_DAY)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_DAY)
     var mDay: Int,
 
-    @ColumnInfo(name = UtilsDb.SCHEDULE_COLUMN_EXAM)
+    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_EXAM)
     var mExam: String? = null
 )

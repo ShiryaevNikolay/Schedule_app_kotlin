@@ -87,5 +87,6 @@ dependencies {
     // EasyAdapter
     implementation 'ru.surfstudio.android:easyadapter:2.0.0'
     // RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation "io.reactivex.rxjava3:rxjava:3.0.9"
 }
