@@ -1,4 +1,4 @@
-package com.shiryaev.domain.model
+package com.shiryaev.domain.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -23,8 +23,8 @@ class Schedule(
     @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TIMESTART)
     var mTimeStart: Int,
 
-    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TIMEEND)
-    var mTimeEnd: Int,
+//    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TIMEEND)
+//    var mTimeEnd: Int,
 
     @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_WEEK)
     var mWeek: Int,

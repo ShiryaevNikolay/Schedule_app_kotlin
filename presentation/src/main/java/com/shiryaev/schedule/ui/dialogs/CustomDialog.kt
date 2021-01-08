@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shiryaev.domain.model.Schedule
+import com.shiryaev.domain.models.Schedule
 import com.shiryaev.schedule.common.controllers.ItemDialogController
 import com.shiryaev.data.common.models.ItemDialog
 import com.shiryaev.schedule.databinding.CustomLayoutDialogBinding

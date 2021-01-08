@@ -6,7 +6,7 @@
     <data>
         <variable
             name="VM"
-            type="com.shiryaev.data.viewmodels.ScheduleViewModel" />
+            type="com.shiryaev.data.viewmodels.AddScheduleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

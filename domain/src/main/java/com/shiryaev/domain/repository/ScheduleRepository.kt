@@ -1,8 +1,7 @@
 package com.shiryaev.domain.repository
 
-import com.shiryaev.domain.model.Schedule
+import com.shiryaev.domain.models.Schedule
 import io.reactivex.rxjava3.core.Flowable
-import io.reactivex.rxjava3.core.Single
 
 interface ScheduleRepository {
 

@@ -33,7 +33,7 @@ class PageScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FrPageScheduleBinding.inflate(inflater, container, false)
-        binding.pageTv.text = positionPage.toString()
+
         return binding.root
     }
 

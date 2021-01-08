@@ -17,5 +17,8 @@
         <item name="android:colorBackground">@color/black_background</item>
         <item name="bottomNavigationStyle">@style/BNViewStyle</item>
         <item name="materialButtonStyle">@style/ButtonStyle</item>
+        <item name="buttonBarButtonStyle">@style/ButtonStyle</item>
+<!--        <item name="alertDialogTheme">@style/MaterialAlertDialogStyle</item>-->
+<!--        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogStyle</item>-->
     </style>
 </resources>

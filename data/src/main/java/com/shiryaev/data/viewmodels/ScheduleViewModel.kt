@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shiryaev.data.AppDelegate
 import com.shiryaev.data.database.Repository
-import com.shiryaev.domain.model.Schedule
+import com.shiryaev.domain.models.Schedule
 import javax.inject.Inject
 
 class ScheduleViewModel : ViewModel() {

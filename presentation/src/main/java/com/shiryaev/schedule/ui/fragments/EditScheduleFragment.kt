@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.shiryaev.data.common.Transfer
 import com.shiryaev.domain.utils.UtilsIntent
+import com.shiryaev.domain.utils.UtilsKeys
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrEditScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
@@ -55,7 +57,13 @@ class EditScheduleFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when(v.id) {
-            R.id.fab -> run { Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), UtilsIntent.CREATE_SCHEDULE.key) }
+            R.id.fab -> run {
+                val options = Bundle().apply {
+                    putInt(UtilsKeys.POSITION_PAGE.key, binding.homeScreenVp.currentItem)
+                }
+//                Toast.makeText(context, "${binding.homeScreenVp.currentItem}", Toast.LENGTH_SHORT).show()
+                Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), UtilsIntent.CREATE_SCHEDULE.key, options)
+            }
         }
     }
 

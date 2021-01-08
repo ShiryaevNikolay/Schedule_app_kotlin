@@ -22,4 +22,14 @@
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="cornerRadius">@dimen/default_dimen</item>
     </style>
+
+<!--    <style name="AlertDialogStyle" parent="Theme.MaterialComponents.Dialog">-->
+<!--        <item name="android:buttonBarButtonStyle">@style/ButtonStyle</item>-->
+<!--        <item name="android:windowBackground">@drawable/alert_dialog_bg</item>-->
+<!--    </style>-->
+
+    <style name="MaterialAlertDialogStyle" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:buttonBarButtonStyle">@style/ButtonStyle</item>
+        <item name="android:windowBackground">@drawable/alert_dialog_bg</item>
+    </style>
 </resources>

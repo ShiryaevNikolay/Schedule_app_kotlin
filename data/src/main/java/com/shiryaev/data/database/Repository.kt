@@ -1,7 +1,7 @@
 package com.shiryaev.data.database
 
 import com.shiryaev.data.AppDelegate
-import com.shiryaev.domain.model.Schedule
+import com.shiryaev.domain.models.Schedule
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -19,7 +19,17 @@ class Repository {
         mScheduleDao = mStorage.getScheduleDao()
     }
 
-    fun getAllSchedules(day: Int) = mScheduleDao.getAllByDay(day)
+    fun getSchedules(day: Int) = mScheduleDao.getAllByDay(day)
+
+    fun getLessons() = mScheduleDao.getLessons()
+
+    fun getTeachers() = mScheduleDao.getTeachers()
+
+    fun getAudits() = mScheduleDao.getAudits()
+
+    fun getExams() = mScheduleDao.getExams()
+
+    fun getTimeStartByDay(mDay: Int) = mScheduleDao.getTimeStartByDay(mDay)
 
     fun insertSchedule(schedule: Schedule) {
         Observable.fromCallable { mScheduleDao.insertSchedule(schedule) }
