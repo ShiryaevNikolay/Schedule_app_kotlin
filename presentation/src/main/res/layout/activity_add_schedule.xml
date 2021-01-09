@@ -35,7 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="vertical"
-                android:layout_margin="@dimen/default_dimen">
+                android:layout_marginHorizontal="@dimen/default_dimen"
+                android:layout_marginVertical="@dimen/margin_vertical">
 
                 <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
                     android:id="@+id/lesson_field"

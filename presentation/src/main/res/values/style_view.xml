@@ -23,6 +23,20 @@
         <item name="cornerRadius">@dimen/default_dimen</item>
     </style>
 
+    <style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextAppearance">@style/TitleTextStyle</item>
+        <item name="titleTextColor">?android:attr/colorPrimary</item>
+        <item name="subtitleTextAppearance">@style/SubtitleTextStyle</item>
+    </style>
+
+    <style name="TitleTextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/toolbar_title_size</item>
+    </style>
+
+    <style name="SubtitleTextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/toolbar_subtitle_size</item>
+    </style>
+
 <!--    <style name="AlertDialogStyle" parent="Theme.MaterialComponents.Dialog">-->
 <!--        <item name="android:buttonBarButtonStyle">@style/ButtonStyle</item>-->
 <!--        <item name="android:windowBackground">@drawable/alert_dialog_bg</item>-->

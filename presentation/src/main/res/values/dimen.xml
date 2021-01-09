@@ -9,4 +9,7 @@
     <dimen name="margin_vertical">15dp</dimen>
     <dimen name="icon_size">24dp</dimen>
     <dimen name="dialog_dimen">20dp</dimen>
+
+    <dimen name="toolbar_title_size">18sp</dimen>
+    <dimen name="toolbar_subtitle_size">14sp</dimen>
 </resources>

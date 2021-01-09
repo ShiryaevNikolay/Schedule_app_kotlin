@@ -1,13 +1,13 @@
 package com.shiryaev.domain.models
 
 import androidx.room.ColumnInfo
-import com.shiryaev.domain.utils.UtilsTableScheulde
+import com.shiryaev.domain.utils.UtilsTableSchedule
 
 class TimeAndWeek(
 
-        @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TIMESTART)
+        @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART)
         var mTimeStart: Int,
 
-        @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_WEEK)
+        @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_WEEK)
         var mWeek: Int
 )

@@ -21,6 +21,7 @@
         <item name="progressBarStyle">@style/ProgressBarStyle</item>
         <item name="materialButtonStyle">@style/ButtonStyle</item>
         <item name="buttonBarButtonStyle">@style/ButtonStyle</item>
+        <item name="toolbarStyle">@style/ToolbarStyle</item>
 <!--        <item name="alertDialogTheme">@style/MaterialAlertDialogStyle</item>-->
 <!--        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogStyle</item>-->
     </style>
