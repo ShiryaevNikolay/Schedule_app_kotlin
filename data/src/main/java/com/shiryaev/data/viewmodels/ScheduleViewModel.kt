@@ -54,7 +54,5 @@ class ScheduleViewModel : ViewModel() {
 //                }
     }
 
-    fun insertSchedule(schedule: Schedule) {
-        mRepository.insertSchedule(schedule)
-    }
+    fun insertSchedule(schedule: Schedule) = mRepository.insertSchedule(schedule)
 }

@@ -3,7 +3,6 @@ package com.shiryaev.schedule.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.shiryaev.schedule.common.CallDialogs
 import com.shiryaev.data.common.CustomFactory
@@ -21,7 +20,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mCurrentDay = 0
     private var mWeek = 0
-    private var mTimeStart = 0
+    private var mTimeStart = -1
 
     private var mListTimes: ArrayList<TimeAndWeek> = ArrayList()
 
@@ -80,7 +79,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when(v.id) {
             R.id.time_btn -> { CallDialogs.callTimePicker(this@AddScheduleActivity, mWeek, mListTimes) { hour, minute ->
-                    mTimeStart = ("$hour$minute").toInt()
+                    mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
                     binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mTimeStart)
                 }
             }
@@ -110,8 +109,9 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setDataToView() {
-        Toast.makeText(this, "$mTimeStart", Toast.LENGTH_SHORT).show()
-        binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mTimeStart)
+        if (mTimeStart != -1) {
+            binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mTimeStart)
+        }
     }
 
     private fun finishActivity() { finish() }
