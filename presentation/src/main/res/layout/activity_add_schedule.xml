@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        
+        <import alias="V" type="android.view.View"/>
+        
         <variable
             name="VM"
             type="com.shiryaev.data.viewmodels.AddScheduleViewModel" />
@@ -131,6 +134,7 @@
                         android:layout_width="@dimen/icon_button_size"
                         android:layout_height="@dimen/icon_button_size"
                         android:background="?android:attr/actionBarItemBackground"
+                        android:visibility="gone"
                         android:src="@drawable/ic_baseline_notes"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -182,6 +186,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_check"
             android:layout_margin="@dimen/fab_margin"
+            android:visibility="@{VM.fabIsVisible ? V.VISIBLE : V.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/create_a_schedule" />

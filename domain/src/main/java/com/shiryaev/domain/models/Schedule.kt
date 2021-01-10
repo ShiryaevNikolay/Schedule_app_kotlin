@@ -15,10 +15,10 @@ class Schedule(
     var mLesson: String,
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_TEACHER)
-    var mTeacher: String,
+    var mTeacher: String? = null,
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_AUDIT)
-    var mAudit: String,
+    var mAudit: String? = null,
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART)
     var mTimeStart: Int,

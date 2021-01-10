@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.shiryaev.schedule.common.CallDialogs
 import com.shiryaev.data.common.CustomFactory
+import com.shiryaev.data.utils.UtilsChecks
 import com.shiryaev.data.viewmodels.AddScheduleViewModel
 import com.shiryaev.domain.models.TimeAndWeek
 import com.shiryaev.domain.utils.UtilsConvert
@@ -20,7 +21,8 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mCurrentDay = 0
     private var mWeek = 0
-    private var mTimeStart = -1
+    private var mLesson = ""
+    private var mTimeStart = UtilsChecks.TIME_DISABLE
 
     private var mListTimes: ArrayList<TimeAndWeek> = ArrayList()
 
@@ -37,8 +39,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         if (savedInstanceState != null) {
             getData(savedInstanceState)
             setDataToView()
-        }
-        else {
+        } else {
             mCurrentDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.key, 0)
         }
 
@@ -56,6 +57,12 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         mViewModel.getTimeStartByDay(mCurrentDay).observe(this, { listTimes ->
             mListTimes = ArrayList(listTimes)
         })
+
+        binding.lessonField.setSimpleTextChangeWatcher { theNewText, isError ->
+            mLesson = theNewText
+            mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mLesson, mTimeStart))
+//            binding.fab.isVisible = UtilsChecks.checkAddSchedule(mLesson, mTimeStart)
+        }
 
         binding.timeBtn.setOnClickListener(this)
 
@@ -81,6 +88,8 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
             R.id.time_btn -> { CallDialogs.callTimePicker(this@AddScheduleActivity, mWeek, mListTimes) { hour, minute ->
                     mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
                     binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mTimeStart)
+                    mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mLesson, mTimeStart))
+//                    binding.fab.isVisible = UtilsChecks.checkAddSchedule(mLesson, mTimeStart)
                 }
             }
         }
@@ -109,7 +118,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setDataToView() {
-        if (mTimeStart != -1) {
+        if (mTimeStart != UtilsChecks.TIME_DISABLE) {
             binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mTimeStart)
         }
     }

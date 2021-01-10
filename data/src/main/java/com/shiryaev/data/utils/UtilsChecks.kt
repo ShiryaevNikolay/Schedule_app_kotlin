@@ -4,6 +4,8 @@ import com.shiryaev.domain.models.TimeAndWeek
 
 object UtilsChecks {
 
+    val TIME_DISABLE = -1
+
     fun checkTime(week: Int, selectedTime: Int, listTime: ArrayList<TimeAndWeek>) : Boolean {
         var flag = true
         for (i in 0 until listTime.size) {
@@ -16,4 +18,6 @@ object UtilsChecks {
         }
         return flag
     }
+
+    fun checkAddSchedule(lesson: String, time: Int) =  (lesson.isNotBlank() || lesson != "") && time != TIME_DISABLE
 }
