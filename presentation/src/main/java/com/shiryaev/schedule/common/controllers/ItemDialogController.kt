@@ -11,9 +11,9 @@ import com.shiryaev.data.common.models.ItemDialog
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 
-class ItemDialogController(
-        val onCLickListener: (position: Int) -> Unit
-) : BindableItemController<ItemDialog, ItemDialogController.Holder>() {
+class ItemDialogController : BindableItemController<ItemDialog, ItemDialogController.Holder>() {
+
+    var onCLickListener: ((position: Int) -> Unit)? = null
 
     override fun createViewHolder(parent: ViewGroup) = Holder(parent)
 
@@ -27,7 +27,7 @@ class ItemDialogController(
 
         init {
             itemView.findViewById<MaterialCardView>(R.id.layout_item).setBackgroundColor(Color.TRANSPARENT)
-            itemView.setOnClickListener { onCLickListener.invoke(adapterPosition) }
+            itemView.setOnClickListener { onCLickListener?.invoke(adapterPosition) }
         }
 
         override fun bind(data: ItemDialog) {

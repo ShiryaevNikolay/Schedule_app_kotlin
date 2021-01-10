@@ -9,24 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shiryaev.domain.models.Schedule
 import com.shiryaev.schedule.common.controllers.ItemDialogController
 import com.shiryaev.data.common.models.ItemDialog
 import com.shiryaev.schedule.databinding.CustomLayoutDialogBinding
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
 
-class CustomDialog(
-        private val onClickItemDialog: (schedule: Schedule, positionItemDialog: Int) -> Unit
-) : DialogFragment() {
+open class CustomDialog : DialogFragment() {
+
+    open val mItemDialogController = ItemDialogController()
 
     private var _binding: CustomLayoutDialogBinding? = null
     private val binding get() = _binding!!
 
     private val mEasyAdapter = EasyAdapter()
-    private lateinit var mItemDialogController: ItemDialogController
 
-    private lateinit var mSchedule: Schedule
     private lateinit var mDialogList: ItemList
 
     override fun onCreateView(
@@ -54,15 +51,7 @@ class CustomDialog(
         _binding = null
     }
 
-    fun setData(schedule: Schedule, listItem: List<ItemDialog>) {
-        mSchedule = schedule
-        setListToAdapter(listItem)
-    }
-
-    private fun setListToAdapter(listItem: List<ItemDialog>) {
-        mItemDialogController = ItemDialogController { positionItem ->
-            onClickItemDialog.invoke(mSchedule, positionItem)
-        }
+    fun setListToAdapter(listItem: List<ItemDialog>) {
         mDialogList = ItemList.create().apply {
             addAll(listItem, mItemDialogController)
         }

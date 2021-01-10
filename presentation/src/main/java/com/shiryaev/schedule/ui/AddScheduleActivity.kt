@@ -16,6 +16,9 @@ import com.shiryaev.domain.utils.UtilsKeys
 import com.shiryaev.domain.utils.UtilsTableSchedule
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.ActivityAddScheduleBinding
+import com.shiryaev.schedule.ui.dialogs.CustomDialog
+import com.shiryaev.schedule.ui.dialogs.ListDialog
+import com.shiryaev.schedule.utils.UtilsListData
 import kotlinx.android.synthetic.main.activity_add_schedule.view.*
 import java.util.ArrayList
 
@@ -48,7 +51,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         mViewModel = ViewModelProvider(this, CustomFactory(AddScheduleViewModel())).get(AddScheduleViewModel::class.java)
 
         // Синхронизируем xml с viewModel
-        binding.apply {
+        with(binding) {
             vm = mViewModel
             lifecycleOwner = this@AddScheduleActivity
         }
@@ -73,6 +76,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         // Устанавливаем случашели на кнопки
         with(binding) {
             timeBtn.setOnClickListener(this@AddScheduleActivity)
+            timeListBtn.setOnClickListener(this@AddScheduleActivity)
             fab.setOnClickListener(this@AddScheduleActivity)
         }
 
@@ -94,6 +98,13 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                     binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
                     mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
                 }
+            }
+            R.id.time_list_btn -> {
+                ListDialog { positionItem ->
+                    // TODO
+                }.apply {
+                    setData(UtilsListData.getListTimeDialog(mListTime))
+                }.show(supportFragmentManager, null)
             }
             R.id.fab -> {
                 mViewModel.insertSchedule(mSchedule)

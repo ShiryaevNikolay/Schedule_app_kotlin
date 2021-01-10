@@ -17,6 +17,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dialog_rv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:overScrollMode="ifContentScrolls"/>
     </com.google.android.material.card.MaterialCardView>
 </layout>
