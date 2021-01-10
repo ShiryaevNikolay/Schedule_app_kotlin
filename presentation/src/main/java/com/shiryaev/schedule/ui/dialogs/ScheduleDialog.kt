@@ -13,6 +13,7 @@ class ScheduleDialog(
         mSchedule = schedule
         mItemDialogController.onCLickListener = { positionItem ->
             onClickItemDialog.invoke(mSchedule, positionItem)
+            dismiss()
         }
         setListToAdapter(listItem)
     }

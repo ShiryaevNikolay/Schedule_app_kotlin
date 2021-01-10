@@ -9,6 +9,7 @@ class ListDialog(
     fun setData(listItem: List<ItemDialog>) {
         mItemDialogController.onCLickListener = { positionItem ->
             onClickItemDialog.invoke(positionItem)
+            dismiss()
         }
         setListToAdapter(listItem)
     }

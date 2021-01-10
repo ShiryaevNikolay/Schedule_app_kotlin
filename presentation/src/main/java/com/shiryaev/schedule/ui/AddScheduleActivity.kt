@@ -95,13 +95,13 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         when(v.id) {
             R.id.time_btn -> { CallDialogs.callTimePicker(this@AddScheduleActivity, mSchedule.mWeek, mListTimeAndWeek) { hour, minute ->
                     mSchedule.mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
-                    binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
-                    mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
+                    setSelectedTime()
                 }
             }
             R.id.time_list_btn -> {
                 ListDialog { positionItem ->
-                    // TODO
+                    mSchedule.mTimeStart = mListTime[positionItem]
+                    setSelectedTime()
                 }.apply {
                     setData(UtilsListData.getListTimeDialog(mListTime))
                 }.show(supportFragmentManager, null)
@@ -138,6 +138,11 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         if (mSchedule.mTimeStart != UtilsChecks.TIME_DISABLE) {
             binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
         }
+    }
+
+    private fun setSelectedTime() {
+        binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
+        mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
     }
 
     private fun finishActivity() { finish() }
