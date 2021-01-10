@@ -4,34 +4,35 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.shiryaev.domain.utils.UtilsTableSchedule
+import java.io.Serializable
 
 @Entity(tableName = UtilsTableSchedule.TABLE_SCHEDULE)
-class Schedule(
+class Schedule : Serializable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_ID)
-    var mId: Long = 0,
+    var mId: Long = 0
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_LESSON)
-    var mLesson: String,
+    lateinit var mLesson: String
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_TEACHER)
-    var mTeacher: String? = null,
+    var mTeacher: String? = null
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_AUDIT)
-    var mAudit: String? = null,
+    var mAudit: String? = null
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART)
-    var mTimeStart: Int,
+    var mTimeStart: Int = -1
 
 //    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TIMEEND)
 //    var mTimeEnd: Int,
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_WEEK)
-    var mWeek: Int,
+    var mWeek: Int = 0
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_DAY)
-    var mDay: Int,
+    var mDay: Int = 0
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_EXAM)
     var mExam: String? = null
-)
+}

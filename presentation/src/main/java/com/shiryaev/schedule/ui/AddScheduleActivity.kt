@@ -8,6 +8,7 @@ import com.shiryaev.schedule.common.CallDialogs
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.utils.UtilsChecks
 import com.shiryaev.data.viewmodels.AddScheduleViewModel
+import com.shiryaev.domain.models.Schedule
 import com.shiryaev.domain.models.TimeAndWeek
 import com.shiryaev.domain.utils.UtilsConvert
 import com.shiryaev.domain.utils.UtilsKeys
@@ -15,14 +16,19 @@ import com.shiryaev.domain.utils.UtilsTableSchedule
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.ActivityAddScheduleBinding
 import kotlinx.android.synthetic.main.activity_add_schedule.view.*
+import java.io.Serializable
 import java.util.ArrayList
 
 class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var mCurrentDay = 0
-    private var mWeek = 0
-    private var mLesson = ""
-    private var mTimeStart = UtilsChecks.TIME_DISABLE
+//    private var mCurrentDay = 0
+//    private var mLesson = ""
+//    private var mTeacher = ""
+//    private var mAudit = ""
+//    private var mTypeOfCertification = ""
+//    private var mWeek = 0
+//    private var mTimeStart = UtilsChecks.TIME_DISABLE
+    private var mSchedule = Schedule()
 
     private var mListTimes: ArrayList<TimeAndWeek> = ArrayList()
 
@@ -40,7 +46,8 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
             getData(savedInstanceState)
             setDataToView()
         } else {
-            mCurrentDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.key, 0)
+//            mCurrentDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.key, 0)
+            mSchedule.mDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.key, 0)
         }
 
         initToolbar()
@@ -50,18 +57,18 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         binding.apply {
             vm = mViewModel
             lifecycleOwner = this@AddScheduleActivity
-            toolbar.setNavigationOnClickListener { finishActivity() }
         }
 
         // Получаем список времени
-        mViewModel.getTimeStartByDay(mCurrentDay).observe(this, { listTimes ->
+        mViewModel.getTimeStartByDay(mSchedule.mDay).observe(this, { listTimes ->
             mListTimes = ArrayList(listTimes)
         })
 
         binding.lessonField.setSimpleTextChangeWatcher { theNewText, isError ->
-            mLesson = theNewText
-            mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mLesson, mTimeStart))
-//            binding.fab.isVisible = UtilsChecks.checkAddSchedule(mLesson, mTimeStart)
+//            mLesson = theNewText
+//            mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mLesson, mTimeStart))
+            mSchedule.mLesson = theNewText
+            mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
         }
 
         binding.timeBtn.setOnClickListener(this)
@@ -85,11 +92,10 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when(v.id) {
-            R.id.time_btn -> { CallDialogs.callTimePicker(this@AddScheduleActivity, mWeek, mListTimes) { hour, minute ->
-                    mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
-                    binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mTimeStart)
-                    mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mLesson, mTimeStart))
-//                    binding.fab.isVisible = UtilsChecks.checkAddSchedule(mLesson, mTimeStart)
+            R.id.time_btn -> { CallDialogs.callTimePicker(this@AddScheduleActivity, mSchedule.mWeek, mListTimes) { hour, minute ->
+                    mSchedule.mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
+                    binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
+                    mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
                 }
             }
         }
@@ -98,28 +104,36 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         with(outState) {
-            putInt(UtilsTableSchedule.SCHEDULE_COLUMN_DAY, mCurrentDay)
-            putInt(UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART, mTimeStart)
+//            putInt(UtilsTableSchedule.SCHEDULE_COLUMN_DAY, mCurrentDay)
+//            putString(UtilsTableSchedule.SCHEDULE_COLUMN_LESSON, mLesson)
+//            putString(UtilsTableSchedule.SCHEDULE_COLUMN_TEACHER, mTeacher)
+//            putString(UtilsTableSchedule.SCHEDULE_COLUMN_AUDIT, mAudit)
+//            putString(UtilsTableSchedule.SCHEDULE_COLUMN_EXAM, mTypeOfCertification)
+//            putInt(UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART, mTimeStart)
+
+            putSerializable(UtilsTableSchedule.SCHEDULE, mSchedule)
         }
     }
 
     private fun getData(savedInstanceState: Bundle) {
         with(savedInstanceState) {
-            mCurrentDay = getInt(UtilsTableSchedule.SCHEDULE_COLUMN_DAY)
-            mTimeStart = getInt(UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART)
+//            mSchedule.mDay = getInt(UtilsTableSchedule.SCHEDULE_COLUMN_DAY)
+//            mSchedule.mTimeStart = getInt(UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART)
+            mSchedule = getSerializable(UtilsTableSchedule.SCHEDULE) as Schedule
         }
     }
 
     private fun initToolbar() {
         with(binding.toolbar) {
             subtitle = this.resources.getString(R.string.create_a_schedule)
-            title = this.resources.getStringArray(R.array.full_days_of_week)[mCurrentDay]
+            title = this.resources.getStringArray(R.array.full_days_of_week)[mSchedule.mDay]
+            setNavigationOnClickListener { finishActivity() }
         }
     }
 
     private fun setDataToView() {
-        if (mTimeStart != UtilsChecks.TIME_DISABLE) {
-            binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mTimeStart)
+        if (mSchedule.mTimeStart != UtilsChecks.TIME_DISABLE) {
+            binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
         }
     }
 

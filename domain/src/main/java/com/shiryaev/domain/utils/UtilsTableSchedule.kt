@@ -2,6 +2,7 @@ package com.shiryaev.domain.utils
 
 object UtilsTableSchedule {
     const val TABLE_SCHEDULE = "table_schedule"
+    const val SCHEDULE = "schedule"
     const val SCHEDULE_COLUMN_ID = "id"
     const val SCHEDULE_COLUMN_LESSON = "lesson"
     const val SCHEDULE_COLUMN_TEACHER = "teacher"
