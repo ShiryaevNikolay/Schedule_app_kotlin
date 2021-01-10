@@ -3,6 +3,7 @@ package com.shiryaev.data.database
 import com.shiryaev.data.AppDelegate
 import com.shiryaev.domain.models.Schedule
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -28,13 +29,13 @@ class Repository {
 
     fun getExams() = mScheduleDao.getExams()
 
+    fun getTimeStart() = mScheduleDao.getTimeStart()
+
     fun getTimeStartByDay(mDay: Int) = mScheduleDao.getTimeStartByDay(mDay)
 
     fun insertSchedule(schedule: Schedule) {
-//        Observable.fromCallable { mScheduleDao.insertSchedule(schedule) }
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
         Completable.fromRunnable { mScheduleDao.insertSchedule(schedule) }
                 .subscribeOn(Schedulers.io())
+                .subscribe { }
     }
 }

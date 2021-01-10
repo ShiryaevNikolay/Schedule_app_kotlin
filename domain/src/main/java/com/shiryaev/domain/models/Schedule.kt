@@ -13,7 +13,7 @@ class Schedule : Serializable {
     var mId: Long = 0
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_LESSON)
-    lateinit var mLesson: String
+    var mLesson: String = ""
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_TEACHER)
     var mTeacher: String? = null
@@ -28,7 +28,7 @@ class Schedule : Serializable {
 //    var mTimeEnd: Int,
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_WEEK)
-    var mWeek: Int = 0
+    var mWeek: Int = -1
 
     @ColumnInfo(name = UtilsTableSchedule.SCHEDULE_COLUMN_DAY)
     var mDay: Int = 0
