@@ -41,47 +41,109 @@
                 android:layout_marginHorizontal="@dimen/default_dimen"
                 android:layout_marginVertical="@dimen/margin_vertical">
 
-                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                    android:id="@+id/lesson_field"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/lesson_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:helperText="@string/obligatory_field"
+                        app:labelText="@string/lesson"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:useDenseSpacing="true">
+
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/lesson_edit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/lesson_list_btn"
+                        android:layout_width="@dimen/icon_button_size"
+                        android:layout_height="@dimen/icon_button_size"
+                        android:layout_marginHorizontal="@dimen/elevation_dimen"
+                        android:layout_marginVertical="@dimen/icon_field_margin"
+                        android:background="?android:attr/actionBarItemBackground"
+                        android:src="@drawable/ic_baseline_notes"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:useDenseSpacing="true"
-                    app:labelText="@string/lesson"
-                    app:helperText="@string/obligatory_field">
+                    android:layout_marginTop="@dimen/margin_vertical">
 
-                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                        android:id="@+id/lesson_edit_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/teacher_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:labelText="@string/teacher"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:useDenseSpacing="true">
 
-                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                    android:id="@+id/teacher_field"
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/teacher_edit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/teacher_list_btn"
+                        android:layout_width="@dimen/icon_button_size"
+                        android:layout_height="@dimen/icon_button_size"
+                        android:layout_marginHorizontal="@dimen/elevation_dimen"
+                        android:layout_marginVertical="@dimen/elevation_dimen"
+                        android:background="?android:attr/actionBarItemBackground"
+                        android:src="@drawable/ic_baseline_notes"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical"
-                    app:useDenseSpacing="true"
-                    app:labelText="@string/teacher">
+                    android:layout_marginTop="@dimen/margin_vertical">
 
-                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                        android:id="@+id/teacher_edit_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                        android:id="@+id/audit_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:labelText="@string/audit"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:useDenseSpacing="true">
 
-                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                    android:id="@+id/audit_field"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical"
-                    app:useDenseSpacing="true"
-                    app:labelText="@string/audit">
+                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                            android:id="@+id/audit_edit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
-                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                        android:id="@+id/audit_edit_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/audit_list_btn"
+                        android:layout_width="@dimen/icon_button_size"
+                        android:layout_height="@dimen/icon_button_size"
+                        android:layout_marginHorizontal="@dimen/elevation_dimen"
+                        android:layout_marginVertical="@dimen/elevation_dimen"
+                        android:background="?android:attr/actionBarItemBackground"
+                        android:src="@drawable/ic_baseline_notes"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -96,18 +158,39 @@
                         android:layout_marginEnd="@dimen/default_dimen"
                         app:srcCompat="@drawable/ic_notebook_check_outline"/>
 
-                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                        android:id="@+id/exam_field"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:useDenseSpacing="true"
-                        app:labelText="@string/type_of_certification">
 
-                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                            android:id="@+id/exam_edit_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                            android:id="@+id/exam_field"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:labelText="@string/type_of_certification"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:useDenseSpacing="true">
+
+                            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                                android:id="@+id/exam_edit_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/exam_list_btn"
+                            android:layout_width="@dimen/icon_button_size"
+                            android:layout_height="@dimen/icon_button_size"
+                            android:layout_marginHorizontal="@dimen/elevation_dimen"
+                            android:layout_marginVertical="@dimen/elevation_dimen"
+                            android:background="?android:attr/actionBarItemBackground"
+                            android:src="@drawable/ic_baseline_notes"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat

@@ -3,6 +3,7 @@ package com.shiryaev.schedule.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.shiryaev.schedule.common.CallDialogs
@@ -14,12 +15,13 @@ import com.shiryaev.domain.models.TimeAndWeek
 import com.shiryaev.domain.utils.UtilsConvert
 import com.shiryaev.domain.utils.UtilsKeys
 import com.shiryaev.domain.utils.UtilsTableSchedule
+import com.shiryaev.domain.utils.nonNullValues
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.ActivityAddScheduleBinding
-import com.shiryaev.schedule.ui.dialogs.CustomDialog
 import com.shiryaev.schedule.ui.dialogs.ListDialog
 import com.shiryaev.schedule.utils.UtilsListData
 import kotlinx.android.synthetic.main.activity_add_schedule.view.*
+import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.util.ArrayList
 
 class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
@@ -27,7 +29,11 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     private var mSchedule = Schedule()
 
     private var mListTimeAndWeek: ArrayList<TimeAndWeek> = ArrayList()
-    private var mListTime = ArrayList<Int>()
+    private var mListLessons: List<String> = listOf()
+    private var mListTeachers: List<String> = listOf()
+    private var mListAudits: List<String> = listOf()
+    private var mListExams: List<String> = listOf()
+    private var mListTime: List<Int> = listOf()
 
     private lateinit var binding: ActivityAddScheduleBinding
 
@@ -75,20 +81,48 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         // Устанавливаем случашели на кнопки
         with(binding) {
+            lessonListBtn.setOnClickListener(this@AddScheduleActivity)
+            teacherListBtn.setOnClickListener(this@AddScheduleActivity)
+            auditListBtn.setOnClickListener(this@AddScheduleActivity)
+            examListBtn.setOnClickListener(this@AddScheduleActivity)
             timeBtn.setOnClickListener(this@AddScheduleActivity)
             timeListBtn.setOnClickListener(this@AddScheduleActivity)
             fab.setOnClickListener(this@AddScheduleActivity)
         }
 
-        // Получаем список времени
-        mViewModel.getTimeStartByDay(mSchedule.mDay).observe(this, { listTimes ->
-            mListTimeAndWeek = ArrayList(listTimes)
-        })
-
-        mViewModel.getListTimeStart().observe(this, { listTime ->
-            binding.timeListBtn.isVisible = listTime.isNotEmpty()
-            mListTime = ArrayList(listTime)
-        })
+        // Получаем списки для каждого поля из viewModel
+        with(mViewModel) {
+            // Получаем список времени
+            getTimeStartByDay(mSchedule.mDay).observe(this@AddScheduleActivity, { listTimes ->
+                mListTimeAndWeek = ArrayList(listTimes)
+            })
+            // Получаем список занятий
+            getListLessons().observe(this@AddScheduleActivity, { listLessons ->
+                mListLessons = nonNullValues(listLessons)
+                binding.lessonListBtn.isVisible = mListLessons.isNotEmpty()
+            })
+            // Получаем список занятий
+            getListTeachers().observe(this@AddScheduleActivity, { listTeachers ->
+                mListTeachers = nonNullValues(listTeachers)
+                Toast.makeText(this@AddScheduleActivity, "$mListTeachers", Toast.LENGTH_SHORT).show()
+                binding.teacherListBtn.isVisible = mListTeachers.isNotEmpty()
+            })
+            // Получаем список занятий
+            getListAudits().observe(this@AddScheduleActivity, { listAudits ->
+                mListAudits = nonNullValues(listAudits)
+                binding.auditListBtn.isVisible = mListAudits.isNotEmpty()
+            })
+            // Получаем список занятий
+            getListExams().observe(this@AddScheduleActivity, { listExams ->
+                mListExams = nonNullValues(listExams)
+                binding.examListBtn.isVisible = mListExams.isNotEmpty()
+            })
+            // Получаем список время+неделя (для текущего дня)
+            getListTimeStart().observe(this@AddScheduleActivity, { listTime ->
+                mListTime = nonNullValues(listTime)
+                binding.timeListBtn.isVisible = mListTime.isNotEmpty()
+            })
+        }
     }
 
     override fun onClick(v: View) {
@@ -97,6 +131,38 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                     mSchedule.mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
                     setSelectedTime()
                 }
+            }
+            R.id.lesson_list_btn -> {
+                ListDialog { positionItem ->
+                    mSchedule.mLesson = mListLessons[positionItem]
+                    setFieldText(binding.lessonEditText, mSchedule.mLesson)
+                }.apply {
+                    setData(UtilsListData.getListDialog(mListLessons))
+                }.show(supportFragmentManager, null)
+            }
+            R.id.teacher_list_btn -> {
+                ListDialog { positionItem ->
+                    mSchedule.mTeacher = mListTeachers[positionItem]
+                    setFieldText(binding.teacherEditText, mSchedule.mTeacher!!)
+                }.apply {
+                    setData(UtilsListData.getListDialog(mListTeachers))
+                }.show(supportFragmentManager, null)
+            }
+            R.id.audit_list_btn -> {
+                ListDialog { positionItem ->
+                    mSchedule.mAudit = mListAudits[positionItem]
+                    setFieldText(binding.auditEditText, mSchedule.mAudit!!)
+                }.apply {
+                    setData(UtilsListData.getListDialog(mListAudits))
+                }.show(supportFragmentManager, null)
+            }
+            R.id.exam_list_btn -> {
+                ListDialog { positionItem ->
+                    mSchedule.mExam = mListExams[positionItem]
+                    setFieldText(binding.examEditText, mSchedule.mExam!!)
+                }.apply {
+                    setData(UtilsListData.getListDialog(mListExams))
+                }.show(supportFragmentManager, null)
             }
             R.id.time_list_btn -> {
                 ListDialog { positionItem ->
@@ -137,6 +203,13 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     private fun setDataToView() {
         if (mSchedule.mTimeStart != UtilsChecks.TIME_DISABLE) {
             binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
+        }
+    }
+
+    private fun setFieldText(field: ExtendedEditText, text: String) {
+        with(field) {
+            setText(text)
+            setSelection(text.length)
         }
     }
 

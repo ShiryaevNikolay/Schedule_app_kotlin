@@ -7,3 +7,5 @@ fun Int.length() = when(this) {
     0 -> 1
     else -> log10(abs(toDouble())).toInt() + 1
 }
+
+fun <T: Any?> nonNullValues(values: List<T?>): List<T> = values.filterNotNull()

@@ -13,10 +13,18 @@ object UtilsListData {
         ItemDialog(icon = R.drawable.ic_trash_can_outline, text = context.resources.getStringArray(R.array.dialog_schedule)[1])
     )
 
-    fun getListTimeDialog(list: ArrayList<Int>): ArrayList<ItemDialog> {
+    fun getListTimeDialog(list: List<Int>): ArrayList<ItemDialog> {
         val listDialog = ArrayList<ItemDialog>()
         for (i in list) {
             listDialog.add(ItemDialog(text = UtilsConvert.convertTimeIntToString(i)))
+        }
+        return listDialog
+    }
+
+    fun getListDialog(list: List<String>): ArrayList<ItemDialog> {
+        val listDialog = ArrayList<ItemDialog>()
+        for (i in list) {
+            listDialog.add(ItemDialog(text = i))
         }
         return listDialog
     }

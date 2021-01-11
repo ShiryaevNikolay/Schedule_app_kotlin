@@ -18,9 +18,17 @@ class AddScheduleViewModel : ViewModel() {
         AppDelegate.getAppComponent().injectAddScheduleViewModel(this)
     }
 
-    fun getTimeStartByDay(mDay: Int) = mRepository.getTimeStartByDay(mDay)
+    fun getListLessons() = mRepository.getLessons()
+
+    fun getListTeachers() = mRepository.getTeachers()
+
+    fun getListAudits() = mRepository.getAudits()
+
+    fun getListExams() = mRepository.getExams()
 
     fun getListTimeStart() = mRepository.getTimeStart()
+
+    fun getTimeStartByDay(mDay: Int) = mRepository.getTimeStartByDay(mDay)
 
     fun insertSchedule(schedule: Schedule) { mRepository.insertSchedule(schedule) }
 
