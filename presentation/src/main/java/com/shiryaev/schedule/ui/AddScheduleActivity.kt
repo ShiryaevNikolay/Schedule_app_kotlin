@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.shiryaev.schedule.common.CallDialogs
@@ -92,35 +93,29 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         // Получаем списки для каждого поля из viewModel
         with(mViewModel) {
-            // Получаем список времени
+            // Получаем список время+неделя (для текущего дня)
             getTimeStartByDay(mSchedule.mDay).observe(this@AddScheduleActivity, { listTimes ->
                 mListTimeAndWeek = ArrayList(listTimes)
             })
             // Получаем список занятий
             getListLessons().observe(this@AddScheduleActivity, { listLessons ->
-                mListLessons = nonNullValues(listLessons)
-                binding.lessonListBtn.isVisible = mListLessons.isNotEmpty()
+                mListLessons = setVisibleBtn(binding.lessonListBtn, listLessons)
             })
             // Получаем список занятий
             getListTeachers().observe(this@AddScheduleActivity, { listTeachers ->
-                mListTeachers = nonNullValues(listTeachers)
-                Toast.makeText(this@AddScheduleActivity, "$mListTeachers", Toast.LENGTH_SHORT).show()
-                binding.teacherListBtn.isVisible = mListTeachers.isNotEmpty()
+                mListTeachers = setVisibleBtn(binding.teacherListBtn, listTeachers)
             })
             // Получаем список занятий
             getListAudits().observe(this@AddScheduleActivity, { listAudits ->
-                mListAudits = nonNullValues(listAudits)
-                binding.auditListBtn.isVisible = mListAudits.isNotEmpty()
+                mListAudits = setVisibleBtn(binding.auditListBtn, listAudits)
             })
             // Получаем список занятий
             getListExams().observe(this@AddScheduleActivity, { listExams ->
-                mListExams = nonNullValues(listExams)
-                binding.examListBtn.isVisible = mListExams.isNotEmpty()
+                mListExams = setVisibleBtn(binding.examListBtn, listExams)
             })
-            // Получаем список время+неделя (для текущего дня)
+            // Получаем список времени
             getListTimeStart().observe(this@AddScheduleActivity, { listTime ->
-                mListTime = nonNullValues(listTime)
-                binding.timeListBtn.isVisible = mListTime.isNotEmpty()
+                mListTime = setVisibleBtn(binding.timeListBtn, listTime)
             })
         }
     }
@@ -204,6 +199,12 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         if (mSchedule.mTimeStart != UtilsChecks.TIME_DISABLE) {
             binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
         }
+    }
+
+    private fun <T> setVisibleBtn(btn: AppCompatImageButton, newList: List<T>): List<T> {
+        val currentList = nonNullValues(newList.distinct())
+        btn.isVisible = currentList.isNotEmpty()
+        return currentList
     }
 
     private fun setFieldText(field: ExtendedEditText, text: String) {

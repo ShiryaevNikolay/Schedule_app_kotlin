@@ -11,19 +11,19 @@ interface ScheduleDao {
     @Query("SELECT * FROM ${UtilsTableSchedule.TABLE_SCHEDULE} WHERE ${UtilsTableSchedule.SCHEDULE_COLUMN_DAY} = :mDay ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART}" )
     fun getAllByDay(mDay: Int) : LiveData<List<Schedule>>
 
-    @Query("SELECT DISTINCT ${UtilsTableSchedule.SCHEDULE_COLUMN_LESSON} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_LESSON}")
+    @Query("SELECT ${UtilsTableSchedule.SCHEDULE_COLUMN_LESSON} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_LESSON}")
     fun getLessons() : LiveData<List<String>>
 
-    @Query("SELECT DISTINCT ${UtilsTableSchedule.SCHEDULE_COLUMN_TEACHER} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_TEACHER}")
+    @Query("SELECT ${UtilsTableSchedule.SCHEDULE_COLUMN_TEACHER} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_TEACHER}")
     fun getTeachers() : LiveData<List<String>>
 
-    @Query("SELECT DISTINCT ${UtilsTableSchedule.SCHEDULE_COLUMN_AUDIT} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_AUDIT}")
+    @Query("SELECT ${UtilsTableSchedule.SCHEDULE_COLUMN_AUDIT} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_AUDIT}")
     fun getAudits() : LiveData<List<String>>
 
-    @Query("SELECT DISTINCT ${UtilsTableSchedule.SCHEDULE_COLUMN_EXAM} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_EXAM}")
+    @Query("SELECT ${UtilsTableSchedule.SCHEDULE_COLUMN_EXAM} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_EXAM}")
     fun getExams() : LiveData<List<String>>
 
-    @Query("SELECT DISTINCT ${UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART}")
+    @Query("SELECT ${UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART} FROM ${UtilsTableSchedule.TABLE_SCHEDULE} ORDER BY ${UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART}")
     fun getTimeStart() : LiveData<List<Int>>
 
     @Query("SELECT ${UtilsTableSchedule.SCHEDULE_COLUMN_TIMESTART}, ${UtilsTableSchedule.SCHEDULE_COLUMN_WEEK} " +
