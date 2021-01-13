@@ -25,7 +25,7 @@ class ItemScheduleController(
                 removeAllViews()
                 for (item in data) {
                     addView(CustomItemSchedule(context).apply {
-                        onClickListener = { schedule -> onClickListener?.invoke(schedule) }
+                        onClickListener = { schedule -> this@ItemScheduleController.onClickListener.invoke(schedule) }
                         setItemSchedule(item)
                     })
                 }

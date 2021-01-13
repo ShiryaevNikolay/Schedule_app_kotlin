@@ -19,7 +19,7 @@
 
             <View
                 android:id="@+id/indicator_week"
-                android:layout_width="3dp"
+                android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:background="@color/blue_200" />
 
@@ -38,17 +38,22 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/lesson_schedule_tv"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/main_text_size"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/teacher_schedule_tv"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_dimen"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/audit_schedule_tv"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_dimen"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TableRow
@@ -71,7 +76,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="@dimen/default_dimen"
-                                android:textSize="12sp"/>
+                                android:textSize="@dimen/bottom_bar_text_size"/>
                         </com.google.android.material.card.MaterialCardView>
                     </FrameLayout>
 
@@ -81,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/default_dimen"
                         android:paddingVertical="@dimen/half_default_dimen"
-                        android:textSize="12sp"/>
+                        android:textSize="@dimen/bottom_bar_text_size"/>
                 </TableRow>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </TableRow>

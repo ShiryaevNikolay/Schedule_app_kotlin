@@ -14,6 +14,7 @@ import com.shiryaev.domain.models.Schedule
 import com.shiryaev.schedule.databinding.FrPageScheduleBinding
 import com.shiryaev.schedule.common.controllers.ItemScheduleController
 import com.shiryaev.domain.utils.UtilsKeys
+import com.shiryaev.schedule.ui.views.utils.SpaceFirstItemDecoration
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -79,6 +80,7 @@ class PageScheduleFragment : Fragment() {
         with(binding.recyclerView) {
             adapter = mEasyAdapter
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(SpaceFirstItemDecoration(60))
         }
     }
 

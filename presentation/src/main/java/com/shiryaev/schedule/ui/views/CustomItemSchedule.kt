@@ -3,13 +3,13 @@ package com.shiryaev.schedule.ui.views
 import android.content.Context
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.view.isVisible
 import com.shiryaev.domain.models.Schedule
 import com.shiryaev.schedule.R
 import kotlinx.android.synthetic.main.custom_card_schedule.view.*
 
 class CustomItemSchedule(
         context: Context
-
 ) : FrameLayout(context) {
 
     var onClickListener: ((Schedule) -> Unit)? = null
@@ -29,8 +29,6 @@ class CustomItemSchedule(
         auditTv = this.findViewById(R.id.audit_schedule_tv)
         weekTv = this.findViewById(R.id.week_schedule_tv)
         examTv = this.findViewById(R.id.exam_schedule_tv)
-
-        this.item_card.setOnClickListener { itemSchedule?.let { it1 -> onClickListener?.invoke(it1) } }
     }
 
     fun setItemSchedule(data: Schedule) {
@@ -42,5 +40,10 @@ class CustomItemSchedule(
             weekTv.text = mWeek.toString()
             examTv.text = mExam
         }
+        teacherTv.isVisible = data.mTeacher != null
+        auditTv.isVisible = data.mAudit != null
+        examTv.isVisible = data.mExam != null
+
+        this.item_card.setOnClickListener { onClickListener?.invoke(data) }
     }
 }
