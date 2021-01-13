@@ -3,7 +3,6 @@ package com.shiryaev.schedule.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider

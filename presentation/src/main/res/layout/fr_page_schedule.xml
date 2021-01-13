@@ -5,6 +5,11 @@
 
     <data>
 
+        <import alias="V" type="android.view.View"/>
+
+        <variable
+            name="VM"
+            type="com.shiryaev.data.viewmodels.PageScheduleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:visibility="@{VM.isErrorVisible ? V.VISIBLE : V.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +44,7 @@
             android:id="@+id/page_schedule_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{VM.isLoading ? V.VISIBLE : V.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +54,6 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/default_dimen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

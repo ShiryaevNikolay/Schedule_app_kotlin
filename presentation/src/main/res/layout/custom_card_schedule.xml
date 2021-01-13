@@ -73,8 +73,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="@dimen/default_dimen"
                                 android:layout_marginVertical="@dimen/half_default_dimen"
-                                android:textSize="12sp"
-                                android:text="Неделя 1"/>
+                                android:textSize="12sp"/>
                         </com.google.android.material.card.MaterialCardView>
                     </FrameLayout>
 
@@ -84,8 +83,7 @@
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/default_dimen"
                         android:paddingVertical="@dimen/half_default_dimen"
-                        android:textSize="12sp"
-                        android:text="Экзамен"/>
+                        android:textSize="12sp"/>
                 </TableRow>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </TableRow>
