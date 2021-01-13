@@ -1,39 +1,34 @@
 package com.shiryaev.schedule.common.controllers
 
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.LinearLayoutCompat
 import com.shiryaev.domain.models.Schedule
 import com.shiryaev.schedule.R
+import com.shiryaev.schedule.ui.views.CustomItemSchedule
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 
 class ItemScheduleController(
-        val onClickListener: () -> Unit
-) : BindableItemController<Schedule, ItemScheduleController.Holder>() {
+        val onClickListener: (Schedule) -> Unit
+) : BindableItemController<ArrayList<Schedule>, ItemScheduleController.Holder>() {
 
     override fun createViewHolder(parent: ViewGroup) = Holder(parent)
 
-    override fun getItemId(data: Schedule) = data.mId.hashCode().toString()
+    override fun getItemId(data: ArrayList<Schedule>) = data.hashCode().toString()
 
-    inner class Holder(parent: ViewGroup) : BindableViewHolder<Schedule>(parent, R.layout.custom_card_schedule) {
+    inner class Holder(parent: ViewGroup) : BindableViewHolder<ArrayList<Schedule>>(parent, R.layout.item_schedule) {
 
-        private val lessonTv: AppCompatTextView = itemView.findViewById(R.id.lesson_schedule_tv)
-        private val teacherTv: AppCompatTextView = itemView.findViewById(R.id.teacher_schedule_tv)
-        private val auditTv: AppCompatTextView = itemView.findViewById(R.id.audit_schedule_tv)
-        private val weekTv: AppCompatTextView = itemView.findViewById(R.id.week_schedule_tv)
-        private val examTv: AppCompatTextView = itemView.findViewById(R.id.exam_schedule_tv)
+        private val container = itemView.findViewById<LinearLayoutCompat>(R.id.item_container)
 
-        init {
-            itemView.setOnClickListener { onClickListener.invoke() }
-        }
-
-        override fun bind(data: Schedule) {
-            with(data) {
-                lessonTv.text = mLesson
-                teacherTv.text = mTeacher
-                auditTv.text = mAudit
-                weekTv.text = mWeek.toString()
-                examTv.text = mExam
+        override fun bind(data: ArrayList<Schedule>) {
+            with(container) {
+                removeAllViews()
+                for (item in data) {
+                    addView(CustomItemSchedule(context).apply {
+                        onClickListener = { schedule -> onClickListener?.invoke(schedule) }
+                        setItemSchedule(item)
+                    })
+                }
             }
         }
     }

@@ -14,7 +14,6 @@ class PageScheduleViewModel : ViewModel() {
 
     private val mIsLoading = MutableLiveData<Boolean>()
     private val mIsErrorVisible = MutableLiveData<Boolean>()
-    private val mSchedules = MutableLiveData<List<Schedule>>()
 
     init {
         AppDelegate.getAppComponent().injectPageScheduleViewModel(this)
@@ -27,6 +26,10 @@ class PageScheduleViewModel : ViewModel() {
     fun setIsErrorVisible(value: Boolean) {
         mIsErrorVisible.value = value
         mIsLoading.value = !value
+    }
+
+    fun setIsLoading(value: Boolean) {
+        mIsLoading.postValue(value)
     }
 
     fun listIsNotEmpty() {

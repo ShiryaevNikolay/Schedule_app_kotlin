@@ -7,10 +7,16 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/item_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_dimen"
         app:cardCornerRadius="@dimen/default_dimen"
-        app:cardElevation="@dimen/elevation_dimen"
-        app:cardUseCompatPadding="true"/>
+        app:cardElevation="@dimen/elevation_dimen">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/item_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

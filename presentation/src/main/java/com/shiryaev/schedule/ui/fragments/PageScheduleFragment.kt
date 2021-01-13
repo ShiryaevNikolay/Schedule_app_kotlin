@@ -14,6 +14,9 @@ import com.shiryaev.domain.models.Schedule
 import com.shiryaev.schedule.databinding.FrPageScheduleBinding
 import com.shiryaev.schedule.common.controllers.ItemScheduleController
 import com.shiryaev.domain.utils.UtilsKeys
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
 import java.util.ArrayList
@@ -79,15 +82,35 @@ class PageScheduleFragment : Fragment() {
         }
     }
 
-    private fun setListToAdapter(list: ArrayList<Schedule?>) {
+    private fun setListToAdapter(list: ArrayList<Schedule>) {
         if (list.isNotEmpty()) {
-            val listSchedule = ItemList.create().apply {
-                addAll(list, mItemSchedule)
-            }
-            mEasyAdapter.setItems(listSchedule)
-            mViewModel.listIsNotEmpty()
+            Observable.fromCallable { getListScheduleByDay(list) }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { mViewModel.setIsLoading(true) }
+                    .doFinally { mViewModel.setIsLoading(false) }
+                    .subscribe { newList ->
+                        val listSchedule = ItemList.create().apply {
+                            addAll(newList, mItemSchedule)
+                        }
+                        mEasyAdapter.setItems(listSchedule)
+                        mViewModel.listIsNotEmpty()
+                    }
         } else {
             mViewModel.setIsErrorVisible(true)
         }
+    }
+
+    private fun getListScheduleByDay(list: ArrayList<Schedule>): ArrayList<ArrayList<Schedule>> {
+        val newListSchedules: ArrayList<ArrayList<Schedule>> = arrayListOf(arrayListOf())
+        var timeTemp = list[0].mTimeStart
+        for (item in list) {
+            if (item.mTimeStart != timeTemp) {
+                newListSchedules.add(arrayListOf())
+                timeTemp = item.mTimeStart
+            }
+            newListSchedules[newListSchedules.size - 1].add(item)
+        }
+        return newListSchedules
     }
 }
