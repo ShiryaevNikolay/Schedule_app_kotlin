@@ -93,7 +93,7 @@ class PageScheduleFragment : Fragment() {
                     .doFinally { mViewModel.setIsLoading(false) }
                     .subscribe { newList ->
                         val listSchedule = ItemList.create().apply {
-                            addAll(newList, mItemSchedule)
+                            addAll(newList, mItemSchedule.apply { setCountItem(newList.size) })
                         }
                         mEasyAdapter.setItems(listSchedule)
                         mViewModel.listIsNotEmpty()

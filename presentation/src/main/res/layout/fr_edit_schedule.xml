@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:cardElevation="@dimen/elevation_dimen"
+            app:cardElevation="@dimen/bar_elevation"
             app:cardCornerRadius="@dimen/default_dimen">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -66,7 +66,7 @@
                         android:background="?android:attr/actionBarItemBackground"
                         app:srcCompat="@drawable/ic_form_select"
                         android:layout_marginBottom="@dimen/half_default_dimen"
-                        android:layout_marginEnd="@dimen/elevation_dimen"
+                        android:layout_marginEnd="@dimen/elevation"
                         tools:ignore="ContentDescription" />
                 </TableRow>
             </androidx.appcompat.widget.LinearLayoutCompat>

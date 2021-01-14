@@ -6,40 +6,23 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <com.google.android.material.card.MaterialCardView
+        <com.shiryaev.schedule.ui.views.CustomTimeLine
             android:id="@+id/item_time_container"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/half_default_dimen"
-            app:cardElevation="@dimen/elevation_dimen"
-            app:cardCornerRadius="@dimen/default_dimen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/item_card">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/item_time_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp" />
-        </com.google.android.material.card.MaterialCardView>
+            android:layout_height="match_parent"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/item_card"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/half_default_dimen"
             app:cardCornerRadius="@dimen/default_dimen"
-            app:cardElevation="@dimen/elevation_dimen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/item_time_container"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardElevation="@dimen/elevation">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/item_container"
@@ -47,5 +30,5 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
         </com.google.android.material.card.MaterialCardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

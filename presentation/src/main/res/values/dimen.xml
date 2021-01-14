@@ -2,7 +2,8 @@
 <resources>
     <dimen name="default_dimen">10dp</dimen>
     <dimen name="half_default_dimen">5dp</dimen>
-    <dimen name="elevation_dimen">5dp</dimen>
+    <dimen name="bar_elevation">5dp</dimen>
+    <dimen name="elevation">3dp</dimen>
     <dimen name="icon_button_size">40dp</dimen>
     <dimen name="corner">15dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
