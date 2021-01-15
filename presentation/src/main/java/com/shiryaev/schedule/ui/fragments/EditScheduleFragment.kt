@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -59,10 +58,10 @@ class EditScheduleFragment : Fragment(), View.OnClickListener {
         when(v.id) {
             R.id.fab -> run {
                 val options = Bundle().apply {
-                    putInt(UtilsKeys.POSITION_PAGE.key, binding.homeScreenVp.currentItem)
+                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.CREATE_LESSON.name)
+                    putInt(UtilsKeys.POSITION_PAGE.name, binding.homeScreenVp.currentItem)
                 }
-//                Toast.makeText(context, "${binding.homeScreenVp.currentItem}", Toast.LENGTH_SHORT).show()
-                Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), UtilsIntent.CREATE_SCHEDULE.key, options)
+                Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), options)
             }
         }
     }

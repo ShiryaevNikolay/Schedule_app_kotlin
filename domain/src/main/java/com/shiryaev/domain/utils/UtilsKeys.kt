@@ -1,5 +1,6 @@
 package com.shiryaev.domain.utils
 
-enum class UtilsKeys(val key: String) {
-    POSITION_PAGE("positionPage")
+enum class UtilsKeys {
+    POSITION_PAGE,
+    REQUEST_CODE
 }

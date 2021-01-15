@@ -4,7 +4,7 @@ import com.shiryaev.domain.models.TimeAndWeek
 
 object UtilsChecks {
 
-    val TIME_DISABLE = -1
+    const val TIME_DISABLE = -1
 
     fun checkTime(week: Int, selectedTime: Int, listTime: ArrayList<TimeAndWeek>) : Boolean {
         var flag = true

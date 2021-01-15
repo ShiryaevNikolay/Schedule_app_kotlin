@@ -251,6 +251,6 @@
             android:visibility="@{VM.fabIsVisible ? V.VISIBLE : V.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/create_a_schedule" />
+            android:contentDescription="@string/create_lesson" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -12,10 +12,7 @@ import com.shiryaev.data.utils.UtilsChecks
 import com.shiryaev.data.viewmodels.AddScheduleViewModel
 import com.shiryaev.domain.models.Schedule
 import com.shiryaev.domain.models.TimeAndWeek
-import com.shiryaev.domain.utils.UtilsConvert
-import com.shiryaev.domain.utils.UtilsKeys
-import com.shiryaev.domain.utils.UtilsTableSchedule
-import com.shiryaev.domain.utils.nonNullValues
+import com.shiryaev.domain.utils.*
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.ActivityAddScheduleBinding
 import com.shiryaev.schedule.ui.dialogs.ListDialog
@@ -44,17 +41,20 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityAddScheduleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mViewModel = ViewModelProvider(this, CustomFactory(AddScheduleViewModel())).get(AddScheduleViewModel::class.java)
+
         // Получение данных при краше активити
         if (savedInstanceState != null) {
             getData(savedInstanceState)
             setDataToView()
         } else {
-            mSchedule.mDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.key, 0)
+            when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
+                UtilsIntent.CREATE_LESSON.name -> mSchedule.mDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.name,0)
+                UtilsIntent.EDIT_LESSON.name -> mSchedule = intent.getSerializableExtra(UtilsTableSchedule.SCHEDULE) as Schedule
+            }
         }
 
         initToolbar()
-
-        mViewModel = ViewModelProvider(this, CustomFactory(AddScheduleViewModel())).get(AddScheduleViewModel::class.java)
 
         // Синхронизируем xml с viewModel
         with(binding) {
@@ -180,17 +180,20 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun getData(savedInstanceState: Bundle) {
-        with(savedInstanceState) {
-            mSchedule = getSerializable(UtilsTableSchedule.SCHEDULE) as Schedule
+    private fun initToolbar() {
+        with(binding.toolbar) {
+            when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
+                UtilsIntent.CREATE_LESSON.name -> subtitle = this.resources.getString(R.string.create_lesson)
+                UtilsIntent.EDIT_LESSON.name -> subtitle = this.resources.getString(R.string.edit_lesson)
+            }
+            title = this.resources.getStringArray(R.array.full_days_of_week)[mSchedule.mDay]
+            setNavigationOnClickListener { finishActivity() }
         }
     }
 
-    private fun initToolbar() {
-        with(binding.toolbar) {
-            subtitle = this.resources.getString(R.string.create_a_schedule)
-            title = this.resources.getStringArray(R.array.full_days_of_week)[mSchedule.mDay]
-            setNavigationOnClickListener { finishActivity() }
+    private fun getData(savedInstanceState: Bundle) {
+        with(savedInstanceState) {
+            mSchedule = getSerializable(UtilsTableSchedule.SCHEDULE) as Schedule
         }
     }
 

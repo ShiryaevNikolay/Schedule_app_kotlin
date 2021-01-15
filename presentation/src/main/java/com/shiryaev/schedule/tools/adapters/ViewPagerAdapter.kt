@@ -14,7 +14,7 @@ class ViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment = PageScheduleFragment().apply {
         arguments = bundleOf(
-                UtilsKeys.POSITION_PAGE.key to position
+                UtilsKeys.POSITION_PAGE.name to position
         )
     }
 

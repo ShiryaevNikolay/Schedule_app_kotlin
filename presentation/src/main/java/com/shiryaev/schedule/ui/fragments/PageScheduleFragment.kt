@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shiryaev.data.common.CustomFactory
+import com.shiryaev.data.common.Transfer
 import com.shiryaev.data.viewmodels.PageScheduleViewModel
 import com.shiryaev.domain.models.Schedule
+import com.shiryaev.domain.utils.UtilsIntent
 import com.shiryaev.schedule.databinding.FrPageScheduleBinding
 import com.shiryaev.schedule.common.controllers.ItemScheduleController
 import com.shiryaev.domain.utils.UtilsKeys
+import com.shiryaev.domain.utils.UtilsTableSchedule
 import com.shiryaev.schedule.R
+import com.shiryaev.schedule.ui.AddScheduleActivity
 import com.shiryaev.schedule.ui.dialogs.ListDialog
 import com.shiryaev.schedule.ui.views.utils.SpaceFirstItemDecoration
 import com.shiryaev.schedule.utils.UtilsListData
@@ -28,7 +33,7 @@ import java.util.ArrayList
 
 class PageScheduleFragment : Fragment() {
 
-    private var positionPage = 0
+    private var mPositionPage = 0
 
     private var _binding: FrPageScheduleBinding? = null
     private val binding get() = _binding!!
@@ -48,7 +53,7 @@ class PageScheduleFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            positionPage = it.getInt(UtilsKeys.POSITION_PAGE.key)
+            mPositionPage = it.getInt(UtilsKeys.POSITION_PAGE.name)
         }
     }
 
@@ -65,6 +70,10 @@ class PageScheduleFragment : Fragment() {
             lifecycleOwner = this@PageScheduleFragment
         }
 
+        mViewModel.getSchedules(mPositionPage).observe(viewLifecycleOwner, { listSchedules ->
+            setListToAdapter(ArrayList(listSchedules))
+        })
+
         initRecyclerView()
 
         return binding.root
@@ -74,15 +83,9 @@ class PageScheduleFragment : Fragment() {
         mItemSchedule = ItemScheduleController({ schedule ->
             // TODO: Детальный показ занятия при нажатии на карточку
         }, { schedule ->
-            ListDialog { positionItem ->
-                actionSchedule(schedule, positionItem)
-            }.apply {
-                setData(UtilsListData.getListScheduleDialog(mContext))
-            }.show(childFragmentManager, null)
-        })
-
-        mViewModel.getSchedules(positionPage).observe(viewLifecycleOwner, { listSchedules ->
-            setListToAdapter(ArrayList(listSchedules))
+            ListDialog { positionItem -> actionSchedule(schedule, positionItem) }
+                .apply { setData(UtilsListData.getListScheduleDialog(mContext)) }
+                .show(childFragmentManager, null)
         })
     }
 
@@ -136,6 +139,14 @@ class PageScheduleFragment : Fragment() {
     private fun actionSchedule(schedule: Schedule, action: Int) {
         val arrayAction = mContext.resources.getStringArray(R.array.dialog_schedule)
         when(arrayAction[action]) {
+            arrayAction.first() -> run {
+                val options = Bundle().apply {
+                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_LESSON.name)
+                    putInt(UtilsKeys.POSITION_PAGE.name, mPositionPage)
+                    putSerializable(UtilsTableSchedule.SCHEDULE, schedule)
+                }
+                Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), options)
+            }
             // Удаление занятия
             arrayAction.last() -> mViewModel.deleteSchedule(schedule)
         }
