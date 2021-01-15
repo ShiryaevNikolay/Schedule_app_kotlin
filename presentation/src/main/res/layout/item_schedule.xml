@@ -20,7 +20,9 @@
             android:id="@+id/item_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/half_default_dimen"
+            android:layout_marginVertical="@dimen/half_default_dimen"
+            android:layout_marginStart="@dimen/half_default_dimen"
+            android:layout_marginEnd="@dimen/default_dimen"
             app:cardCornerRadius="@dimen/default_dimen"
             app:cardElevation="@dimen/elevation">
 
