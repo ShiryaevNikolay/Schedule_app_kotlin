@@ -6,6 +6,10 @@
     <data>
         
         <import alias="V" type="android.view.View"/>
+
+        <variable
+            name="schedule"
+            type="com.shiryaev.domain.models.Schedule" />
         
         <variable
             name="VM"
@@ -60,7 +64,8 @@
                         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                             android:id="@+id/lesson_edit_text"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:text="@{schedule.MLesson}"/>
                     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                     <androidx.appcompat.widget.AppCompatImageButton
@@ -95,7 +100,8 @@
                         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                             android:id="@+id/teacher_edit_text"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{schedule.MTeacher}"/>
                     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                     <androidx.appcompat.widget.AppCompatImageButton
@@ -130,7 +136,8 @@
                         <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                             android:id="@+id/audit_edit_text"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="@{schedule.MAudit}"/>
                     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                     <androidx.appcompat.widget.AppCompatImageButton
@@ -158,7 +165,6 @@
                         android:layout_marginEnd="@dimen/default_dimen"
                         app:srcCompat="@drawable/ic_notebook_check_outline"/>
 
-
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -177,7 +183,8 @@
                             <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                                 android:id="@+id/exam_edit_text"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:text="@{schedule.MExam}"/>
                         </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                         <androidx.appcompat.widget.AppCompatImageButton

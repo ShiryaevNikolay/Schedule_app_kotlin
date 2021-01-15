@@ -43,11 +43,9 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         mViewModel = ViewModelProvider(this, CustomFactory(AddScheduleViewModel())).get(AddScheduleViewModel::class.java)
 
-        // Получение данных при краше активити
-        if (savedInstanceState != null) {
-            getData(savedInstanceState)
-            setDataToView()
-        } else {
+        // Получение данных при краше активити или с intent
+        if (savedInstanceState != null) { getData(savedInstanceState) }
+        else {
             when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
                 UtilsIntent.CREATE_LESSON.name -> mSchedule.mDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.name,0)
                 UtilsIntent.EDIT_LESSON.name -> mSchedule = intent.getSerializableExtra(UtilsTableSchedule.SCHEDULE) as Schedule
@@ -56,10 +54,13 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         initToolbar()
 
+        setDataToView()
+
         // Синхронизируем xml с viewModel
         with(binding) {
             vm = mViewModel
             lifecycleOwner = this@AddScheduleActivity
+            schedule = mSchedule
         }
 
         // Проверяем ввод полей
@@ -167,7 +168,10 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                 }.show(supportFragmentManager, null)
             }
             R.id.fab -> {
-                mViewModel.insertSchedule(mSchedule)
+                when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
+                    UtilsIntent.CREATE_LESSON.name -> mViewModel.insertSchedule(mSchedule)
+                    UtilsIntent.EDIT_LESSON.name -> mViewModel.updateSchedule(mSchedule)
+                }
                 finishActivity()
             }
         }

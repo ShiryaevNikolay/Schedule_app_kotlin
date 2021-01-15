@@ -26,13 +26,15 @@ class AddScheduleViewModel : ViewModel() {
 
     fun getListExams() = mRepository.getExams()
 
+    fun setFabIsVisible(value: Boolean) { mFabIsVisible.value = value }
+
+    fun getFabIsVisible() = mFabIsVisible
+
     fun getListTimeStart() = mRepository.getTimeStart()
 
     fun getTimeStartByDay(mDay: Int) = mRepository.getTimeStartByDay(mDay)
 
     fun insertSchedule(schedule: Schedule) { mRepository.insertSchedule(schedule) }
 
-    fun setFabIsVisible(value: Boolean) { mFabIsVisible.value = value }
-
-    fun getFabIsVisible() = mFabIsVisible
+    fun updateSchedule(schedule: Schedule) { mRepository.updateSchedule(schedule) }
 }
