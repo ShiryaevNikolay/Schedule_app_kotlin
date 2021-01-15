@@ -23,21 +23,16 @@ class PageScheduleViewModel : ViewModel() {
 
     fun getIsErrorVisible() = mIsErrorVisible
 
-    fun setIsErrorVisible(value: Boolean) {
-        mIsErrorVisible.value = value
-        mIsLoading.value = !value
-    }
+    fun setIsErrorVisible(value: Boolean) { mIsErrorVisible.value = value }
 
-    fun setIsLoading(value: Boolean) {
-        mIsLoading.postValue(value)
-    }
-
-    fun listIsNotEmpty() {
-        mIsErrorVisible.value = false
-        mIsLoading.value = false
-    }
+    fun setIsLoading(value: Boolean) { mIsLoading.postValue(value) }
 
     fun getSchedules(mDay: Int) = mRepository.getSchedules(mDay)
 
-    fun deleteSchedule(schedule: Schedule) {  }
+    fun deleteSchedule(schedule: Schedule) {
+        mRepository.deleteSchedule(schedule)
+            .doOnSubscribe { mIsLoading.postValue(true) }
+            .doFinally { mIsLoading.postValue(false) }
+            .subscribe {  }
+    }
 }

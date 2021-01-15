@@ -13,6 +13,7 @@ class CustomItemSchedule(
 ) : FrameLayout(context) {
 
     var onClickListener: ((Schedule) -> Unit)? = null
+    var onLongClickListener: ((Schedule) -> Unit)? = null
     private var itemSchedule: Schedule? = null
 
     private val lessonTv: AppCompatTextView
@@ -45,5 +46,9 @@ class CustomItemSchedule(
         examTv.isVisible = data.mExam != null
 
         this.item_card.setOnClickListener { onClickListener?.invoke(data) }
+        this.item_card.setOnLongClickListener {
+            onLongClickListener?.invoke(data)
+            true
+        }
     }
 }

@@ -38,4 +38,7 @@ class Repository {
                 .subscribeOn(Schedulers.io())
                 .subscribe { }
     }
+
+    fun deleteSchedule(schedule: Schedule): Completable = Completable.fromRunnable { mScheduleDao.deleteSchedule(schedule) }
+            .subscribeOn(Schedulers.io())
 }

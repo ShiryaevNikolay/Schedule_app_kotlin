@@ -33,8 +33,8 @@ open class CustomDialog : DialogFragment() {
     ): View {
         _binding = CustomLayoutDialogBinding.inflate(inflater, container, false)
 
-        // Устанавливаем прозрачность в 75%
-        binding.layoutDialog.background.alpha = 192
+        // Устанавливаем прозрачность в 80%
+        binding.layoutDialog.background.alpha = 204
 
         return binding.root
     }

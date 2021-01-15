@@ -14,10 +14,14 @@ import com.shiryaev.domain.models.Schedule
 import com.shiryaev.schedule.databinding.FrPageScheduleBinding
 import com.shiryaev.schedule.common.controllers.ItemScheduleController
 import com.shiryaev.domain.utils.UtilsKeys
+import com.shiryaev.schedule.R
+import com.shiryaev.schedule.ui.dialogs.ListDialog
 import com.shiryaev.schedule.ui.views.utils.SpaceFirstItemDecoration
+import com.shiryaev.schedule.utils.UtilsListData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.android.synthetic.main.custom_layout_dialog.view.*
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
 import java.util.ArrayList
@@ -30,12 +34,14 @@ class PageScheduleFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val mEasyAdapter = EasyAdapter()
-    private lateinit var mItemSchedule: ItemScheduleController
 
+    private lateinit var mContext: Context
+    private lateinit var mItemSchedule: ItemScheduleController
     private lateinit var mViewModel: PageScheduleViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        mContext = context
         mViewModel = ViewModelProvider(this, CustomFactory(PageScheduleViewModel())).get(PageScheduleViewModel::class.java)
     }
 
@@ -65,7 +71,16 @@ class PageScheduleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mItemSchedule = ItemScheduleController {  }
+        mItemSchedule = ItemScheduleController({ schedule ->
+            // TODO: Детальный показ занятия при нажатии на карточку
+        }, { schedule ->
+            ListDialog { positionItem ->
+                actionSchedule(schedule, positionItem)
+            }.apply {
+                setData(UtilsListData.getListScheduleDialog(mContext))
+            }.show(childFragmentManager, null)
+        })
+
         mViewModel.getSchedules(positionPage).observe(viewLifecycleOwner, { listSchedules ->
             setListToAdapter(ArrayList(listSchedules))
         })
@@ -85,27 +100,29 @@ class PageScheduleFragment : Fragment() {
     }
 
     private fun setListToAdapter(list: ArrayList<Schedule>) {
-        if (list.isNotEmpty()) {
-            Observable.fromCallable { getListScheduleByDay(list) }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSubscribe { mViewModel.setIsLoading(true) }
-                    .doFinally { mViewModel.setIsLoading(false) }
-                    .subscribe { newList ->
-                        val listSchedule = ItemList.create().apply {
-                            addAll(newList, mItemSchedule.apply { setCountItem(newList.size) })
-                        }
-                        mEasyAdapter.setItems(listSchedule)
-                        mViewModel.listIsNotEmpty()
-                    }
-        } else {
-            mViewModel.setIsErrorVisible(true)
+        Observable.fromCallable {
+            if (list.isNotEmpty()) { getListScheduleByDay(list) }
+            else { ArrayList() }
         }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    mViewModel.setIsLoading(true)
+                    mViewModel.setIsErrorVisible(false)
+                }
+                .doFinally { mViewModel.setIsLoading(false) }
+                .subscribe { newList ->
+                    val listSchedule = ItemList.create().apply {
+                        addAll(newList, mItemSchedule.apply { setCountItem(newList.size) })
+                    }
+                    mEasyAdapter.setItems(listSchedule)
+                    mViewModel.setIsErrorVisible(mEasyAdapter.itemCount == 0)
+                }
     }
 
     private fun getListScheduleByDay(list: ArrayList<Schedule>): ArrayList<ArrayList<Schedule>> {
         val newListSchedules: ArrayList<ArrayList<Schedule>> = arrayListOf(arrayListOf())
-        var timeTemp = list[0].mTimeStart
+        var timeTemp = list.first().mTimeStart
         for (item in list) {
             if (item.mTimeStart != timeTemp) {
                 newListSchedules.add(arrayListOf())
@@ -114,5 +131,13 @@ class PageScheduleFragment : Fragment() {
             newListSchedules[newListSchedules.size - 1].add(item)
         }
         return newListSchedules
+    }
+
+    private fun actionSchedule(schedule: Schedule, action: Int) {
+        val arrayAction = mContext.resources.getStringArray(R.array.dialog_schedule)
+        when(arrayAction[action]) {
+            // Удаление занятия
+            arrayAction.last() -> mViewModel.deleteSchedule(schedule)
+        }
     }
 }
