@@ -11,4 +11,8 @@
         android:id="@+id/editSchedule"
         android:name="com.shiryaev.schedule.ui.fragments.EditScheduleFragment"
         android:label="EditScheduleFragment" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.shiryaev.schedule.ui.fragments.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
