@@ -16,14 +16,14 @@
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?android:attr/colorPrimary"/>
+            android:background="?android:attr/colorAccent"/>
 
         <FrameLayout
             android:id="@+id/line_bottom"
             android:layout_width="2dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="?android:attr/colorPrimary"/>
+            android:background="?android:attr/colorAccent"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.card.MaterialCardView

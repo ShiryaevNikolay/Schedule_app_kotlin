@@ -11,7 +11,7 @@ import com.shiryaev.data.common.models.ItemDialog
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 
-class ItemDialogController : BindableItemController<ItemDialog, ItemDialogController.Holder>() {
+class ItemListDialogController : BindableItemController<ItemDialog, ItemListDialogController.Holder>() {
 
     var onCLickListener: ((position: Int) -> Unit)? = null
 

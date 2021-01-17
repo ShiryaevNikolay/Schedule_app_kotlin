@@ -44,16 +44,10 @@
     </string-array>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Сообщение</string>
-    <string name="sync_header">Синхронизация</string>
+    <string name="general_header">Общие настройки</string>
+    <string name="theme_mode">Темная тема</string>
+    <string name="weeks">Недели</string>
+    <string name="number_of_weeks">Количество недель</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Ваша подпись</string>
     <string name="reply_title">Действие ответа по умолчанию</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Периодически синхронизировать электронную почту</string>
-    <string name="attachment_title">Скачать входящие вложения</string>
-    <string name="attachment_summary_on">Автоматически загружать вложения для входящих писем</string>
-    <string name="attachment_summary_off">Загружать вложения только по запросу вручную</string>
 </resources>

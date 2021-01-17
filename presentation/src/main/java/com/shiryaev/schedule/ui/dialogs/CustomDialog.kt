@@ -9,22 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shiryaev.schedule.common.controllers.ItemDialogController
-import com.shiryaev.data.common.models.ItemDialog
+import com.shiryaev.schedule.common.controllers.ItemListDialogController
 import com.shiryaev.schedule.databinding.CustomLayoutDialogBinding
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
 
 open class CustomDialog : DialogFragment() {
 
-    open val mItemDialogController = ItemDialogController()
+    open val mItemDialogController = ItemListDialogController()
 
     private var _binding: CustomLayoutDialogBinding? = null
     private val binding get() = _binding!!
 
     private val mEasyAdapter = EasyAdapter()
-
-    private lateinit var mDialogList: ItemList
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -51,12 +48,7 @@ open class CustomDialog : DialogFragment() {
         _binding = null
     }
 
-    fun setListToAdapter(listItem: List<ItemDialog>) {
-        mDialogList = ItemList.create().apply {
-            addAll(listItem, mItemDialogController)
-        }
-        mEasyAdapter.setItems(mDialogList)
-    }
+    fun setListToAdapter(listItem: ItemList) { mEasyAdapter.setItems(listItem) }
 
     private fun initList() {
         with(binding.dialogRv) {
