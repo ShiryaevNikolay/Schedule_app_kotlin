@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.ui.dialogs.RadioDialog
 import com.shiryaev.schedule.utils.UtilsListData
@@ -32,13 +33,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
         initItems()
 
         mSetThemeMode = { value ->
-            // TODO
+            PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+                .putString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode[value])
+                .apply()
+            saveThemeMode()
         }
 
         mThemeMode.setOnPreferenceClickListener {
             RadioDialog()
                 .setData(
-                    UtilsListData.getRadioListDialog(mListThemeMode, mListThemeMode[0]),
+                    UtilsListData.getRadioListDialog(mListThemeMode, getThemeMode()!!),
                     mContext?.resources?.getString(R.string.theme_mode)!!)
                 { position ->
                     mSetThemeMode?.invoke(position)
@@ -50,5 +54,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun initItems() {
         mThemeMode = findPreference(mContext?.resources?.getString(R.string.theme_key)!!)!!
+        saveThemeMode()
     }
+
+    private fun saveThemeMode() {
+        mThemeMode.summary = getThemeMode()
+    }
+
+    private fun getThemeMode() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode[0])
 }
