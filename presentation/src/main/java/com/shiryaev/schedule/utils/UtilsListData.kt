@@ -23,8 +23,16 @@ object UtilsListData {
 
     fun getListDialog(list: List<String>): ArrayList<ItemDialog> {
         val listDialog = ArrayList<ItemDialog>()
-        for (i in list) {
-            listDialog.add(ItemDialog(text = i))
+        list.forEach { itemText ->
+            listDialog.add(ItemDialog(text = itemText))
+        }
+        return listDialog
+    }
+
+    fun getRadioListDialog(list: Array<String>, value: String): ArrayList<ItemDialog> {
+        val listDialog = ArrayList<ItemDialog>()
+        list.forEach { itemText ->
+            listDialog.add(ItemDialog(text = itemText, isChecked = value == itemText))
         }
         return listDialog
     }

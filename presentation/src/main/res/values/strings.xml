@@ -49,5 +49,7 @@
     <string name="number_of_weeks">Number of weeks</string>
 
     <string name="reply_title">Default reply action</string>
+    <string name="theme_key">theme_key</string>
+    <string name="weeks_key">weeks_key</string>
 
 </resources>

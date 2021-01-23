@@ -50,4 +50,6 @@
     <string name="number_of_weeks">Количество недель</string>
 
     <string name="reply_title">Действие ответа по умолчанию</string>
+    <string name="theme_key">theme_key</string>
+    <string name="weeks_key">weeks_key</string>
 </resources>

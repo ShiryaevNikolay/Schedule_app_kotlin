@@ -1,19 +1,17 @@
 package com.shiryaev.schedule.common.controllers
 
-import android.graphics.Color
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
-import com.google.android.material.card.MaterialCardView
 import com.shiryaev.schedule.R
 import com.shiryaev.data.common.models.ItemDialog
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 
-class ItemListDialogController : BindableItemController<ItemDialog, ItemListDialogController.Holder>() {
-
-    var onCLickListener: ((position: Int) -> Unit)? = null
+class ItemListDialogController(
+    private val onCLickListener: (position: Int) -> Unit
+) : BindableItemController<ItemDialog, ItemListDialogController.Holder>() {
 
     override fun createViewHolder(parent: ViewGroup) = Holder(parent)
 
@@ -26,8 +24,7 @@ class ItemListDialogController : BindableItemController<ItemDialog, ItemListDial
         private val iconIv: AppCompatImageView = itemView.findViewById(R.id.icon_item_dialog)
 
         init {
-            itemView.findViewById<MaterialCardView>(R.id.layout_item).setBackgroundColor(Color.TRANSPARENT)
-            itemView.setOnClickListener { onCLickListener?.invoke(adapterPosition) }
+            itemView.setOnClickListener { onCLickListener.invoke(adapterPosition) }
         }
 
         override fun bind(data: ItemDialog) {

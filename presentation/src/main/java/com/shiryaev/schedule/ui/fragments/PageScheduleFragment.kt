@@ -82,8 +82,10 @@ class PageScheduleFragment : Fragment() {
         mItemSchedule = ItemScheduleController({ schedule ->
             // TODO: Детальный показ занятия при нажатии на карточку
         }, { schedule ->
-            ListDialog { positionItem -> actionSchedule(schedule, positionItem) }
-                .apply { setData(UtilsListData.getListScheduleDialog(mContext)) }
+            ListDialog()
+                .setData(UtilsListData.getListScheduleDialog(mContext)) { positionItem ->
+                    actionSchedule(schedule, positionItem)
+                }
                 .show(childFragmentManager, null)
         })
     }

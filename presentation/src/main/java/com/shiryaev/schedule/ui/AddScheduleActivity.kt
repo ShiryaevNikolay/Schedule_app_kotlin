@@ -128,44 +128,44 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.lesson_list_btn -> {
-                ListDialog { positionItem ->
-                    mSchedule.mLesson = mListLessons[positionItem]
-                    setFieldText(binding.lessonEditText, mSchedule.mLesson)
-                }.apply {
-                    setData(UtilsListData.getListDialog(mListLessons))
-                }.show(supportFragmentManager, null)
+                ListDialog()
+                    .setData(UtilsListData.getListDialog(mListLessons)) { positionItem ->
+                        mSchedule.mLesson = mListLessons[positionItem]
+                        setFieldText(binding.lessonEditText, mSchedule.mLesson)
+                    }
+                    .show(supportFragmentManager, null)
             }
             R.id.teacher_list_btn -> {
-                ListDialog { positionItem ->
-                    mSchedule.mTeacher = mListTeachers[positionItem]
-                    setFieldText(binding.teacherEditText, mSchedule.mTeacher!!)
-                }.apply {
-                    setData(UtilsListData.getListDialog(mListTeachers))
-                }.show(supportFragmentManager, null)
+                ListDialog()
+                    .setData(UtilsListData.getListDialog(mListLessons)) { positionItem ->
+                        mSchedule.mTeacher = mListTeachers[positionItem]
+                        setFieldText(binding.teacherEditText, mSchedule.mTeacher!!)
+                    }
+                    .show(supportFragmentManager, null)
             }
             R.id.audit_list_btn -> {
-                ListDialog { positionItem ->
-                    mSchedule.mAudit = mListAudits[positionItem]
-                    setFieldText(binding.auditEditText, mSchedule.mAudit!!)
-                }.apply {
-                    setData(UtilsListData.getListDialog(mListAudits))
-                }.show(supportFragmentManager, null)
+                ListDialog()
+                    .setData(UtilsListData.getListDialog(mListAudits)) { positionItem ->
+                        mSchedule.mAudit = mListAudits[positionItem]
+                        setFieldText(binding.auditEditText, mSchedule.mAudit!!)
+                    }
+                    .show(supportFragmentManager, null)
             }
             R.id.exam_list_btn -> {
-                ListDialog { positionItem ->
-                    mSchedule.mExam = mListExams[positionItem]
-                    setFieldText(binding.examEditText, mSchedule.mExam!!)
-                }.apply {
-                    setData(UtilsListData.getListDialog(mListExams))
-                }.show(supportFragmentManager, null)
+                ListDialog()
+                    .setData(UtilsListData.getListDialog(mListExams)) { positionItem ->
+                        mSchedule.mExam = mListExams[positionItem]
+                        setFieldText(binding.examEditText, mSchedule.mExam!!)
+                    }
+                    .show(supportFragmentManager, null)
             }
             R.id.time_list_btn -> {
-                ListDialog { positionItem ->
-                    mSchedule.mTimeStart = mListTime[positionItem]
-                    setSelectedTime()
-                }.apply {
-                    setData(UtilsListData.getListTimeDialog(mListTime))
-                }.show(supportFragmentManager, null)
+                ListDialog()
+                    .setData(UtilsListData.getListTimeDialog(mListTime)) { positionItem ->
+                        mSchedule.mTimeStart = mListTime[positionItem]
+                        setSelectedTime()
+                    }
+                    .show(supportFragmentManager, null)
             }
             R.id.fab -> {
                 when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {

@@ -16,8 +16,6 @@ import ru.surfstudio.android.easyadapter.ItemList
 
 open class CustomDialog : DialogFragment() {
 
-    open val mItemDialogController = ItemListDialogController()
-
     private var _binding: CustomLayoutDialogBinding? = null
     private val binding get() = _binding!!
 
