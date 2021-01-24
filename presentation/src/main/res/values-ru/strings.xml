@@ -47,7 +47,6 @@
     <string name="general_header">Общие настройки</string>
     <string name="theme_mode">Темная тема</string>
     <string name="weeks">Недели</string>
-    <string name="number_of_weeks">Количество недель</string>
 
     <string name="reply_title">Действие ответа по умолчанию</string>
     <string name="theme_key">theme_key</string>

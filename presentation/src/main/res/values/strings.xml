@@ -46,7 +46,6 @@
     <string name="general_header">General</string>
     <string name="theme_mode">Dark theme</string>
     <string name="weeks">Weeks</string>
-    <string name="number_of_weeks">Number of weeks</string>
 
     <string name="reply_title">Default reply action</string>
     <string name="theme_key">theme_key</string>
