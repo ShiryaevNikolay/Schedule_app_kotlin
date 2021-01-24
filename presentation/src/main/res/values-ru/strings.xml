@@ -15,6 +15,7 @@
     <string name="create_lesson">Создать занятие</string>
     <string name="edit_lesson">Редактировать занятие</string>
     <string name="obligatory_field">Обязательное поле</string>
+    <string name="save">Сохранить</string>
     <string name="there_are_no_classes_on_this_day">В этот день нет занятий</string>
 
     <!--  Диалог при нажатии на занятие  -->

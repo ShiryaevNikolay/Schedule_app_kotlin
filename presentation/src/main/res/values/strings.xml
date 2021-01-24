@@ -14,6 +14,7 @@
     <string name="create_lesson">Create lesson</string>
     <string name="edit_lesson">Edit lesson</string>
     <string name="obligatory_field">Obligatory field</string>
+    <string name="save">Save</string>
     <string name="there_are_no_classes_on_this_day">There are no classes on this day</string>
 
     <!--  Диалог при нажатии на занятие  -->
@@ -50,5 +51,4 @@
     <string name="reply_title">Default reply action</string>
     <string name="theme_key">theme_key</string>
     <string name="weeks_key">weeks_key</string>
-
 </resources>
