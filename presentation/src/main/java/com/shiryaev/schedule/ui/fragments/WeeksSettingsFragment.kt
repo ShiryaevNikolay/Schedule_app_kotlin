@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.shiryaev.schedule.databinding.FrWeeksSettingsBinding
+import com.shiryaev.schedule.ui.dialogs.FieldDialog
 
 class WeeksSettingsFragment : Fragment() {
 
@@ -27,6 +28,17 @@ class WeeksSettingsFragment : Fragment() {
 
         binding.toolbar.setNavigationOnClickListener { mNavController.popBackStack() }
 
+        binding.fab.setOnClickListener { showDialog() }
+
         return binding.root
+    }
+
+    private fun showDialog() {
+        FieldDialog()
+            .setHeader("Введите название недели")
+            .setButton(listOf("ОТМЕНА", "ОК"))
+            .setData { nameWeek ->
+
+            }.show(childFragmentManager, null)
     }
 }

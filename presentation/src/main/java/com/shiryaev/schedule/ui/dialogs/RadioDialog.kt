@@ -7,13 +7,20 @@ import ru.surfstudio.android.easyadapter.ItemList
 
 class RadioDialog : CustomDialog() {
 
-    inline fun setData(listItem: List<ItemDialog>, header: String? = null, crossinline onCLickItemDialog: (positionItemDialog: Int) -> Unit): RadioDialog {
+    private var mHeader: String? = null
+
+    fun setHeader(header: String): RadioDialog {
+        mHeader = header
+        return this
+    }
+
+    fun setData(listItem: List<ItemDialog>, onCLickItemDialog: (Int) -> Unit): RadioDialog {
         val itemRadio = ItemRadioDialogController { positionItem ->
-            onCLickItemDialog.invoke(if(header != null) positionItem - 1 else positionItem)
+            onCLickItemDialog.invoke(if(mHeader != null) positionItem - 1 else positionItem)
             dismiss()
         }
         val mDialogList = ItemList.create().apply {
-            addIf(header != null, header, ItemHeaderDialogController())
+            addIf(mHeader != null, mHeader, ItemHeaderDialogController())
             addAll(listItem, itemRadio)
         }
         setListToAdapter(mDialogList)

@@ -47,10 +47,8 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
 
         mThemeMode.setOnPreferenceClickListener {
             RadioDialog()
-                .setData(
-                    UtilsListData.getRadioListDialog(mListThemeMode, getThemeMode()!!),
-                    mContext?.resources?.getString(R.string.theme_mode)!!)
-                { position ->
+                .setHeader(mContext?.resources?.getString(R.string.theme_mode)!!)
+                .setData(UtilsListData.getRadioListDialog(mListThemeMode, getThemeMode()!!)) { position ->
                     mSetThemeMode?.invoke(position)
                 }
                 .show(childFragmentManager, null)
