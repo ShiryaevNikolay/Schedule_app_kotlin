@@ -12,7 +12,6 @@ class CustomButtonDialog(context: Context) : TableRow(context) {
     private val mTextBtn: MaterialTextView
 
     init {
-        // НЕ РАБОТАЕТ
         this.layoutParams = LayoutParams(
                 LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT,

@@ -7,8 +7,11 @@ import ru.surfstudio.android.easyadapter.ItemList
 
 class FieldDialog : CustomDialog() {
 
+    var onClickPositiveButton: ((String) -> FieldDialog)? = null
+
     private var mHeader: String? = null
     private var mButton: List<String>? = null
+    private lateinit var mItemButtonController: ItemButtonDialogController
 
     fun setHeader(header: String): FieldDialog {
         mHeader = header
@@ -17,6 +20,9 @@ class FieldDialog : CustomDialog() {
 
     fun setButton(button: List<String>): FieldDialog {
         mButton = button
+        mItemButtonController = ItemButtonDialogController { textBtn ->
+            clickBtn(textBtn)
+        }
         return this
     }
 
@@ -27,9 +33,16 @@ class FieldDialog : CustomDialog() {
         val mDialogList = ItemList.create().apply {
             addIf(mHeader != null, mHeader, ItemHeaderDialogController())
             addAll(listOf(textField), itemField)
-            addAllIf(mButton != null, listOf(mButton), ItemButtonDialogController())
+            addAllIf(mButton != null, listOf(mButton), mItemButtonController)
         }
         setListToAdapter(mDialogList)
         return this
+    }
+
+    private fun clickBtn(text: String) {
+        when(text) {
+            mButton?.first() -> { dismiss() }
+            mButton?.last() -> {  }
+        }
     }
 }
