@@ -32,12 +32,13 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/icon_button_size"
                 android:layout_height="@dimen/icon_button_size"
-                app:srcCompat="@drawable/ic_playlist_remove"/>
+                app:srcCompat="@drawable/ic_attention"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/there_are_no_classes_on_this_day"/>
+                android:text="@string/there_are_no_classes_on_this_day"
+                android:layout_marginTop="@dimen/default_dimen"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <ProgressBar

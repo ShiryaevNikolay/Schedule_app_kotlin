@@ -17,7 +17,7 @@ import com.shiryaev.domain.utils.UtilsIntent
 import com.shiryaev.schedule.databinding.FrPageScheduleBinding
 import com.shiryaev.schedule.common.controllers.ItemScheduleController
 import com.shiryaev.domain.utils.UtilsKeys
-import com.shiryaev.domain.utils.UtilsTableSchedule
+import com.shiryaev.domain.utils.UtilsTable
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.ui.AddScheduleActivity
 import com.shiryaev.schedule.ui.dialogs.ListDialog
@@ -144,7 +144,7 @@ class PageScheduleFragment : Fragment() {
                 val options = Bundle().apply {
                     putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_LESSON.name)
                     putInt(UtilsKeys.POSITION_PAGE.name, mPositionPage)
-                    putSerializable(UtilsTableSchedule.SCHEDULE, schedule)
+                    putSerializable(UtilsTable.SCHEDULE, schedule)
                 }
                 Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), options)
             }

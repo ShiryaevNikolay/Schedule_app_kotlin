@@ -2,11 +2,14 @@ package com.shiryaev.schedule.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import com.shiryaev.data.common.CustomFactory
+import com.shiryaev.data.viewmodels.WeekSettingsViewModel
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.ui.dialogs.RadioDialog
 import com.shiryaev.schedule.utils.UtilsListData
@@ -19,11 +22,13 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
     private lateinit var mThemeMode: Preference
     private lateinit var mWeeks: Preference
     private lateinit var mNavController: NavController
+    private lateinit var mViewModel: WeekSettingsViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
         mListThemeMode = context.resources.getStringArray(R.array.theme_mode_entries)
+        mViewModel = ViewModelProvider(this, CustomFactory(WeekSettingsViewModel())).get(WeekSettingsViewModel::class.java)
     }
 
     override fun onDetach() {
@@ -37,6 +42,10 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
         mNavController = NavHostFragment.findNavController(this)
 
         initItems()
+
+        mViewModel.getCountWeek().observe(this) { countWeek ->
+            mWeeks.summary = if(countWeek > 0) countWeek.toString() else ""
+        }
 
         mSetThemeMode = { value ->
             PreferenceManager.getDefaultSharedPreferences(mContext).edit()

@@ -18,6 +18,8 @@
     <string name="there_are_no_classes_on_this_day">There are no classes on this day</string>
     <string name="name_of_week">Name of a week</string>
 
+    <string name="enter_the_name_of_the_week">Enter the name of the week</string>
+
     <!--  Диалог при нажатии на занятие  -->
     <string-array name="dialog_schedule">
         <item>Edit</item>
@@ -52,4 +54,5 @@
     <string name="reply_title">Default reply action</string>
     <string name="theme_key">theme_key</string>
     <string name="weeks_key">weeks_key</string>
+    <string name="click_on_to_add_a_week">Click on + to add a week</string>
 </resources>

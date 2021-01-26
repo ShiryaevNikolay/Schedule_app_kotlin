@@ -1,9 +1,9 @@
 package com.shiryaev.data.database
 
 import com.shiryaev.data.AppDelegate
+import com.shiryaev.data.database.schedule.ScheduleDao
 import com.shiryaev.domain.models.Schedule
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 

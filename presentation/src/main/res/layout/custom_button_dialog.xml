@@ -23,7 +23,7 @@
                 android:id="@+id/text_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/buttonDialog_size"
                 android:textColor="?android:attr/colorPrimary"
                 app:textAllCaps="true"/>
         </androidx.appcompat.widget.LinearLayoutCompat>

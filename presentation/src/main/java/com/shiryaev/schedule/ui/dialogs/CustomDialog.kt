@@ -1,5 +1,6 @@
 package com.shiryaev.schedule.ui.dialogs
 
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -42,8 +43,8 @@ open class CustomDialog : DialogFragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 
     fun setListToAdapter(listItem: ItemList) { mEasyAdapter.setItems(listItem) }

@@ -48,7 +48,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         else {
             when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
                 UtilsIntent.CREATE_LESSON.name -> mSchedule.mDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.name,0)
-                UtilsIntent.EDIT_LESSON.name -> mSchedule = intent.getSerializableExtra(UtilsTableSchedule.SCHEDULE) as Schedule
+                UtilsIntent.EDIT_LESSON.name -> mSchedule = intent.getSerializableExtra(UtilsTable.SCHEDULE) as Schedule
             }
         }
 
@@ -180,7 +180,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         with(outState) {
-            putSerializable(UtilsTableSchedule.SCHEDULE, mSchedule)
+            putSerializable(UtilsTable.SCHEDULE, mSchedule)
         }
     }
 
@@ -197,7 +197,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun getData(savedInstanceState: Bundle) {
         with(savedInstanceState) {
-            mSchedule = getSerializable(UtilsTableSchedule.SCHEDULE) as Schedule
+            mSchedule = getSerializable(UtilsTable.SCHEDULE) as Schedule
         }
     }
 
