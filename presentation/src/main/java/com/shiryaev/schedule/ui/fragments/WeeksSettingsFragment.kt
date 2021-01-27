@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -14,10 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.viewmodels.WeekSettingsViewModel
 import com.shiryaev.domain.models.Week
+import com.shiryaev.domain.utils.UtilsKeys
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.common.controllers.ItemWeekController
 import com.shiryaev.schedule.databinding.FrWeeksSettingsBinding
 import com.shiryaev.schedule.ui.dialogs.FieldDialog
+import com.shiryaev.schedule.ui.dialogs.InfoDialog
 import com.shiryaev.schedule.ui.dialogs.OnClickButtonDialogListener
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
@@ -67,7 +68,7 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
 
         binding.toolbar.setNavigationOnClickListener { mNavController.popBackStack() }
 
-        binding.fab.setOnClickListener { showDialog() }
+        binding.fab.setOnClickListener { showFieldDialog() }
 
         return binding.root
     }
@@ -81,8 +82,8 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
 
     private fun setListToAdapter(weeks: List<Week>) {
         val itemWeek = ItemWeekController().apply {
-            onClickLayout = { week -> showDialog(week = week) }
-            onLongClickLayout = { week ->  }
+            onClickLayout = { week -> showFieldDialog(week = week) }
+            onLongClickLayout = { week -> showRemoveDialog(week) }
             onCLickIndicatorBtn = {  }
         }
         val listWeek = ItemList.create().apply {
@@ -92,7 +93,7 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
         mViewModel.setIsErrorVisible(mEasyAdapter.itemCount == 0)
     }
 
-    private fun showDialog(week: Week? = null) {
+    private fun showFieldDialog(week: Week? = null) {
         FieldDialog()
             .setHeader(mContext?.resources?.getString(R.string.enter_the_name_of_the_week)!!)
             .setButton(listOf(
@@ -100,14 +101,32 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
                     mContext?.resources?.getStringArray(R.array.button_dialog)!!.last()
             ))
             .setData(week = week)
-            .show(childFragmentManager, null)
+            .show(childFragmentManager, UtilsKeys.FIELD_DIALOG.name)
     }
 
-    override fun onClick(text: String, week: Week?) {
-        if (week == null) {
-            mViewModel.insertWeek(Week(mName = text))
-        } else {
-            mViewModel.updateWeek(week)
+    private fun showRemoveDialog(week: Week) {
+        InfoDialog()
+            .setHeader(mContext?.resources?.getString(R.string.delete_week)!!)
+            .setButton(listOf(
+                mContext?.resources?.getStringArray(R.array.button_dialog)!!.first(),
+                mContext?.resources?.getStringArray(R.array.button_dialog)!!.last()
+            ))
+            .setData(week = week)
+            .show(childFragmentManager, UtilsKeys.INFO_DIALOG.name)
+    }
+
+    override fun onClick(text: String, week: Week?, dialog: String) {
+        when(dialog) {
+            UtilsKeys.FIELD_DIALOG.name -> {
+                if (week == null) {
+                    mViewModel.insertWeek(Week(mName = text))
+                } else {
+                    mViewModel.updateWeek(week)
+                }
+            }
+            UtilsKeys.INFO_DIALOG.name -> {
+                week?.let { mViewModel.deleteWeek(it) }
+            }
         }
     }
 }
