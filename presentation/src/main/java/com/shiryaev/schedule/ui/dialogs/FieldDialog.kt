@@ -1,6 +1,7 @@
 package com.shiryaev.schedule.ui.dialogs
 
 import android.content.Context
+import com.shiryaev.domain.models.Week
 import com.shiryaev.schedule.common.controllers.ItemButtonDialogController
 import com.shiryaev.schedule.common.controllers.ItemFieldDialogController
 import com.shiryaev.schedule.common.controllers.ItemHeaderDialogController
@@ -8,6 +9,7 @@ import ru.surfstudio.android.easyadapter.ItemList
 
 class FieldDialog : CustomDialog() {
 
+    private var mWeek: Week? = null
     private var mText = ""
     private var mHeader: String? = null
     private var mButton: List<String>? = null
@@ -32,14 +34,16 @@ class FieldDialog : CustomDialog() {
         return this
     }
 
-    fun setData(nameWeek: String = ""): FieldDialog {
-        mText = nameWeek
+    fun setData(week: Week? = null): FieldDialog {
+        mWeek = week
+        mText = mWeek?.mName ?: ""
         val itemField = ItemFieldDialogController { text ->
             mText = text
+            mWeek?.mName = text
         }
         val mDialogList = ItemList.create().apply {
             addIf(mHeader != null, mHeader, ItemHeaderDialogController())
-            addAll(listOf(nameWeek), itemField)
+            addAll(listOf(mText), itemField)
             addAllIf(mButton != null, listOf(mButton), mItemButtonController)
         }
         setListToAdapter(mDialogList)
@@ -49,7 +53,10 @@ class FieldDialog : CustomDialog() {
     private fun clickBtn(text: String) {
         when(text) {
             mButton?.first() -> { dismiss() }
-            mButton?.last() -> { mOnClickListener.onClick(mText) }
+            mButton?.last() -> {
+                mOnClickListener.onClick(mText, mWeek)
+                dismiss()
+            }
         }
     }
 }

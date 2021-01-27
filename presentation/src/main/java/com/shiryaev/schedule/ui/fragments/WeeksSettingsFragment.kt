@@ -80,25 +80,34 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
     }
 
     private fun setListToAdapter(weeks: List<Week>) {
+        val itemWeek = ItemWeekController().apply {
+            onClickLayout = { week -> showDialog(week = week) }
+            onLongClickLayout = { week ->  }
+            onCLickIndicatorBtn = {  }
+        }
         val listWeek = ItemList.create().apply {
-            addAll(weeks, ItemWeekController())
+            addAll(weeks, itemWeek)
         }
         mEasyAdapter.setItems(listWeek)
         mViewModel.setIsErrorVisible(mEasyAdapter.itemCount == 0)
     }
 
-    private fun showDialog() {
+    private fun showDialog(week: Week? = null) {
         FieldDialog()
             .setHeader(mContext?.resources?.getString(R.string.enter_the_name_of_the_week)!!)
             .setButton(listOf(
                     mContext?.resources?.getStringArray(R.array.button_dialog)!!.first(),
                     mContext?.resources?.getStringArray(R.array.button_dialog)!!.last()
             ))
-            .setData()
+            .setData(week = week)
             .show(childFragmentManager, null)
     }
 
-    override fun onClick(text: String) {
-        Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show()
+    override fun onClick(text: String, week: Week?) {
+        if (week == null) {
+            mViewModel.insertWeek(Week(mName = text))
+        } else {
+            mViewModel.updateWeek(week)
+        }
     }
 }
