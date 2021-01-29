@@ -13,6 +13,7 @@ import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.common.Transfer
 import com.shiryaev.data.viewmodels.PageScheduleViewModel
 import com.shiryaev.domain.models.Schedule
+import com.shiryaev.domain.models.Week
 import com.shiryaev.domain.utils.UtilsIntent
 import com.shiryaev.schedule.databinding.FrPageScheduleBinding
 import com.shiryaev.schedule.common.controllers.ItemScheduleController
@@ -33,6 +34,7 @@ import java.util.ArrayList
 class PageScheduleFragment : Fragment() {
 
     private var mPositionPage = 0
+    private var mListWeek: List<Week> = listOf()
 
     private var _binding: FrPageScheduleBinding? = null
     private val binding get() = _binding!!
@@ -73,13 +75,17 @@ class PageScheduleFragment : Fragment() {
             setListToAdapter(ArrayList(listSchedules))
         })
 
+        mViewModel.getWeeks().observe(viewLifecycleOwner) { listWeek ->
+            mListWeek = listWeek
+        }
+
         initRecyclerView()
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mItemSchedule = ItemScheduleController({ schedule ->
+        mItemSchedule = ItemScheduleController(mListWeek, { schedule ->
             // TODO: Детальный показ занятия при нажатии на карточку
         }, { schedule ->
             ListDialog()

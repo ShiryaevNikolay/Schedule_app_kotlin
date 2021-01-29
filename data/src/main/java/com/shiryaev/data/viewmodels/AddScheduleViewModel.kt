@@ -18,6 +18,8 @@ class AddScheduleViewModel : ViewModel() {
         AppDelegate.getAppComponent().injectAddScheduleViewModel(this)
     }
 
+    fun getWeeks() = mRepository.getWeeks()
+
     fun getListLessons() = mRepository.getLessons()
 
     fun getListTeachers() = mRepository.getTeachers()

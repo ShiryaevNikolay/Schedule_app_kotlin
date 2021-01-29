@@ -15,5 +15,5 @@ class Week (
     var mName: String = "",
 
     @ColumnInfo(name = UtilsTable.WEEK_COLOR)
-    var mColor: String? = null
+    var mColor: String = ""
 )

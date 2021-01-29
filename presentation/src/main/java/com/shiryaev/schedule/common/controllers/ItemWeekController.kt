@@ -1,5 +1,7 @@
 package com.shiryaev.schedule.common.controllers
 
+import android.content.res.TypedArray
+import android.util.TypedValue
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageButton
@@ -14,7 +16,7 @@ class ItemWeekController : BindableItemController<Week, ItemWeekController.Holde
 
     var onClickLayout: ((Week) -> Unit)? = null
     var onLongClickLayout: ((Week) -> Unit)? = null
-    var onCLickIndicatorBtn: (() -> Unit)? = null
+    var onCLickIndicatorBtn: ((Week) -> Unit)? = null
 
     override fun createViewHolder(parent: ViewGroup) = Holder(parent)
 
@@ -39,8 +41,19 @@ class ItemWeekController : BindableItemController<Week, ItemWeekController.Holde
                 }
             }
 
-            mIndicatorWeek.setOnClickListener {
-                Toast.makeText(itemView.context, "Click on Indicator button", Toast.LENGTH_SHORT).show()
+            mIndicatorWeek.apply {
+                if (data.mColor == "") {
+                    val typedValue = TypedValue()
+                    val typedArray: TypedArray = itemView.context.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorAccent))
+                    val color = typedArray.getColor(0, 0)
+                    typedArray.recycle()
+                    setColorFilter(color)
+                } else {
+                    setColorFilter(data.mColor!!.toInt())
+                }
+                setOnClickListener {
+                    onCLickIndicatorBtn?.invoke(data)
+                }
             }
         }
     }

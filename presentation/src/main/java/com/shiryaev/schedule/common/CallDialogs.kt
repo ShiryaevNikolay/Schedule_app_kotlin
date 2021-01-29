@@ -8,7 +8,7 @@ import com.shiryaev.schedule.R
 
 object CallDialogs {
 
-    fun callTimePicker(context: Context, week: Int, listTime: ArrayList<TimeAndWeek>, onSelectTime: (Int, Int) -> Unit) {
+    fun callTimePicker(context: Context, week: String, listTime: ArrayList<TimeAndWeek>, onSelectTime: (Int, Int) -> Unit) {
         TimePickerDialog(context, { _, hourOfDay, minute ->
             if (UtilsChecks.checkTime(week, ("$hourOfDay$minute").toInt(), listTime)) {
                 onSelectTime.invoke(hourOfDay, minute)

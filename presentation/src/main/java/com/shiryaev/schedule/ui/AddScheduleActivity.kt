@@ -12,6 +12,7 @@ import com.shiryaev.data.utils.UtilsChecks
 import com.shiryaev.data.viewmodels.AddScheduleViewModel
 import com.shiryaev.domain.models.Schedule
 import com.shiryaev.domain.models.TimeAndWeek
+import com.shiryaev.domain.models.Week
 import com.shiryaev.domain.utils.*
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.ActivityAddScheduleBinding
@@ -25,6 +26,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mSchedule = Schedule()
 
+    private var mListWeek: List<Week> = listOf()
     private var mListTimeAndWeek: ArrayList<TimeAndWeek> = ArrayList()
     private var mListLessons: List<String> = listOf()
     private var mListTeachers: List<String> = listOf()
@@ -93,6 +95,10 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         // Получаем списки для каждого поля из viewModel
         with(mViewModel) {
+            // Получаем список недель
+            getWeeks().observe(this@AddScheduleActivity) { listWeek ->
+                mListWeek = listWeek
+            }
             // Получаем список время+неделя (для текущего дня)
             getTimeStartByDay(mSchedule.mDay).observe(this@AddScheduleActivity, { listTimes ->
                 mListTimeAndWeek = ArrayList(listTimes)

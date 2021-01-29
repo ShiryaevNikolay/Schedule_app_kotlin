@@ -29,6 +29,8 @@ class PageScheduleViewModel : ViewModel() {
 
     fun getSchedules(mDay: Int) = mRepository.getSchedules(mDay)
 
+    fun getWeeks() = mRepository.getWeeks()
+
     fun deleteSchedule(schedule: Schedule) {
         mRepository.deleteSchedule(schedule)
             .doOnSubscribe { mIsLoading.postValue(true) }

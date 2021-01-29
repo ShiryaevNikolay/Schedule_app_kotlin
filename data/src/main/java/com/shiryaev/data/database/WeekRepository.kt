@@ -23,12 +23,12 @@ class WeekRepository {
 
     fun getCountWeek() = mWeekDao.getCountWeek()
 
-    fun insertWeek(week: Week) = Completable.fromRunnable { mWeekDao.insertWeek(week) }
+    fun insertWeek(week: Week): Completable = Completable.fromRunnable { mWeekDao.insertWeek(week) }
                 .subscribeOn(Schedulers.io())
 
-    fun updateWeek(week: Week) = Completable.fromRunnable { mWeekDao.updateWeek(week) }
+    fun updateWeek(week: Week): Completable = Completable.fromRunnable { mWeekDao.updateWeek(week) }
                 .subscribeOn(Schedulers.io())
 
-    fun deleteWeek(week: Week) = Completable.fromRunnable { mWeekDao.deleteWeek(week) }
+    fun deleteWeek(week: Week): Completable = Completable.fromRunnable { mWeekDao.deleteWeek(week) }
                 .subscribeOn(Schedulers.io())
 }

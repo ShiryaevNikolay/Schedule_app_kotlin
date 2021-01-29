@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.shiryaev.domain.models.Schedule
+import com.shiryaev.domain.models.Week
 import com.shiryaev.domain.utils.UtilsConvert
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.ui.views.CustomItemSchedule
@@ -12,6 +13,7 @@ import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 
 class ItemScheduleController(
+        private val listWeek: List<Week>,
         private val onClickListener: (Schedule) -> Unit,
         private val onLongClickListener: (Schedule) -> Unit
 ) : BindableItemController<ArrayList<Schedule>, ItemScheduleController.Holder>() {
@@ -65,7 +67,7 @@ class ItemScheduleController(
             with(container) {
                 removeAllViews()
                 for (item in data) {
-                    addView(CustomItemSchedule(context).apply {
+                    addView(CustomItemSchedule(context, listWeek).apply {
                         onClickListener = { schedule -> this@ItemScheduleController.onClickListener.invoke(schedule) }
                         onLongClickListener = { schedule -> this@ItemScheduleController.onLongClickListener.invoke(schedule) }
                         setItemSchedule(item)

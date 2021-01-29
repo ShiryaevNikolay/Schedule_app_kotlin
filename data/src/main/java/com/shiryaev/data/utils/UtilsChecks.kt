@@ -6,7 +6,7 @@ object UtilsChecks {
 
     const val TIME_DISABLE = -1
 
-    fun checkTime(week: Int, selectedTime: Int, listTime: ArrayList<TimeAndWeek>) : Boolean {
+    fun checkTime(week: String, selectedTime: Int, listTime: ArrayList<TimeAndWeek>) : Boolean {
         var flag = true
         for (i in 0 until listTime.size) {
             if (listTime[i].mTimeStart == selectedTime) {

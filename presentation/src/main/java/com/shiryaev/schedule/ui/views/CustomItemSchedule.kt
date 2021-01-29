@@ -1,15 +1,21 @@
 package com.shiryaev.schedule.ui.views
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
+import com.google.android.material.card.MaterialCardView
 import com.shiryaev.domain.models.Schedule
+import com.shiryaev.domain.models.Week
 import com.shiryaev.schedule.R
 import kotlinx.android.synthetic.main.custom_card_schedule.view.*
 
+@SuppressLint("ViewConstructor")
 class CustomItemSchedule(
-        context: Context
+        context: Context,
+        private val listWeek: List<Week>
 ) : FrameLayout(context) {
 
     var onClickListener: ((Schedule) -> Unit)? = null
@@ -21,6 +27,8 @@ class CustomItemSchedule(
     private val auditTv: AppCompatTextView
     private val weekTv: AppCompatTextView
     private val examTv: AppCompatTextView
+    private val mIndicatorCardWeek: MaterialCardView
+    private val mIndicatorWeek: View
 
     init {
         inflate(context, R.layout.custom_card_schedule, this)
@@ -30,6 +38,8 @@ class CustomItemSchedule(
         auditTv = this.findViewById(R.id.audit_schedule_tv)
         weekTv = this.findViewById(R.id.week_schedule_tv)
         examTv = this.findViewById(R.id.exam_schedule_tv)
+        mIndicatorCardWeek = this.findViewById(R.id.indicator_card_week)
+        mIndicatorWeek = this.findViewById(R.id.indicator_week)
     }
 
     fun setItemSchedule(data: Schedule) {
@@ -38,12 +48,29 @@ class CustomItemSchedule(
             lessonTv.text = mLesson
             teacherTv.text = mTeacher
             auditTv.text = mAudit
-            weekTv.text = mWeek.toString()
+            weekTv.text = mWeek
             examTv.text = mExam
         }
         teacherTv.isVisible = data.mTeacher != null
         auditTv.isVisible = data.mAudit != null
         examTv.isVisible = data.mExam != null
+
+        mIndicatorCardWeek.isVisible = data.mWeek != ""
+        mIndicatorWeek.isVisible = data.mWeek != ""
+
+        listWeek.forEach { week ->
+            if (week.mName == data.mWeek) {
+                if (week.mColor != "") {
+                    mIndicatorCardWeek.background.setTint(week.mColor.toInt())
+                    mIndicatorWeek.setBackgroundColor(week.mColor.toInt())
+                    mIndicatorCardWeek.isVisible = true
+                    mIndicatorWeek.isVisible = true
+                } else {
+                    mIndicatorCardWeek.isVisible = false
+                    mIndicatorWeek.isVisible = false
+                }
+            }
+        }
 
         this.item_card.setOnClickListener { onClickListener?.invoke(data) }
         this.item_card.setOnLongClickListener {
