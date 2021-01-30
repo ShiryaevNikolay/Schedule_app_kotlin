@@ -66,4 +66,13 @@ class WeekSettingsViewModel : ViewModel() {
                 .doOnComplete { mIsErrorVisible.postValue(false) }
                 .subscribe()
     }
+
+    fun deleteWeekSchedule(nameWeek: String) {
+        mWeekRepository.deleteWeekSchedule(nameWeek)
+                .doOnSubscribe { mIsLoading.postValue(true) }
+                .doFinally { mIsLoading.postValue(false) }
+                .doOnError { mIsErrorVisible.postValue(true) }
+                .doOnComplete { mIsErrorVisible.postValue(false) }
+                .subscribe()
+    }
 }

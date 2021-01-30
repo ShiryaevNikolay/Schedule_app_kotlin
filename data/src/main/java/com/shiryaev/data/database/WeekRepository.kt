@@ -37,4 +37,7 @@ class WeekRepository {
 
     fun updateWeekSchedule(oldNameWeek: String, newNameWeek: String): Completable = Completable.fromRunnable { mScheduleDao.updateWeekSchedule(oldNameWeek, newNameWeek) }
                 .subscribeOn(Schedulers.io())
+
+    fun deleteWeekSchedule(nameWeek: String): Completable = Completable.fromRunnable { mScheduleDao.deleteWeekSchedule(nameWeek) }
+            .subscribeOn(Schedulers.io())
 }

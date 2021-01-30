@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_margin="@dimen/margin_vertical">
+                    android:layout_margin="@dimen/margin_card">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/lesson_schedule_tv"

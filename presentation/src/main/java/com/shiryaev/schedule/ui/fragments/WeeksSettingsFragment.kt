@@ -139,6 +139,7 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
                 }
             }
             UtilsKeys.INFO_DIALOG.name -> {
+                week?.let { mViewModel.deleteWeekSchedule(it.mName) }
                 week?.let { mViewModel.deleteWeek(it) }
             }
             UtilsKeys.COLOR_PICK_DIALOG.name -> {

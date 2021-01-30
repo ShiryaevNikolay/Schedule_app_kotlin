@@ -37,6 +37,11 @@ interface ScheduleDao {
             "WHERE ${UtilsTable.SCHEDULE_COLUMN_WEEK} = :oldNameWeek")
     fun updateWeekSchedule(oldNameWeek: String, newNameWeek: String)
 
+    @Query("UPDATE ${UtilsTable.TABLE_SCHEDULE} " +
+            "SET ${UtilsTable.SCHEDULE_COLUMN_WEEK} = '' " +
+            "WHERE ${UtilsTable.SCHEDULE_COLUMN_WEEK} = :nameWeek")
+    fun deleteWeekSchedule(nameWeek: String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSchedule(schedule: Schedule)
 
