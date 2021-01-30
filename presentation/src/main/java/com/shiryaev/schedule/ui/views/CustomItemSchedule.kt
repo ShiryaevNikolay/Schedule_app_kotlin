@@ -2,6 +2,9 @@ package com.shiryaev.schedule.ui.views
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.TypedArray
+import android.graphics.Color
+import android.util.TypedValue
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
@@ -56,18 +59,25 @@ class CustomItemSchedule(
         examTv.isVisible = data.mExam != null
 
         mIndicatorCardWeek.isVisible = data.mWeek != ""
-        mIndicatorWeek.isVisible = data.mWeek != ""
 
-        listWeek.forEach { week ->
-            if (week.mName == data.mWeek) {
-                if (week.mColor != "") {
-                    mIndicatorCardWeek.background.setTint(week.mColor.toInt())
-                    mIndicatorWeek.setBackgroundColor(week.mColor.toInt())
+        if (data.mWeek == "") {
+            mIndicatorWeek.setBackgroundColor(Color.TRANSPARENT)
+            mIndicatorCardWeek.isVisible = false
+        } else {
+            listWeek.forEach { week ->
+                if (data.mWeek == week.mName) {
+                    if (week.mColor == "") {
+                        val typedValue = TypedValue()
+                        val typedArray: TypedArray = context.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorAccent))
+                        val color = typedArray.getColor(0, 0)
+                        typedArray.recycle()
+                        mIndicatorCardWeek.background.setTint(color)
+                        mIndicatorWeek.setBackgroundColor(color)
+                    } else {
+                        mIndicatorCardWeek.background.setTint(context.resources.getIntArray(R.array.color_pick)[week.mColor.toInt()])
+                        mIndicatorWeek.setBackgroundColor(context.resources.getIntArray(R.array.color_pick)[week.mColor.toInt()])
+                    }
                     mIndicatorCardWeek.isVisible = true
-                    mIndicatorWeek.isVisible = true
-                } else {
-                    mIndicatorCardWeek.isVisible = false
-                    mIndicatorWeek.isVisible = false
                 }
             }
         }

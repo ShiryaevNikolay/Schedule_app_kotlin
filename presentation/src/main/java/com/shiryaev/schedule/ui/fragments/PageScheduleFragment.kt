@@ -42,7 +42,7 @@ class PageScheduleFragment : Fragment() {
     private val mEasyAdapter = EasyAdapter()
 
     private lateinit var mContext: Context
-    private lateinit var mItemSchedule: ItemScheduleController
+//    private lateinit var mItemSchedule: ItemScheduleController
     private lateinit var mViewModel: PageScheduleViewModel
 
     override fun onAttach(context: Context) {
@@ -85,15 +85,15 @@ class PageScheduleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mItemSchedule = ItemScheduleController(mListWeek, { schedule ->
-            // TODO: Детальный показ занятия при нажатии на карточку
-        }, { schedule ->
-            ListDialog()
-                .setData(UtilsListData.getListScheduleDialog(mContext)) { positionItem ->
-                    actionSchedule(schedule, positionItem)
-                }
-                .show(childFragmentManager, null)
-        })
+//        mItemSchedule = ItemScheduleController(mListWeek, { schedule ->
+//            // TODO: Детальный показ занятия при нажатии на карточку
+//        }, { schedule ->
+//            ListDialog()
+//                .setData(UtilsListData.getListScheduleDialog(mContext)) { positionItem ->
+//                    actionSchedule(schedule, positionItem)
+//                }
+//                .show(childFragmentManager, null)
+//        })
     }
 
     override fun onDestroyView() {
@@ -122,6 +122,9 @@ class PageScheduleFragment : Fragment() {
                 }
                 .doFinally { mViewModel.setIsLoading(false) }
                 .subscribe { newList ->
+                    val mItemSchedule = ItemScheduleController(mListWeek, { schedule ->
+                        // TODO: Детальный показ занятия при нажатии на карточку
+                    }, { schedule -> showListDialog(schedule) })
                     val listSchedule = ItemList.create().apply {
                         addAll(newList, mItemSchedule.apply { setCountItem(newList.size) })
                     }
@@ -157,5 +160,13 @@ class PageScheduleFragment : Fragment() {
             // Удаление занятия
             arrayAction.last() -> mViewModel.deleteSchedule(schedule)
         }
+    }
+
+    private fun showListDialog(schedule: Schedule) {
+        ListDialog()
+            .setData(UtilsListData.getListScheduleDialog(mContext)) { positionItem ->
+                actionSchedule(schedule, positionItem)
+            }
+            .show(childFragmentManager, null)
     }
 }

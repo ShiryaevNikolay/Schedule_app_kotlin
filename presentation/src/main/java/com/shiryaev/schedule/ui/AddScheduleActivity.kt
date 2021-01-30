@@ -175,11 +175,16 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                     .show(supportFragmentManager, null)
             }
             R.id.week_btn -> {
-//                ListDialog()
-//                    .setData(mListWeek) {
-//
-//                    }
-//                    .show(supportFragmentManager, null)
+                ListDialog()
+                    .setData(UtilsListData.getListNameWeekDialog(mListWeek, this)) { positionItem ->
+                        if (positionItem == mListWeek.size) {
+                            mSchedule.mWeek = ""
+                        } else {
+                            mSchedule.mWeek = mListWeek[positionItem].mName
+                        }
+                        setSelectedWeek()
+                    }
+                    .show(supportFragmentManager, null)
             }
             R.id.fab -> {
                 when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
@@ -219,6 +224,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         if (mSchedule.mTimeStart != UtilsChecks.TIME_DISABLE) {
             binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
         }
+        binding.weekBtn.text = mSchedule.mWeek
     }
 
     private fun <T> setVisibleBtn(btn: AppCompatImageButton, newList: List<T>): List<T> {
@@ -237,6 +243,10 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     private fun setSelectedTime() {
         binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
         mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
+    }
+
+    private fun setSelectedWeek() {
+        binding.weekBtn.text = mSchedule.mWeek
     }
 
     private fun finishActivity() { finish() }

@@ -57,4 +57,13 @@ class WeekSettingsViewModel : ViewModel() {
                 .doOnComplete { mIsErrorVisible.postValue(false) }
                 .subscribe()
     }
+
+    fun updateWeekSchedule(oldNameWeek: String, newNameWeek: String) {
+        mWeekRepository.updateWeekSchedule(oldNameWeek, newNameWeek)
+                .doOnSubscribe { mIsLoading.postValue(true) }
+                .doFinally { mIsLoading.postValue(false) }
+                .doOnError { mIsErrorVisible.postValue(true) }
+                .doOnComplete { mIsErrorVisible.postValue(false) }
+                .subscribe()
+    }
 }

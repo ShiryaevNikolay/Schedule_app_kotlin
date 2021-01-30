@@ -128,12 +128,13 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
                 .show(childFragmentManager, UtilsKeys.COLOR_PICK_DIALOG.name)
     }
 
-    override fun onClick(text: String, week: Week?, dialog: String) {
+    override fun onClick(text: String, oldText: String, week: Week?, dialog: String) {
         when(dialog) {
             UtilsKeys.FIELD_DIALOG.name -> {
                 if (week == null) {
                     mViewModel.insertWeek(Week(mName = text))
                 } else {
+                    mViewModel.updateWeekSchedule(oldText, week.mName)
                     mViewModel.updateWeek(week)
                 }
             }

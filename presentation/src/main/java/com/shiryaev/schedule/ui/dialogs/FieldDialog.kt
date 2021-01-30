@@ -12,6 +12,7 @@ class FieldDialog : CustomDialog() {
 
     private var mWeek: Week? = null
     private var mText = ""
+    private var mOldWeek = ""
     private var mHeader: String? = null
     private var mButton: List<String>? = null
     private lateinit var mItemButtonController: ItemButtonDialogController
@@ -38,6 +39,7 @@ class FieldDialog : CustomDialog() {
     fun setData(week: Week? = null): FieldDialog {
         mWeek = week
         mText = mWeek?.mName ?: ""
+        mOldWeek = mText
         val itemField = ItemFieldDialogController { text ->
             mText = text
             mWeek?.mName = text
@@ -55,7 +57,7 @@ class FieldDialog : CustomDialog() {
         when(text) {
             mButton?.first() -> { dismiss() }
             mButton?.last() -> {
-                mOnClickListener.onClick(mText, mWeek, dialog = UtilsKeys.FIELD_DIALOG.name)
+                mOnClickListener.onClick(mText, mOldWeek, mWeek, dialog = UtilsKeys.FIELD_DIALOG.name)
                 dismiss()
             }
         }

@@ -32,6 +32,11 @@ interface ScheduleDao {
             "ORDER BY ${UtilsTable.SCHEDULE_COLUMN_TIMESTART}" )
     fun getTimeStartByDay(mDay: Int) : LiveData<List<TimeAndWeek>>
 
+    @Query("UPDATE ${UtilsTable.TABLE_SCHEDULE} " +
+            "SET ${UtilsTable.SCHEDULE_COLUMN_WEEK} = :newNameWeek " +
+            "WHERE ${UtilsTable.SCHEDULE_COLUMN_WEEK} = :oldNameWeek")
+    fun updateWeekSchedule(oldNameWeek: String, newNameWeek: String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSchedule(schedule: Schedule)
 

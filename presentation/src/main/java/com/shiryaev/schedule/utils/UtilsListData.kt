@@ -2,6 +2,7 @@ package com.shiryaev.schedule.utils
 
 import android.content.Context
 import com.shiryaev.data.common.models.ItemDialog
+import com.shiryaev.domain.models.Week
 import com.shiryaev.domain.utils.UtilsConvert
 import com.shiryaev.schedule.R
 import java.util.ArrayList
@@ -26,6 +27,15 @@ object UtilsListData {
         list.forEach { itemText ->
             listDialog.add(ItemDialog(text = itemText))
         }
+        return listDialog
+    }
+
+    fun getListNameWeekDialog(listWeek: List<Week>, context: Context): ArrayList<ItemDialog> {
+        val listDialog = ArrayList<ItemDialog>()
+        listWeek.forEach { week ->
+            listDialog.add(ItemDialog(text = week.mName))
+        }
+        listDialog.add(ItemDialog(text = context.resources.getString(R.string.every_week)))
         return listDialog
     }
 

@@ -1,6 +1,7 @@
 package com.shiryaev.data.database
 
 import com.shiryaev.data.AppDelegate
+import com.shiryaev.data.database.schedule.ScheduleDao
 import com.shiryaev.data.database.week.WeekDao
 import com.shiryaev.domain.models.Week
 import io.reactivex.rxjava3.core.Completable
@@ -12,10 +13,12 @@ class WeekRepository {
     @Inject
     lateinit var mStorage: Storage
 
-    private var mWeekDao: WeekDao
+    private val mScheduleDao: ScheduleDao
+    private val mWeekDao: WeekDao
 
     init {
         AppDelegate.getAppComponent().injectWeekRepository(this)
+        mScheduleDao = mStorage.getScheduleDao()
         mWeekDao = mStorage.getWeekDao()
     }
 
@@ -30,5 +33,8 @@ class WeekRepository {
                 .subscribeOn(Schedulers.io())
 
     fun deleteWeek(week: Week): Completable = Completable.fromRunnable { mWeekDao.deleteWeek(week) }
+                .subscribeOn(Schedulers.io())
+
+    fun updateWeekSchedule(oldNameWeek: String, newNameWeek: String): Completable = Completable.fromRunnable { mScheduleDao.updateWeekSchedule(oldNameWeek, newNameWeek) }
                 .subscribeOn(Schedulers.io())
 }

@@ -10,9 +10,9 @@ import ru.surfstudio.android.easyadapter.ItemList
 
 class ColorPickerDialog : CustomDialog() {
 
-    private lateinit var mWeek: Week
     private var mHeader: String? = null
     private var mButton: List<String>? = null
+    private lateinit var mWeek: Week
     private lateinit var mItemButtonController: ItemButtonDialogController
     private lateinit var mOnClickListener: OnClickButtonDialogListener
 
