@@ -19,6 +19,8 @@
     <string name="there_are_no_classes_on_this_day">В этот день нет занятий</string>
     <string name="name_of_week">Название недели</string>
     <string name="delete_week">Удалить неделю?</string>
+    <string name="choose_color">Выберите цвет</string>
+    <string name="dumping">Сброс</string>
 
     <string name="enter_the_name_of_the_week">Введите название недели</string>
 

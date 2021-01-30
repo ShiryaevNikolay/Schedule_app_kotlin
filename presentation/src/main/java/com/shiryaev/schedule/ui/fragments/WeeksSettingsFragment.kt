@@ -17,6 +17,7 @@ import com.shiryaev.domain.utils.UtilsKeys
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.common.controllers.ItemWeekController
 import com.shiryaev.schedule.databinding.FrWeeksSettingsBinding
+import com.shiryaev.schedule.ui.dialogs.ColorPickerDialog
 import com.shiryaev.schedule.ui.dialogs.FieldDialog
 import com.shiryaev.schedule.ui.dialogs.InfoDialog
 import com.shiryaev.schedule.ui.dialogs.OnClickButtonDialogListener
@@ -84,7 +85,7 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
         val itemWeek = ItemWeekController().apply {
             onClickLayout = { week -> showFieldDialog(week = week) }
             onLongClickLayout = { week -> showRemoveDialog(week) }
-            onCLickIndicatorBtn = {  }
+            onCLickIndicatorBtn = { week -> showColorPickerDialog(week) }
         }
         val listWeek = ItemList.create().apply {
             addAll(weeks, itemWeek)
@@ -115,6 +116,18 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
             .show(childFragmentManager, UtilsKeys.INFO_DIALOG.name)
     }
 
+    private fun showColorPickerDialog(week: Week) {
+        ColorPickerDialog()
+                .setHeader(mContext?.resources?.getString(R.string.choose_color)!!)
+                .setButton(listOf(
+                        mContext?.resources?.getString(R.string.dumping)!!,
+                        mContext?.resources?.getStringArray(R.array.button_dialog)!!.first(),
+                        mContext?.resources?.getStringArray(R.array.button_dialog)!!.last()
+                ))
+                .setData(week)
+                .show(childFragmentManager, UtilsKeys.COLOR_PICK_DIALOG.name)
+    }
+
     override fun onClick(text: String, week: Week?, dialog: String) {
         when(dialog) {
             UtilsKeys.FIELD_DIALOG.name -> {
@@ -126,6 +139,11 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
             }
             UtilsKeys.INFO_DIALOG.name -> {
                 week?.let { mViewModel.deleteWeek(it) }
+            }
+            UtilsKeys.COLOR_PICK_DIALOG.name -> {
+                if (week != null) {
+                    mViewModel.updateWeek(week)
+                }
             }
         }
     }

@@ -49,7 +49,7 @@ class ItemWeekController : BindableItemController<Week, ItemWeekController.Holde
                     typedArray.recycle()
                     setColorFilter(color)
                 } else {
-                    setColorFilter(data.mColor!!.toInt())
+                    setColorFilter(data.mColor.toInt())
                 }
                 setOnClickListener {
                     onCLickIndicatorBtn?.invoke(data)
