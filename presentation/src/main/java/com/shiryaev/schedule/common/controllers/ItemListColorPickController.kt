@@ -29,7 +29,7 @@ class ItemListColorPickController(
             }
 //            setListToAdapter()
             mEasyAdapter.notifyDataSetChanged()
-            onColorPick.invoke(mListColorPick[position].mColor)
+            onColorPick.invoke(position)
         }
 
         init {

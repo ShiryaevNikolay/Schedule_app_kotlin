@@ -90,6 +90,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
             examListBtn.setOnClickListener(this@AddScheduleActivity)
             timeBtn.setOnClickListener(this@AddScheduleActivity)
             timeListBtn.setOnClickListener(this@AddScheduleActivity)
+            weekBtn.setOnClickListener(this@AddScheduleActivity)
             fab.setOnClickListener(this@AddScheduleActivity)
         }
 
@@ -172,6 +173,13 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                         setSelectedTime()
                     }
                     .show(supportFragmentManager, null)
+            }
+            R.id.week_btn -> {
+//                ListDialog()
+//                    .setData(mListWeek) {
+//
+//                    }
+//                    .show(supportFragmentManager, null)
             }
             R.id.fab -> {
                 when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
