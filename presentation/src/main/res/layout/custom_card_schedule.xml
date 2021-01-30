@@ -21,7 +21,7 @@
                 android:id="@+id/indicator_week"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
-                android:background="@color/blue_200"/>
+                android:background="?android:attr/colorPrimary"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_margin="@dimen/default_dimen">
+                    android:layout_margin="@dimen/margin_vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/lesson_schedule_tv"
@@ -68,9 +68,9 @@
                             android:id="@+id/indicator_card_week"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/blue_200"
+                            android:backgroundTint="?android:attr/colorPrimary"
                             app:shapeAppearanceOverlay="@style/CardCornerWeek"
-                            >
+                            android:visibility="gone">
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/week_schedule_tv"
