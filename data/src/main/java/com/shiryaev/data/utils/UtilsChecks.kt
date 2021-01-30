@@ -8,12 +8,14 @@ object UtilsChecks {
 
     fun checkTime(week: String, selectedTime: Int, listTime: ArrayList<TimeAndWeek>) : Boolean {
         var flag = true
-        for (i in 0 until listTime.size) {
+        for (i in listTime.indices) {
             if (listTime[i].mTimeStart == selectedTime) {
-                if (listTime[i].mWeek == 0)  flag = false
-//                else for () {
-//
-//                }
+                flag = when {
+                    listTime[i].mWeek == "" -> false
+                    listTime[i].mWeek == week -> false
+                    listTime[i].mWeek != "" && week == "" -> false
+                    else -> true
+                }
             }
         }
         return flag

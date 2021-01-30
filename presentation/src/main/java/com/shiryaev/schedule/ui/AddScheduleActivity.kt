@@ -144,7 +144,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.teacher_list_btn -> {
                 ListDialog()
-                    .setData(UtilsListData.getListDialog(mListLessons)) { positionItem ->
+                    .setData(UtilsListData.getListDialog(mListTeachers)) { positionItem ->
                         mSchedule.mTeacher = mListTeachers[positionItem]
                         setFieldText(binding.teacherEditText, mSchedule.mTeacher!!)
                     }

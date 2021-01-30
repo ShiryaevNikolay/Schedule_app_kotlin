@@ -9,5 +9,5 @@ class TimeAndWeek(
         var mTimeStart: Int,
 
         @ColumnInfo(name = UtilsTable.SCHEDULE_COLUMN_WEEK)
-        var mWeek: Int
+        var mWeek: String
 )

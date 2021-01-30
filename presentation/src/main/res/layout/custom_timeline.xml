@@ -26,20 +26,26 @@
             android:background="?android:attr/colorAccent"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/item_time_container"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/half_default_dimen"
-        android:layout_marginHorizontal="@dimen/default_dimen"
         android:layout_gravity="center"
-        app:cardCornerRadius="@dimen/default_dimen"
-        app:cardElevation="@dimen/elevation">
+        android:background="?android:attr/colorBackground">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/item_time_tv"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/item_time_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp" />
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_marginVertical="@dimen/half_default_dimen"
+            android:layout_marginHorizontal="@dimen/default_dimen"
+            app:cardCornerRadius="@dimen/default_dimen"
+            app:cardElevation="@dimen/elevation">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/item_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 </FrameLayout>
