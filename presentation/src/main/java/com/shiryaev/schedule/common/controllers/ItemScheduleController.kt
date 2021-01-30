@@ -6,6 +6,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import com.shiryaev.domain.models.Schedule
 import com.shiryaev.domain.models.Week
 import com.shiryaev.domain.utils.UtilsConvert
+import com.shiryaev.domain.utils.sortWeeks
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.ui.views.CustomItemSchedule
 import com.shiryaev.schedule.ui.views.CustomTimeLine
@@ -64,9 +65,15 @@ class ItemScheduleController(
                 }
             }
 
+            val newListSchedule = if (data.size == 1 && data.first().mWeek == "") {
+                data
+            } else {
+                sortWeeks(data, listWeek)
+            }
+
             with(container) {
                 removeAllViews()
-                for (item in data) {
+                for (item in newListSchedule) {
                     addView(CustomItemSchedule(context, listWeek).apply {
                         onClickListener = { schedule -> this@ItemScheduleController.onClickListener.invoke(schedule) }
                         onLongClickListener = { schedule -> this@ItemScheduleController.onLongClickListener.invoke(schedule) }
