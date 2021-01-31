@@ -11,6 +11,7 @@ import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrHomeScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
 import com.shiryaev.schedule.ui.views.utils.*
+import java.util.*
 
 class HomeScheduleFragment : Fragment() {
 
@@ -42,6 +43,8 @@ class HomeScheduleFragment : Fragment() {
             binding.homeScreenVp.currentItem = selectedTab
         }
 
+        setCurrentDay()
+
         return binding.root
     }
 
@@ -60,5 +63,43 @@ class HomeScheduleFragment : Fragment() {
                 }
             })
         }
+    }
+
+    private fun setCurrentDay() {
+        // Устанавливаем сегодняшний день
+        binding.topBar.setSelectedTab(when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            Calendar.MONDAY -> {
+                binding.homeScreenVp.currentItem = 0
+                0
+            }
+            Calendar.TUESDAY -> {
+                binding.homeScreenVp.currentItem = 1
+                1
+            }
+            Calendar.WEDNESDAY -> {
+                binding.homeScreenVp.currentItem = 1
+                2
+            }
+            Calendar.THURSDAY -> {
+                binding.homeScreenVp.currentItem = 3
+                3
+            }
+            Calendar.FRIDAY -> {
+                binding.homeScreenVp.currentItem = 4
+                4
+            }
+            Calendar.SATURDAY -> {
+                binding.homeScreenVp.currentItem = 5
+                5
+            }
+            Calendar.SUNDAY -> {
+                binding.homeScreenVp.currentItem = 6
+                6
+            }
+            else -> {
+                binding.homeScreenVp.currentItem = 7
+                0
+            }
+        })
     }
 }
