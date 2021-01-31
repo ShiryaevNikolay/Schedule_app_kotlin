@@ -34,7 +34,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/item_time_container"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/timeline_width"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/half_default_dimen"
             android:layout_marginHorizontal="@dimen/default_dimen"
@@ -45,7 +45,8 @@
                 android:id="@+id/item_time_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp" />
+                android:layout_gravity="center"
+                android:paddingVertical="10dp" />
         </com.google.android.material.card.MaterialCardView>
     </FrameLayout>
 </FrameLayout>
