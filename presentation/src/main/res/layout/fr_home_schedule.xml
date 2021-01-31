@@ -21,73 +21,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.card.MaterialCardView
+        <com.shiryaev.schedule.ui.views.TopBar
             android:id="@+id/top_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_dimen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:cardElevation="@dimen/bar_elevation"
-            app:cardCornerRadius="@dimen/default_dimen">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical|start"
-                        android:layout_weight="1">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/top_bar_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:textColor="?android:attr/colorPrimary"
-                            android:layout_marginStart="@dimen/default_dimen"
-                            android:text="Понедельник" />
-
-                        <ImageButton
-                            android:id="@+id/top_bar_show_tabs_btn"
-                            android:layout_width="@dimen/icon_button_size"
-                            android:layout_height="@dimen/icon_button_size"
-                            android:background="?android:attr/actionBarItemBackground"
-                            app:srcCompat="@drawable/ic_chevron_down"
-                            android:layout_marginVertical="@dimen/half_default_dimen"
-                            tools:ignore="ContentDescription" />
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/change_view_btn"
-                        android:layout_width="@dimen/icon_button_size"
-                        android:layout_height="@dimen/icon_button_size"
-                        android:background="?android:attr/actionBarItemBackground"
-                        app:srcCompat="@drawable/ic_calendar_month"
-                        android:layout_marginVertical="@dimen/half_default_dimen"
-                        android:layout_marginEnd="@dimen/elevation"
-                        tools:ignore="ContentDescription" />
-                </TableRow>
-
-                <com.shiryaev.schedule.ui.views.CustomTabLayout
-                    android:id="@+id/custom_tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="@dimen/default_dimen"
-                    android:layout_marginBottom="@dimen/default_dimen"
-                    android:visibility="gone" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

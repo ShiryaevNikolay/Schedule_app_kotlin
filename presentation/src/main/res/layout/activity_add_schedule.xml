@@ -163,7 +163,7 @@
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
                         android:layout_marginEnd="@dimen/default_dimen"
-                        app:srcCompat="@drawable/ic_notebook_check_outline"/>
+                        app:srcCompat="@drawable/ic_doc_success"/>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
