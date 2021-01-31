@@ -1,7 +1,9 @@
 package com.shiryaev.schedule.ui.fragments
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -23,6 +25,7 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
     private lateinit var mWeeks: Preference
     private lateinit var mNavController: NavController
     private lateinit var mViewModel: WeekSettingsViewModel
+    private lateinit var mSharedPref: SharedPreferences
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,6 +42,8 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(mContext)
+
         mNavController = NavHostFragment.findNavController(this)
 
         initItems()
@@ -48,10 +53,11 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
         }
 
         mSetThemeMode = { value ->
-            PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+            mSharedPref.edit()
                 .putString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode[value])
                 .apply()
             saveThemeMode()
+            setThemeMode()
         }
 
         mThemeMode.setOnPreferenceClickListener {
@@ -78,6 +84,14 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
 
     private fun saveThemeMode() {
         mThemeMode.summary = getThemeMode()
+    }
+
+    private fun setThemeMode() {
+        when(mSharedPref.getString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode.first())) {
+            mListThemeMode.first() -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) }
+            mListThemeMode[1] -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) }
+            mListThemeMode.last() -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) }
+        }
     }
 
     private fun getThemeMode() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode[0])
