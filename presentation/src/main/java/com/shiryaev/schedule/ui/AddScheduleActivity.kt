@@ -3,9 +3,11 @@ package com.shiryaev.schedule.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.shiryaev.schedule.common.CallDialogs
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.utils.UtilsChecks
@@ -40,6 +42,10 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Устанавливаем тему
+        setTheme()
+
         binding = ActivityAddScheduleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -250,4 +256,13 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun finishActivity() { finish() }
+
+    private fun setTheme() {
+        val listThemeMode = resources.getStringArray(R.array.theme_mode_entries)
+        when (PreferenceManager.getDefaultSharedPreferences(this).getString(resources.getString(R.string.theme_key), listThemeMode.first())) {
+            listThemeMode.first() -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) }
+            listThemeMode[1] -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) }
+            listThemeMode.last() -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) }
+        }
+    }
 }
