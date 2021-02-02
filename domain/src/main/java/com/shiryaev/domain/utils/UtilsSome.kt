@@ -14,5 +14,10 @@ fun sortWeeks(schedules: ArrayList<Schedule>, weeks: List<Week>): ArrayList<Sche
             }
         }
     }
+    schedules.forEach { schedule ->
+        if (schedule.mWeek == "") {
+            newListSchedules.add(schedule)
+        }
+    }
     return newListSchedules
 }

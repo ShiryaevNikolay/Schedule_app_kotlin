@@ -13,16 +13,20 @@ import androidx.preference.PreferenceManager
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.viewmodels.WeekSettingsViewModel
 import com.shiryaev.schedule.R
+import com.shiryaev.schedule.ui.dialogs.ListDialog
 import com.shiryaev.schedule.ui.dialogs.RadioDialog
 import com.shiryaev.schedule.utils.UtilsListData
 
 class GeneralSettingsFragment : PreferenceFragmentCompat() {
 
     private var mSetThemeMode: ((Int) -> Unit)? = null
+    private var mSetCurrentWeek: ((Int) -> Unit)? = null
     private var mContext: Context? = null
+    private var mListWeeks = mutableListOf<String>()
     private lateinit var mListThemeMode: Array<String>
     private lateinit var mThemeMode: Preference
     private lateinit var mWeeks: Preference
+    private lateinit var mCurrentWeeks: Preference
     private lateinit var mNavController: NavController
     private lateinit var mViewModel: WeekSettingsViewModel
     private lateinit var mSharedPref: SharedPreferences
@@ -52,12 +56,25 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
             mWeeks.summary = if(countWeek > 0) countWeek.toString() else ""
         }
 
+        mViewModel.getWeeks().observe(this) { weeks ->
+            weeks.forEach { week ->
+                mListWeeks.add(week.mName)
+            }
+        }
+
         mSetThemeMode = { value ->
             mSharedPref.edit()
                 .putString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode[value])
                 .apply()
             saveThemeMode()
             setThemeMode()
+        }
+
+        mSetCurrentWeek = { value ->
+            mSharedPref.edit()
+                    .putString(mContext?.resources?.getString(R.string.current_week_key), mListWeeks[value])
+                    .apply()
+            saveCurrentWeek()
         }
 
         mThemeMode.setOnPreferenceClickListener {
@@ -70,6 +87,15 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
+        mCurrentWeeks.setOnPreferenceClickListener {
+            ListDialog()
+                    .setData(UtilsListData.getListDialog(mListWeeks)) { position ->
+                        mSetCurrentWeek?.invoke(position)
+                    }
+                    .show(childFragmentManager, null)
+            true
+        }
+
         mWeeks.setOnPreferenceClickListener {
             mNavController.navigate(R.id.action_generalSettings_to_weeksSettings)
             true
@@ -79,11 +105,17 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
     private fun initItems() {
         mThemeMode = findPreference(mContext?.resources?.getString(R.string.theme_key)!!)!!
         mWeeks = findPreference(mContext?.resources?.getString(R.string.weeks_key)!!)!!
+        mCurrentWeeks = findPreference(mContext?.resources?.getString(R.string.current_week_key)!!)!!
         saveThemeMode()
+        saveCurrentWeek()
     }
 
     private fun saveThemeMode() {
         mThemeMode.summary = getThemeMode()
+    }
+
+    private fun saveCurrentWeek() {
+        mCurrentWeeks.summary = getCurrentWeek()
     }
 
     private fun setThemeMode() {
@@ -95,4 +127,6 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun getThemeMode() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode[0])
+
+    private fun getCurrentWeek() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.current_week_key), "")
 }

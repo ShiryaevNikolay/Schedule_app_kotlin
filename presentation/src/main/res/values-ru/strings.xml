@@ -58,5 +58,7 @@
     <string name="reply_title">Действие ответа по умолчанию</string>
     <string name="theme_key">theme_key</string>
     <string name="weeks_key">weeks_key</string>
+    <string name="current_week_key">current_week_key</string>
+    <string name="current_week">Текущая неделя</string>
     <string name="click_on_to_add_a_week">Нажмите +, чтобы добавить неделю</string>
 </resources>

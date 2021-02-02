@@ -6,7 +6,7 @@ import ru.surfstudio.android.easyadapter.ItemList
 
 class ListDialog : CustomDialog() {
 
-    inline fun setData(listItem: List<ItemDialog>, crossinline onClickItemDialog: (positionItemDialog: Int) -> Unit): ListDialog {
+    fun setData(listItem: List<ItemDialog>, onClickItemDialog: (positionItemDialog: Int) -> Unit): ListDialog {
         val itemDialog = ItemListDialogController { positionItem ->
             onClickItemDialog.invoke(positionItem)
             dismiss()
