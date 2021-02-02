@@ -36,13 +36,14 @@ class PageScheduleFragment : Fragment() {
     private var mPositionPage = 0
     private var mListWeek: List<Week> = listOf()
 
+    private var mDecorator = SpaceFirstItemDecoration()
+
     private var _binding: FrPageScheduleBinding? = null
     private val binding get() = _binding!!
 
     private val mEasyAdapter = EasyAdapter()
 
     private lateinit var mContext: Context
-//    private lateinit var mItemSchedule: ItemScheduleController
     private lateinit var mViewModel: PageScheduleViewModel
 
     override fun onAttach(context: Context) {
@@ -81,19 +82,19 @@ class PageScheduleFragment : Fragment() {
 
         initRecyclerView()
 
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        mItemSchedule = ItemScheduleController(mListWeek, { schedule ->
-//            // TODO: Детальный показ занятия при нажатии на карточку
-//        }, { schedule ->
-//            ListDialog()
-//                .setData(UtilsListData.getListScheduleDialog(mContext)) { positionItem ->
-//                    actionSchedule(schedule, positionItem)
-//                }
-//                .show(childFragmentManager, null)
-//        })
+        when (parentFragment) {
+            is HomeScheduleFragment -> {
+                (parentFragment as HomeScheduleFragment).getViewModel().getHeightTopBar().observe(viewLifecycleOwner) { height ->
+                    setHeightDecoration(height)
+                }
+            }
+            is EditScheduleFragment -> {
+//                (parentFragment as EditScheduleFragment)
+            }
+        }
+
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -105,7 +106,14 @@ class PageScheduleFragment : Fragment() {
         with(binding.recyclerView) {
             adapter = mEasyAdapter
             layoutManager = LinearLayoutManager(context)
-            addItemDecoration(SpaceFirstItemDecoration(60))
+        }
+    }
+
+    private fun setHeightDecoration(height: Int) {
+        binding.recyclerView.apply {
+            removeItemDecoration(mDecorator)
+            mDecorator = SpaceFirstItemDecoration(height)
+            addItemDecoration(mDecorator)
         }
     }
 

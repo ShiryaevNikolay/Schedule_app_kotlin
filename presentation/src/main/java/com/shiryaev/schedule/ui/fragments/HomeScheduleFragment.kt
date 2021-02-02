@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.shiryaev.data.common.CustomFactory
+import com.shiryaev.data.viewmodels.HomeScheduleViewModel
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrHomeScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
@@ -15,22 +18,24 @@ import java.util.*
 
 class HomeScheduleFragment : Fragment() {
 
-    private var countPage = 0
+    private var mCountPage = 0
     private var _binding: FrHomeScheduleBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var vpAdapter: ViewPagerAdapter
+    private lateinit var mViewModel: HomeScheduleViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        countPage = context.resources.getStringArray(R.array.days_of_week).size
+        mCountPage = context.resources.getStringArray(R.array.days_of_week).size
+        mViewModel = ViewModelProvider(this, CustomFactory(HomeScheduleViewModel())).get(HomeScheduleViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vpAdapter = ViewPagerAdapter(this@HomeScheduleFragment).apply {
             // Устанавливаем колличество страниц viewPage2
-            setCountPage(countPage)
+            setCountPage(mCountPage)
         }
     }
 
@@ -43,6 +48,10 @@ class HomeScheduleFragment : Fragment() {
             binding.homeScreenVp.currentItem = selectedTab
         }
 
+        binding.topBar.onChangeHeight = { height ->
+            mViewModel.setHeightTopBar(height)
+        }
+
         setCurrentDay()
 
         return binding.root
@@ -53,12 +62,13 @@ class HomeScheduleFragment : Fragment() {
         _binding = null
     }
 
+    fun getViewModel() = mViewModel
+
     private fun initViewPager(_binding: FrHomeScheduleBinding) {
         with (_binding.homeScreenVp) {
             adapter = vpAdapter
             registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
                     binding.topBar.setSelectedTab(position)
                 }
             })

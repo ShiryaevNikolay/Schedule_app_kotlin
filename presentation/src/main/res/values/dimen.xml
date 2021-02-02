@@ -16,6 +16,8 @@
     <dimen name="buttonDialog_size">15dp</dimen>
     <dimen name="timeline_width">60dp</dimen>
 
+    <dimen name="text_secondary">13sp</dimen>
+
     <dimen name="toolbar_title_size">18sp</dimen>
     <dimen name="toolbar_subtitle_size">14sp</dimen>
 

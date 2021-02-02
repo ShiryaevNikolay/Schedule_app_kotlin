@@ -47,12 +47,14 @@
                         android:id="@+id/teacher_schedule_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_secondary"
                         android:layout_marginTop="@dimen/default_dimen"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/audit_schedule_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_secondary"
                         android:layout_marginTop="@dimen/default_dimen"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
