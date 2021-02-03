@@ -92,7 +92,9 @@ class PageScheduleFragment : Fragment() {
                 }
             }
             is EditScheduleFragment -> {
-//                (parentFragment as EditScheduleFragment)
+                (parentFragment as EditScheduleFragment).getViewModel().getHeightTopBar().observe(viewLifecycleOwner) { height ->
+                    setHeightDecoration(height)
+                }
                 mViewModel.getSchedules(mPositionPage).observe(viewLifecycleOwner, { listSchedules ->
                     setListToAdapter(ArrayList(listSchedules))
                 })

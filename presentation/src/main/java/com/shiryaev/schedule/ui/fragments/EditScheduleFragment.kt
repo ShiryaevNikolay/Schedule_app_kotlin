@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.common.Transfer
+import com.shiryaev.data.viewmodels.HomeScheduleViewModel
 import com.shiryaev.domain.utils.UtilsIntent
 import com.shiryaev.domain.utils.UtilsKeys
 import com.shiryaev.schedule.R
@@ -19,30 +22,39 @@ import com.shiryaev.schedule.ui.views.CustomTabLayout
 
 class EditScheduleFragment : Fragment(), View.OnClickListener {
 
-    private var countPage = 0
+    private var mCountPage = 0
     private var _binding: FrEditScheduleBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var vpAdapter: ViewPagerAdapter
+    private lateinit var mViewModel: HomeScheduleViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        countPage = context.resources.getStringArray(R.array.days_of_week).size - 1
+        mCountPage = context.resources.getStringArray(R.array.days_of_week).size - 1
+        mViewModel = ViewModelProvider(this, CustomFactory(HomeScheduleViewModel())).get(HomeScheduleViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vpAdapter = ViewPagerAdapter(this@EditScheduleFragment).apply {
             // Устанавливаем колличество страниц viewPage2
-            setCountPage(countPage)
+            setCountPage(mCountPage)
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding  = FrEditScheduleBinding.inflate(inflater, container, false)
 
-        initTabLayout(binding.customTabLayout)
         initViewPager(binding)
+
+        binding.topBarEdit.onChangeCurrentItem = { selectedTab ->
+            binding.homeScreenVp.currentItem = selectedTab
+        }
+
+        binding.topBarEdit.onChangeHeight = { height ->
+            mViewModel.setHeightTopBar(height)
+        }
 
         binding.fab.setOnClickListener(this)
 
@@ -66,14 +78,7 @@ class EditScheduleFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun initTabLayout(tabLayout: CustomTabLayout) {
-        tabLayout.run {
-            setCountTab(countPage)
-            setSelectedPage = { selectedTab ->
-                binding.homeScreenVp.currentItem = selectedTab
-            }
-        }
-    }
+    fun getViewModel() = mViewModel
 
     private fun initViewPager(_binding: FrEditScheduleBinding) {
         _binding.homeScreenVp.apply {
@@ -81,7 +86,7 @@ class EditScheduleFragment : Fragment(), View.OnClickListener {
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    binding.customTabLayout.setSelectedTab(position)
+                    binding.topBarEdit.setSelectedTab(position)
                 }
             })
         }

@@ -44,11 +44,11 @@ class HomeScheduleFragment : Fragment() {
 
         initViewPager(binding)
 
-        binding.topBar.onChangeCurrentItem = { selectedTab ->
+        binding.topBarHome.onChangeCurrentItem = { selectedTab ->
             binding.homeScreenVp.currentItem = selectedTab
         }
 
-        binding.topBar.onChangeHeight = { height ->
+        binding.topBarHome.onChangeHeight = { height ->
             mViewModel.setHeightTopBar(height)
         }
 
@@ -69,7 +69,7 @@ class HomeScheduleFragment : Fragment() {
             adapter = vpAdapter
             registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    binding.topBar.setSelectedTab(position)
+                    binding.topBarHome.setSelectedTab(position)
                 }
             })
         }
@@ -77,7 +77,7 @@ class HomeScheduleFragment : Fragment() {
 
     private fun setCurrentDay() {
         // Устанавливаем сегодняшний день
-        binding.topBar.setSelectedTab(when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+        binding.topBarHome.setSelectedTab(when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
             Calendar.MONDAY -> {
                 binding.homeScreenVp.currentItem = 0
                 0

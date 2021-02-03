@@ -21,8 +21,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.shiryaev.schedule.ui.views.TopBar
-            android:id="@+id/top_bar"
+        <com.shiryaev.schedule.ui.views.TopBarHome
+            android:id="@+id/top_bar_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

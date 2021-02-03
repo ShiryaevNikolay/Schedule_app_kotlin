@@ -13,7 +13,7 @@ import com.shiryaev.schedule.R
 import com.shiryaev.schedule.ui.views.utils.showTabs
 
 
-class TopBar @JvmOverloads constructor(
+class TopBarHome @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
@@ -33,7 +33,7 @@ class TopBar @JvmOverloads constructor(
     private lateinit var mTabLayout: CustomTabLayout
 
     init {
-        inflate(context, R.layout.custom_topbar, this)
+        inflate(context, R.layout.custom_topbar_home, this)
 
         initViews()
 
@@ -42,14 +42,12 @@ class TopBar @JvmOverloads constructor(
         setClickListener()
 
         onChangeHeight?.invoke(mCardLayout.height)
-//        setChangeHeight()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
         onChangeHeight?.invoke(h)
-//        setChangeHeight()
     }
 
     fun setSelectedTab(position: Int) {
@@ -92,22 +90,10 @@ class TopBar @JvmOverloads constructor(
             R.id.top_bar_show_tabs_btn, R.id.top_bar_title -> {
                 showTabs = showTabs(context, mShowTabLayoutBtn, !showTabs)
                 mTabLayout.isVisible = showTabs
-//                setChangeHeight()
             }
             R.id.change_view_btn -> {
                 // TODO: show calendar
             }
         }
-    }
-
-    private fun setChangeHeight() {
-        mCardLayout.viewTreeObserver.addOnGlobalLayoutListener(
-                object : OnGlobalLayoutListener {
-                    override fun onGlobalLayout() {
-                        onChangeHeight?.invoke(mCardLayout.height)
-                        mCardLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    }
-                }
-        )
     }
 }

@@ -21,56 +21,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/top_bar"
+        <com.shiryaev.schedule.ui.views.TopBarEdit
+            android:id="@+id/top_bar_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_dimen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:cardElevation="@dimen/bar_elevation"
-            app:cardCornerRadius="@dimen/default_dimen">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.shiryaev.schedule.ui.views.CustomTabLayout
-                    android:id="@+id/custom_tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="@dimen/default_dimen" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <FrameLayout
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/default_dimen">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:text="Все недели"/>
-                    </FrameLayout>
-
-                    <ImageButton
-                        android:id="@+id/change_view_btn"
-                        android:layout_width="@dimen/icon_button_size"
-                        android:layout_height="@dimen/icon_button_size"
-                        android:background="?android:attr/actionBarItemBackground"
-                        app:srcCompat="@drawable/ic_form_select"
-                        android:layout_marginBottom="@dimen/half_default_dimen"
-                        android:layout_marginEnd="@dimen/elevation"
-                        tools:ignore="ContentDescription" />
-                </TableRow>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
