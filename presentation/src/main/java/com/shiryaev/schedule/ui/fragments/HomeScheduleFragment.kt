@@ -87,7 +87,7 @@ class HomeScheduleFragment : Fragment() {
                 1
             }
             Calendar.WEDNESDAY -> {
-                binding.homeScreenVp.currentItem = 1
+                binding.homeScreenVp.currentItem = 2
                 2
             }
             Calendar.THURSDAY -> {

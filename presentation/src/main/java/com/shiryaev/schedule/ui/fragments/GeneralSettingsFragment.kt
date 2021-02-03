@@ -54,6 +54,7 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
 
         mViewModel.getCountWeek().observe(this) { countWeek ->
             mWeeks.summary = if(countWeek > 0) countWeek.toString() else ""
+            mCurrentWeeks.isVisible = countWeek != 0
         }
 
         mViewModel.getWeeks().observe(this) { weeks ->
@@ -126,7 +127,7 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private fun getThemeMode() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode[0])
+    private fun getThemeMode() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode.first())
 
-    private fun getCurrentWeek() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.current_week_key), "")
+    private fun getCurrentWeek() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.current_week_key), if(mListWeeks.isEmpty()) "" else mListWeeks.first())
 }
