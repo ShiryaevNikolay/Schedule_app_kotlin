@@ -29,6 +29,8 @@ class PageScheduleViewModel : ViewModel() {
 
     fun getSchedules(mDay: Int) = mRepository.getSchedules(mDay)
 
+    fun getSchedules(mDay: Int, mWeek: String) = mRepository.getSchedules(mDay, mWeek)
+
     fun getWeeks() = mRepository.getWeeks()
 
     fun deleteSchedule(schedule: Schedule) {

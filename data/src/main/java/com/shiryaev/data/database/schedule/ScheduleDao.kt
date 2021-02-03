@@ -11,6 +11,12 @@ interface ScheduleDao {
     @Query("SELECT * FROM ${UtilsTable.TABLE_SCHEDULE} WHERE ${UtilsTable.SCHEDULE_COLUMN_DAY} = :mDay ORDER BY ${UtilsTable.SCHEDULE_COLUMN_TIMESTART}" )
     fun getAllByDay(mDay: Int) : LiveData<List<Schedule>>
 
+    @Query("SELECT * FROM ${UtilsTable.TABLE_SCHEDULE} " +
+            "WHERE (${UtilsTable.SCHEDULE_COLUMN_DAY} = :mDay " +
+            "AND (${UtilsTable.SCHEDULE_COLUMN_WEEK} = :mWeek OR ${UtilsTable.SCHEDULE_COLUMN_WEEK} = '')) " +
+            "ORDER BY ${UtilsTable.SCHEDULE_COLUMN_TIMESTART}" )
+    fun getAllByDayForWeek(mDay: Int, mWeek: String): LiveData<List<Schedule>>
+
     @Query("SELECT ${UtilsTable.SCHEDULE_COLUMN_LESSON} FROM ${UtilsTable.TABLE_SCHEDULE} ORDER BY ${UtilsTable.SCHEDULE_COLUMN_LESSON}" )
     fun getLessons() : LiveData<List<String>>
 

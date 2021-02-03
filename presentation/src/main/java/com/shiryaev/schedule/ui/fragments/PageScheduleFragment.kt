@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.common.Transfer
@@ -72,10 +73,6 @@ class PageScheduleFragment : Fragment() {
             lifecycleOwner = this@PageScheduleFragment
         }
 
-        mViewModel.getSchedules(mPositionPage).observe(viewLifecycleOwner, { listSchedules ->
-            setListToAdapter(ArrayList(listSchedules))
-        })
-
         mViewModel.getWeeks().observe(viewLifecycleOwner) { listWeek ->
             mListWeek = listWeek
         }
@@ -88,9 +85,17 @@ class PageScheduleFragment : Fragment() {
                 (parentFragment as HomeScheduleFragment).getViewModel().getHeightTopBar().observe(viewLifecycleOwner) { height ->
                     setHeightDecoration(height)
                 }
+                PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext.resources?.getString(R.string.current_week_key), "")?.let {
+                    mViewModel.getSchedules(mPositionPage, it).observe(viewLifecycleOwner) { listSchedules ->
+                        setListToAdapter(ArrayList(listSchedules))
+                    }
+                }
             }
             is EditScheduleFragment -> {
 //                (parentFragment as EditScheduleFragment)
+                mViewModel.getSchedules(mPositionPage).observe(viewLifecycleOwner, { listSchedules ->
+                    setListToAdapter(ArrayList(listSchedules))
+                })
             }
         }
 

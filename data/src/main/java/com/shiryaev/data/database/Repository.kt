@@ -26,6 +26,8 @@ class Repository {
 
     fun getSchedules(day: Int) = mScheduleDao.getAllByDay(day)
 
+    fun getSchedules(day: Int, week: String) = mScheduleDao.getAllByDayForWeek(day, week)
+
     fun getLessons() = mScheduleDao.getLessons()
 
     fun getTeachers() = mScheduleDao.getTeachers()
