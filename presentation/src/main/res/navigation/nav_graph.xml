@@ -15,4 +15,8 @@
         android:id="@+id/settings"
         android:name="com.shiryaev.schedule.ui.fragments.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/note"
+        android:name="com.shiryaev.schedule.ui.fragments.NoteFragment"
+        android:label="NoteFragment" />
 </navigation>

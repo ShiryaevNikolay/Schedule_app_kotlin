@@ -16,6 +16,7 @@
         android:title="@string/edit" />
 
     <item
+        android:id="@+id/note"
         android:icon="@drawable/ic_notebook"
         android:title="@string/notes" />
 </menu>
