@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.shiryaev.data.common.CustomFactory
-import com.shiryaev.data.viewmodels.HomeScheduleViewModel
+import com.shiryaev.data.viewmodels.ScheduleViewModel
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrHomeScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
@@ -18,17 +18,21 @@ import java.util.*
 
 class HomeScheduleFragment : Fragment() {
 
+    companion object {
+        val TAG = HomeScheduleFragment::class.simpleName
+    }
+
     private var mCountPage = 0
     private var _binding: FrHomeScheduleBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var vpAdapter: ViewPagerAdapter
-    private lateinit var mViewModel: HomeScheduleViewModel
+    private lateinit var mViewModel: ScheduleViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mCountPage = context.resources.getStringArray(R.array.days_of_week).size
-        mViewModel = ViewModelProvider(this, CustomFactory(HomeScheduleViewModel())).get(HomeScheduleViewModel::class.java)
+        mViewModel = ViewModelProvider(this, CustomFactory(ScheduleViewModel())).get(ScheduleViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +40,7 @@ class HomeScheduleFragment : Fragment() {
         vpAdapter = ViewPagerAdapter(this@HomeScheduleFragment).apply {
             // Устанавливаем колличество страниц viewPage2
             setCountPage(mCountPage)
+            TAG?.let { setScreenTag(it) }
         }
     }
 

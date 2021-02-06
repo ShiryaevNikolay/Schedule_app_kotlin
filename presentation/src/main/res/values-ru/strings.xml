@@ -21,6 +21,7 @@
     <string name="delete_week">Удалить неделю?</string>
     <string name="choose_color">Выберите цвет</string>
     <string name="dumping">Сброс</string>
+    <string name="full_schedule">Полное расписание</string>
 
     <string name="enter_the_name_of_the_week">Введите название недели</string>
 

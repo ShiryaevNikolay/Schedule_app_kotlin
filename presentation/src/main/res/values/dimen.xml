@@ -13,7 +13,7 @@
     <dimen name="icon_size">24dp</dimen>
     <dimen name="dialog_dimen">20dp</dimen>
     <dimen name="header_size">20sp</dimen>
-    <dimen name="buttonDialog_size">15dp</dimen>
+    <dimen name="button_dialog_size">15sp</dimen>
     <dimen name="timeline_width">60dp</dimen>
 
     <dimen name="text_secondary">13sp</dimen>

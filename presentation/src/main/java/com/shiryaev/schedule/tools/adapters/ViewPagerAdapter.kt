@@ -11,10 +11,12 @@ class ViewPagerAdapter(
 ) : FragmentStateAdapter(fragment) {
 
     private var mCountPage = 0
+    private var mScreen: String = ""
 
     override fun createFragment(position: Int) = PageScheduleFragment().apply {
         arguments = bundleOf(
-                UtilsKeys.POSITION_PAGE.name to position
+                UtilsKeys.POSITION_PAGE.name to position,
+                UtilsKeys.SCREEN.name to getScreenTag()
         )
     }
 
@@ -23,4 +25,10 @@ class ViewPagerAdapter(
     fun setCountPage(count: Int) {
         this.mCountPage = count
     }
+
+    fun setScreenTag(screen: String) {
+        mScreen = screen
+    }
+
+    private fun getScreenTag() = mScreen
 }

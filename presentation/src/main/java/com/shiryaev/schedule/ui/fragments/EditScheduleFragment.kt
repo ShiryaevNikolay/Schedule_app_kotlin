@@ -11,35 +11,40 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.common.Transfer
-import com.shiryaev.data.viewmodels.HomeScheduleViewModel
+import com.shiryaev.data.viewmodels.ScheduleViewModel
 import com.shiryaev.domain.utils.UtilsIntent
 import com.shiryaev.domain.utils.UtilsKeys
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrEditScheduleBinding
 import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
 import com.shiryaev.schedule.ui.AddScheduleActivity
-import com.shiryaev.schedule.ui.views.CustomTabLayout
+import kotlinx.android.synthetic.main.fr_edit_schedule.view.*
 
 class EditScheduleFragment : Fragment(), View.OnClickListener {
+
+    companion object {
+        val TAG = EditScheduleFragment::class.simpleName
+    }
 
     private var mCountPage = 0
     private var _binding: FrEditScheduleBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var vpAdapter: ViewPagerAdapter
-    private lateinit var mViewModel: HomeScheduleViewModel
+    private lateinit var mVpAdapter: ViewPagerAdapter
+    private lateinit var mViewModel: ScheduleViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mCountPage = context.resources.getStringArray(R.array.days_of_week).size - 1
-        mViewModel = ViewModelProvider(this, CustomFactory(HomeScheduleViewModel())).get(HomeScheduleViewModel::class.java)
+        mViewModel = ViewModelProvider(this, CustomFactory(ScheduleViewModel())).get(ScheduleViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vpAdapter = ViewPagerAdapter(this@EditScheduleFragment).apply {
+        mVpAdapter = ViewPagerAdapter(this@EditScheduleFragment).apply {
             // Устанавливаем колличество страниц viewPage2
             setCountPage(mCountPage)
+            TAG?.let { setScreenTag(it) }
         }
     }
 
@@ -82,7 +87,7 @@ class EditScheduleFragment : Fragment(), View.OnClickListener {
 
     private fun initViewPager(_binding: FrEditScheduleBinding) {
         _binding.homeScreenVp.apply {
-            adapter = vpAdapter
+            adapter = mVpAdapter
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)

@@ -13,12 +13,15 @@ import com.google.android.material.card.MaterialCardView
 import com.shiryaev.domain.models.Schedule
 import com.shiryaev.domain.models.Week
 import com.shiryaev.schedule.R
+import com.shiryaev.schedule.ui.fragments.EditScheduleFragment
+import com.shiryaev.schedule.ui.fragments.HomeScheduleFragment
 import kotlinx.android.synthetic.main.custom_card_schedule.view.*
 
 @SuppressLint("ViewConstructor")
 class CustomItemSchedule(
         context: Context,
-        private val listWeek: List<Week>
+        private val listWeek: List<Week>,
+        private val screen: String
 ) : FrameLayout(context) {
 
     var onClickListener: ((Schedule) -> Unit)? = null
@@ -83,9 +86,18 @@ class CustomItemSchedule(
         }
 
         this.item_card.setOnClickListener { onClickListener?.invoke(data) }
-        this.item_card.setOnLongClickListener {
-            onLongClickListener?.invoke(data)
-            true
+
+        when(screen) {
+            EditScheduleFragment.TAG -> {
+                this.item_card.setOnLongClickListener {
+                    onLongClickListener?.invoke(data)
+                    true
+                }
+            }
+            HomeScheduleFragment.TAG -> {
+                mIndicatorWeek.isVisible = false
+                mIndicatorCardWeek.isVisible = false
+            }
         }
     }
 }

@@ -15,9 +15,11 @@ import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 
 class ItemScheduleController(
         private val listWeek: List<Week>,
-        private val onClickListener: (Schedule) -> Unit,
-        private val onLongClickListener: (Schedule) -> Unit
+        private val screen: String,
+        private val onClickListener: (Schedule) -> Unit
 ) : BindableItemController<ArrayList<Schedule>, ItemScheduleController.Holder>() {
+
+    var onLongClickListener: ((Schedule) -> Unit)? = null
 
     private var countItem: Int = 0
 
@@ -74,9 +76,9 @@ class ItemScheduleController(
             with(container) {
                 removeAllViews()
                 for (item in newListSchedule) {
-                    addView(CustomItemSchedule(context, listWeek).apply {
+                    addView(CustomItemSchedule(context, listWeek, screen).apply {
                         onClickListener = { schedule -> this@ItemScheduleController.onClickListener.invoke(schedule) }
-                        onLongClickListener = { schedule -> this@ItemScheduleController.onLongClickListener.invoke(schedule) }
+                        onLongClickListener = { schedule -> this@ItemScheduleController.onLongClickListener?.invoke(schedule) }
                         setItemSchedule(item)
                     })
                 }

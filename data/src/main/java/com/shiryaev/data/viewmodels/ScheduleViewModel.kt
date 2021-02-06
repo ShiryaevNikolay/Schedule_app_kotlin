@@ -3,7 +3,7 @@ package com.shiryaev.data.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeScheduleViewModel : ViewModel() {
+class ScheduleViewModel : ViewModel() {
 
     private val mHeightTopBar = MutableLiveData<Int>()
 

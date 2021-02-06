@@ -46,6 +46,7 @@ class PageScheduleFragment : Fragment() {
 
     private lateinit var mContext: Context
     private lateinit var mViewModel: PageScheduleViewModel
+    private lateinit var mScreen: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -57,6 +58,7 @@ class PageScheduleFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             mPositionPage = it.getInt(UtilsKeys.POSITION_PAGE.name)
+            mScreen = it.getString(UtilsKeys.SCREEN.name).toString()
         }
     }
 
@@ -78,7 +80,6 @@ class PageScheduleFragment : Fragment() {
         }
 
         initRecyclerView()
-
 
         when (parentFragment) {
             is HomeScheduleFragment -> {
@@ -137,9 +138,12 @@ class PageScheduleFragment : Fragment() {
                 }
                 .doFinally { mViewModel.setIsLoading(false) }
                 .subscribe { newList ->
-                    val mItemSchedule = ItemScheduleController(mListWeek, { schedule ->
+                    val mItemSchedule = ItemScheduleController(mListWeek, mScreen) { schedule ->
                         // TODO: Детальный показ занятия при нажатии на карточку
-                    }, { schedule -> showListDialog(schedule) })
+                    }
+                    if (parentFragment is EditScheduleFragment) {
+                        mItemSchedule.onLongClickListener = { schedule -> showListDialog(schedule) }
+                    }
                     val listSchedule = ItemList.create().apply {
                         addAll(newList, mItemSchedule.apply { setCountItem(newList.size) })
                     }
