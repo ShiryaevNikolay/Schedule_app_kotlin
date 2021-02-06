@@ -79,6 +79,20 @@ class PageScheduleFragment : Fragment() {
             mListWeek = listWeek
         }
 
+        mViewModel.getCorrectListSchedule().observe(viewLifecycleOwner) { schedules ->
+            val mItemSchedule = ItemScheduleController(mListWeek, mScreen) { schedule ->
+                // TODO: Детальный показ занятия при нажатии на карточку
+            }
+            if (parentFragment is EditScheduleFragment) {
+                mItemSchedule.onLongClickListener = { schedule -> showListDialog(schedule) }
+            }
+            val listSchedule = ItemList.create().apply {
+                addAll(schedules, mItemSchedule.apply { setCountItem(schedules.size) })
+            }
+            mEasyAdapter.setItems(listSchedule)
+            mViewModel.setIsErrorVisible(mEasyAdapter.itemCount == 0)
+        }
+
         initRecyclerView()
 
         when (parentFragment) {
@@ -88,7 +102,7 @@ class PageScheduleFragment : Fragment() {
                 }
                 PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext.resources?.getString(R.string.current_week_key), "")?.let {
                     mViewModel.getSchedules(mPositionPage, it).observe(viewLifecycleOwner) { listSchedules ->
-                        setListToAdapter(ArrayList(listSchedules))
+                        mViewModel.setListSchedule(listSchedules)
                     }
                 }
             }
@@ -97,7 +111,7 @@ class PageScheduleFragment : Fragment() {
                     setHeightDecoration(height)
                 }
                 mViewModel.getSchedules(mPositionPage).observe(viewLifecycleOwner, { listSchedules ->
-                    setListToAdapter(ArrayList(listSchedules))
+                    mViewModel.setListSchedule(listSchedules)
                 })
             }
         }
@@ -123,46 +137,6 @@ class PageScheduleFragment : Fragment() {
             mDecorator = SpaceFirstItemDecoration(height)
             addItemDecoration(mDecorator)
         }
-    }
-
-    private fun setListToAdapter(list: ArrayList<Schedule>) {
-        Observable.fromCallable {
-            if (list.isNotEmpty()) { getListScheduleByDay(list) }
-            else { ArrayList() }
-        }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-                    mViewModel.setIsLoading(true)
-                    mViewModel.setIsErrorVisible(false)
-                }
-                .doFinally { mViewModel.setIsLoading(false) }
-                .subscribe { newList ->
-                    val mItemSchedule = ItemScheduleController(mListWeek, mScreen) { schedule ->
-                        // TODO: Детальный показ занятия при нажатии на карточку
-                    }
-                    if (parentFragment is EditScheduleFragment) {
-                        mItemSchedule.onLongClickListener = { schedule -> showListDialog(schedule) }
-                    }
-                    val listSchedule = ItemList.create().apply {
-                        addAll(newList, mItemSchedule.apply { setCountItem(newList.size) })
-                    }
-                    mEasyAdapter.setItems(listSchedule)
-                    mViewModel.setIsErrorVisible(mEasyAdapter.itemCount == 0)
-                }
-    }
-
-    private fun getListScheduleByDay(list: ArrayList<Schedule>): ArrayList<ArrayList<Schedule>> {
-        val newListSchedules: ArrayList<ArrayList<Schedule>> = arrayListOf(arrayListOf())
-        var timeTemp = list.first().mTimeStart
-        for (item in list) {
-            if (item.mTimeStart != timeTemp) {
-                newListSchedules.add(arrayListOf())
-                timeTemp = item.mTimeStart
-            }
-            newListSchedules[newListSchedules.size - 1].add(item)
-        }
-        return newListSchedules
     }
 
     private fun actionSchedule(schedule: Schedule, action: Int) {
