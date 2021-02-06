@@ -63,4 +63,8 @@
     <string name="current_week">Текущая неделя</string>
     <string name="click_on_to_add_a_week">Нажмите + чтобы добавить неделю</string>
     <string name="click_on_to_add_a_note">Нажмите + чтобы добавить заметку</string>
+    <string name="title">Заголовок</string>
+    <string name="note">Заметка</string>
+    <string name="deadline">Дата выполнения</string>
+    <string name="color">Цвет</string>
 </resources>

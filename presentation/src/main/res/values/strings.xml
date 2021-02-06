@@ -62,4 +62,8 @@
     <string name="current_week">Current week</string>
     <string name="click_on_to_add_a_week">Click on + to add a week</string>
     <string name="click_on_to_add_a_note">Click on + to add a note</string>
+    <string name="title">Title</string>
+    <string name="note">Note</string>
+    <string name="deadline">Deadline</string>
+    <string name="color">Color</string>
 </resources>
