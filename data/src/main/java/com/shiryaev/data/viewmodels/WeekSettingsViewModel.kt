@@ -3,7 +3,7 @@ package com.shiryaev.data.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.shiryaev.data.AppDelegate
-import com.shiryaev.data.database.WeekRepository
+import com.shiryaev.data.database.repository.WeekRepository
 import com.shiryaev.domain.models.Week
 import javax.inject.Inject
 

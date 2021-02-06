@@ -1,6 +1,7 @@
 package com.shiryaev.domain.utils
 
 object UtilsTable {
+    // Для занятий
     const val TABLE_SCHEDULE = "table_schedule"
     const val SCHEDULE = "schedule"
     const val SCHEDULE_COLUMN_ID = "id"
@@ -13,8 +14,18 @@ object UtilsTable {
     const val SCHEDULE_COLUMN_DAY = "day"
     const val SCHEDULE_COLUMN_EXAM = "exam"
 
+    // Для недель
     const val TABLE_WEEK = "table_week"
     const val WEEK_ID = "id"
     const val WEEK_NAME = "name"
     const val WEEK_COLOR = "color"
+
+    // Для заметок
+    const val TABLE_NOTE = "table_note"
+    const val NOTE_ID = "id"
+    const val NOTE_TITLE = "title"
+    const val NOTE_TEXT = "text"
+    const val NOTE_DATE = "date"
+    const val NOTE_CHECK = "check"
+    const val NOTE_IMAGE_PATH = "image_path"
 }

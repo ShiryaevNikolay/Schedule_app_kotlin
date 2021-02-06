@@ -1,6 +1,7 @@
-package com.shiryaev.data.database
+package com.shiryaev.data.database.repository
 
 import com.shiryaev.data.AppDelegate
+import com.shiryaev.data.database.Storage
 import com.shiryaev.data.database.schedule.ScheduleDao
 import com.shiryaev.data.database.week.WeekDao
 import com.shiryaev.domain.models.Week

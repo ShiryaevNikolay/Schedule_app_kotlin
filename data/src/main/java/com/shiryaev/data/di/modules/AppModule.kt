@@ -2,9 +2,10 @@ package com.shiryaev.data.di.modules
 
 import androidx.room.Room
 import com.shiryaev.data.AppDelegate
-import com.shiryaev.data.database.WeekRepository
-import com.shiryaev.data.database.Repository
+import com.shiryaev.data.database.repository.WeekRepository
+import com.shiryaev.data.database.repository.ScheduleRepository
 import com.shiryaev.data.database.Storage
+import com.shiryaev.data.database.repository.NoteRepository
 import com.shiryaev.domain.utils.UtilsDb
 import dagger.Module
 import dagger.Provides
@@ -25,9 +26,13 @@ class AppModule(private val mApp: AppDelegate) {
 
     @Provides
     @Singleton
-    fun provideRepository() = Repository()
+    fun provideScheduleRepository() = ScheduleRepository()
 
     @Provides
     @Singleton
-    fun provideInternalData() = WeekRepository()
+    fun provideWeekRepository() = WeekRepository()
+
+    @Provides
+    @Singleton
+    fun provideNoteRepository() = NoteRepository()
 }
