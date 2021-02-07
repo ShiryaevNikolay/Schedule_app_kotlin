@@ -23,14 +23,20 @@ class ItemNoteController : BindableItemController<Note, ItemNoteController.Holde
         private val mNoteCard: MaterialCardView = itemView.findViewById(R.id.note_card)
         private val mTitle: MaterialTextView = itemView.findViewById(R.id.title_tv)
         private val mText: MaterialTextView = itemView.findViewById(R.id.text_tv)
+        private val mDeadline: MaterialTextView = itemView.findViewById(R.id.deadline_tv)
 
         override fun bind(data: Note) {
             if (data.mTitle != null || data.mTitle != "") {
                 mTitle.text = data.mTitle
             }
-            mTitle.isVisible = data.mTitle != null
+            mTitle.isVisible = data.mTitle != null || data.mTitle != ""
 
             mText.text = data.mText
+
+            if (data.mDeadline != null || data.mDeadline != "") {
+                mDeadline.text = data.mDeadline
+            }
+            mDeadline.isVisible = data.mDeadline != null || data.mDeadline != ""
 
             with (mNoteCard) {
                 setOnClickListener { onClickNote?.invoke(data) }

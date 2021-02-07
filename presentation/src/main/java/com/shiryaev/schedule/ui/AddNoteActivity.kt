@@ -14,6 +14,7 @@ import com.shiryaev.data.viewmodels.AddNoteViewModel
 import com.shiryaev.domain.models.Note
 import com.shiryaev.domain.utils.*
 import com.shiryaev.schedule.R
+import com.shiryaev.schedule.common.CallDialogs
 import com.shiryaev.schedule.databinding.ActivityAddNoteBinding
 import com.shiryaev.schedule.ui.dialogs.ListDialog
 import com.shiryaev.schedule.utils.UtilsListData
@@ -23,7 +24,7 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mNote = Note()
     private var mListLessons: List<String> = listOf()
-    private var mListDeadline: List<Long> = listOf()
+    private var mListDeadline: List<String> = listOf()
 
     private lateinit var binding: ActivityAddNoteBinding
     private lateinit var mViewModel: AddNoteViewModel
@@ -102,7 +103,10 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
                         .show(supportFragmentManager, null)
             }
             R.id.deadline_btn -> {
-                // TODO
+                CallDialogs.callDatePickerDialog(this) { date ->
+                    mNote.mDeadline = date
+                    setSelectedDate()
+                }
             }
             R.id.deadline_list_btn -> {
                 // TODO
@@ -140,8 +144,8 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setDataToView() {
-        if (mNote.mDeadline != UtilsChecks.DEADLINE_DISABLE) {
-            binding.deadlineBtn.text = UtilsConvert.format(mNote.mDeadline)
+        if (mNote.mDeadline != null || mNote.mDeadline != "") {
+            binding.deadlineBtn.text = mNote.mDeadline
         }
     }
 
@@ -156,6 +160,10 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
             setText(text)
             setSelection(text.length)
         }
+    }
+
+    private fun setSelectedDate() {
+        binding.deadlineBtn.text = mNote.mDeadline
     }
 
     private fun finishActivity() { finish() }
