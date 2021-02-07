@@ -8,17 +8,20 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.common.Transfer
 import com.shiryaev.data.viewmodels.NoteViewModel
+import com.shiryaev.domain.models.Note
 import com.shiryaev.domain.utils.UtilsIntent
 import com.shiryaev.domain.utils.UtilsKeys
+import com.shiryaev.domain.utils.UtilsTable
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.common.controllers.ItemNoteController
 import com.shiryaev.schedule.databinding.FrNoteBinding
 import com.shiryaev.schedule.ui.AddNoteActivity
+import com.shiryaev.schedule.ui.dialogs.ListDialog
+import com.shiryaev.schedule.utils.UtilsListData
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
 
@@ -28,14 +31,16 @@ class NoteFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     private val mEasyAdapter = EasyAdapter()
+    private lateinit var mContext: Context
     private lateinit var mViewModel: NoteViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        mContext = context
         mViewModel = ViewModelProvider(this, CustomFactory(NoteViewModel())).get(NoteViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FrNoteBinding.inflate(inflater, container, false)
 
         // Синхронизируем xml с viewModel
@@ -47,7 +52,14 @@ class NoteFragment : Fragment(), View.OnClickListener {
         with (mViewModel) {
             // Получаем список заметок
             getNotes().observe(viewLifecycleOwner) { notes ->
-                val itemNote = ItemNoteController()
+                val itemNote = ItemNoteController().apply {
+                    onClickNote = { note ->
+                        // TODO
+                    }
+                    onLongClickNote = { note ->
+                        showListDialog(note)
+                    }
+                }
                 val itemList = ItemList.create().apply {
                     addAll(notes, itemNote)
                 }
@@ -83,6 +95,29 @@ class NoteFragment : Fragment(), View.OnClickListener {
         with(binding.recyclerView) {
             adapter = mEasyAdapter
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        }
+    }
+
+    private fun showListDialog(note: Note) {
+        ListDialog()
+                .setData(UtilsListData.getListScheduleDialog(mContext)) { positionItem ->
+                    actionSchedule(note, positionItem)
+                }
+                .show(childFragmentManager, null)
+    }
+
+    private fun actionSchedule(note: Note, action: Int) {
+        val arrayAction = mContext.resources.getStringArray(R.array.list_dialog)
+        when(arrayAction[action]) {
+            arrayAction.first() -> run {
+                val options = Bundle().apply {
+                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_NOTE.name)
+                    putSerializable(UtilsTable.NOTE, note)
+                }
+                Transfer.transferToActivity(activity as AppCompatActivity, AddNoteActivity(), options)
+            }
+            // Удаление занятия
+            arrayAction.last() -> mViewModel.deleteNote(note)
         }
     }
 }

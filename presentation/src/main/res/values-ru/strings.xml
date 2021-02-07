@@ -26,7 +26,7 @@
     <string name="enter_the_name_of_the_week">Введите название недели</string>
 
     <!--  Диалог при нажатии на занятие  -->
-    <string-array name="dialog_schedule">
+    <string-array name="list_dialog">
         <item>Изменить</item>
         <item>Удалить</item>
     </string-array>

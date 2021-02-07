@@ -11,6 +11,9 @@ import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 
 class ItemNoteController : BindableItemController<Note, ItemNoteController.Holder>() {
 
+    var onClickNote: ((Note) -> Unit)? = null
+    var onLongClickNote: ((Note) -> Unit)? = null
+
     override fun createViewHolder(parent: ViewGroup) = Holder(parent)
 
     override fun getItemId(data: Note) = data.mId.hashCode().toString()
@@ -22,15 +25,19 @@ class ItemNoteController : BindableItemController<Note, ItemNoteController.Holde
         private val mText: MaterialTextView = itemView.findViewById(R.id.text_tv)
 
         override fun bind(data: Note) {
-            if (data.mTitle != null) {
+            if (data.mTitle != null || data.mTitle != "") {
                 mTitle.text = data.mTitle
             }
             mTitle.isVisible = data.mTitle != null
 
             mText.text = data.mText
 
-            mNoteCard.setOnClickListener {
-
+            with (mNoteCard) {
+                setOnClickListener { onClickNote?.invoke(data) }
+                setOnLongClickListener {
+                    onLongClickNote?.invoke(data)
+                    true
+                }
             }
         }
     }

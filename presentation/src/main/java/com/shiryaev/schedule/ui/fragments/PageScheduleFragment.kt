@@ -25,12 +25,8 @@ import com.shiryaev.schedule.ui.AddScheduleActivity
 import com.shiryaev.schedule.ui.dialogs.ListDialog
 import com.shiryaev.schedule.ui.views.utils.SpaceFirstItemDecoration
 import com.shiryaev.schedule.utils.UtilsListData
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
-import java.util.ArrayList
 
 class PageScheduleFragment : Fragment() {
 
@@ -140,7 +136,7 @@ class PageScheduleFragment : Fragment() {
     }
 
     private fun actionSchedule(schedule: Schedule, action: Int) {
-        val arrayAction = mContext.resources.getStringArray(R.array.dialog_schedule)
+        val arrayAction = mContext.resources.getStringArray(R.array.list_dialog)
         when(arrayAction[action]) {
             arrayAction.first() -> run {
                 val options = Bundle().apply {

@@ -32,7 +32,16 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_tv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:maxLines="5"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/deadline_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_dimen"
+                android:textSize="@dimen/bottom_bar_text_size"
+                android:text="22 дек 2020" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </com.google.android.material.card.MaterialCardView>
 </layout>
