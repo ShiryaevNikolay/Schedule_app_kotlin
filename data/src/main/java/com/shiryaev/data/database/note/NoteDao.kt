@@ -8,7 +8,10 @@ import com.shiryaev.domain.utils.UtilsTable
 @Dao
 interface NoteDao {
     @Query("SELECT * FROM ${UtilsTable.TABLE_NOTE}")
-    fun getAllNote(): LiveData<Note>
+    fun getAllNote(): LiveData<List<Note>>
+
+    @Query("SELECT ${UtilsTable.NOTE_DEADLINE} FROM ${UtilsTable.TABLE_NOTE}")
+    fun getAllDeadline(): LiveData<List<Long>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNote(note: Note)

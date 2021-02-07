@@ -5,6 +5,7 @@ import com.shiryaev.domain.models.TimeAndWeek
 object UtilsChecks {
 
     const val TIME_DISABLE = -1
+    const val DEADLINE_DISABLE: Long = -1
 
     fun checkTime(week: String, selectedTime: Int, listTime: ArrayList<TimeAndWeek>) : Boolean {
         var flag = true
@@ -22,4 +23,6 @@ object UtilsChecks {
     }
 
     fun checkAddSchedule(lesson: String, time: Int) =  (lesson.isNotBlank() || lesson != "") && time != TIME_DISABLE
+
+    fun checkAddNote(note: String) =  (note.isNotBlank() || note != "")
 }

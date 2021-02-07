@@ -22,10 +22,11 @@ object UtilsTable {
 
     // Для заметок
     const val TABLE_NOTE = "table_note"
+    const val NOTE = "note"
     const val NOTE_ID = "id"
     const val NOTE_TITLE = "title"
     const val NOTE_TEXT = "text"
-    const val NOTE_DATE = "date"
+    const val NOTE_DEADLINE = "date"
     const val NOTE_CHECK = "check"
     const val NOTE_IMAGE_PATH = "image_path"
 }

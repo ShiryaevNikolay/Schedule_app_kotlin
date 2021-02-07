@@ -14,7 +14,6 @@ class NoteViewModel : ViewModel() {
 
     private val mIsLoading = MutableLiveData<Boolean>()
     private val mIsErrorVisible = MutableLiveData<Boolean>()
-    private val mFabIsVisible = MutableLiveData<Boolean>()
 
     init {
         AppDelegate.getAppComponent().injectNoteViewModel(this)
@@ -27,10 +26,6 @@ class NoteViewModel : ViewModel() {
     fun setIsErrorVisible(value: Boolean) { mIsErrorVisible.value = value }
 
     fun setIsLoading(value: Boolean) { mIsLoading.postValue(value) }
-
-    fun setFabIsVisible(value: Boolean) { mFabIsVisible.value = value }
-
-    fun getFabIsVisible() = mFabIsVisible
 
     fun insertNote(note: Note) { mRepository.insertNote(note) }
 

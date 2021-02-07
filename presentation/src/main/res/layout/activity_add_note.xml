@@ -12,7 +12,7 @@
 
         <variable
             name="VM"
-            type="com.shiryaev.data.viewmodels.NoteViewModel" />
+            type="com.shiryaev.data.viewmodels.AddNoteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,7 +67,7 @@
                     </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
 
                     <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/teacher_list_btn"
+                        android:id="@+id/title_list_btn"
                         android:layout_width="@dimen/icon_button_size"
                         android:layout_height="@dimen/icon_button_size"
                         android:layout_marginHorizontal="@dimen/elevation"
@@ -116,14 +116,14 @@
                         app:srcCompat="@drawable/ic_timer_sand"/>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/time_btn"
+                        android:id="@+id/deadline_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/default_dimen"
                         android:hint="@string/deadline"/>
 
                     <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/time_list_btn"
+                        android:id="@+id/deadline_list_btn"
                         android:layout_width="@dimen/icon_button_size"
                         android:layout_height="@dimen/icon_button_size"
                         android:background="?android:attr/actionBarItemBackground"
@@ -143,7 +143,7 @@
                         app:srcCompat="@drawable/ic_palette_outline"/>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/week_btn"
+                        android:id="@+id/color_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/default_dimen"

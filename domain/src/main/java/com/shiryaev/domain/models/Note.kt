@@ -18,8 +18,8 @@ class Note : Serializable {
     @ColumnInfo(name = UtilsTable.NOTE_TEXT)
     var mText: String = ""
 
-    @ColumnInfo(name = UtilsTable.NOTE_DATE)
-    var mDate: Long = -1
+    @ColumnInfo(name = UtilsTable.NOTE_DEADLINE)
+    var mDeadline: Long = -1
 
     @ColumnInfo(name = UtilsTable.NOTE_CHECK)
     var mIsChecked: Boolean = false
