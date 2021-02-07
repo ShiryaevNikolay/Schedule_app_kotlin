@@ -15,6 +15,7 @@
     <dimen name="header_size">20sp</dimen>
     <dimen name="button_dialog_size">15sp</dimen>
     <dimen name="timeline_width">60dp</dimen>
+    <dimen name="margin_text">5dp</dimen>
 
     <dimen name="text_secondary">13sp</dimen>
 

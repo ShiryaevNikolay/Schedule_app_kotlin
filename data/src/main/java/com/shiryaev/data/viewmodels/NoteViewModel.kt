@@ -27,6 +27,8 @@ class NoteViewModel : ViewModel() {
 
     fun setIsLoading(value: Boolean) { mIsLoading.postValue(value) }
 
+    fun getNotes() = mRepository.getNotes()
+
     fun insertNote(note: Note) { mRepository.insertNote(note) }
 
     fun updateNote(note: Note) { mRepository.updateNote(note) }
