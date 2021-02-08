@@ -8,6 +8,8 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.shiryaev.schedule.common.CallDialogs
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.utils.UtilsChecks
@@ -135,10 +137,11 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when(v.id) {
-            R.id.time_btn -> { CallDialogs.callTimePicker(this@AddScheduleActivity, mSchedule.mWeek, mListTimeAndWeek) { hour, minute ->
+            R.id.time_btn -> {
+                CallDialogs.callTimePicker(this@AddScheduleActivity, mSchedule.mWeek, mListTimeAndWeek) { hour, minute ->
                     mSchedule.mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
                     setSelectedTime()
-                }
+                }.show(supportFragmentManager, null)
             }
             R.id.lesson_list_btn -> {
                 ListDialog()

@@ -23,7 +23,7 @@
         <item name="buttonBarButtonStyle">@style/ButtonStyle</item>
         <item name="toolbarStyle">@style/ToolbarStyle</item>
         <item name="android:fontFamily">@font/font_rubik_family</item>
-<!--        <item name="alertDialogTheme">@style/MaterialAlertDialogStyle</item>-->
-<!--        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogStyle</item>-->
+        <item name="materialTimePickerTheme">@style/MaterialTimePickerTheme</item>
+        <item name="materialTimePickerStyle">@style/MaterialTimePickerTheme</item>
     </style>
 </resources>
