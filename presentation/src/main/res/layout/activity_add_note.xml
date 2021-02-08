@@ -121,13 +121,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/default_dimen"
                         android:hint="@string/deadline"/>
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/deadline_list_btn"
-                        android:layout_width="@dimen/icon_button_size"
-                        android:layout_height="@dimen/icon_button_size"
-                        android:background="?android:attr/actionBarItemBackground"
-                        android:src="@drawable/ic_baseline_notes"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat

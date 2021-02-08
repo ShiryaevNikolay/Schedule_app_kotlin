@@ -29,7 +29,6 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
 
     private var mNote = Note()
     private var mListLessons: List<String> = listOf()
-    private var mListDeadline: List<String> = listOf()
 
     private lateinit var binding: ActivityAddNoteBinding
     private lateinit var mViewModel: AddNoteViewModel
@@ -79,7 +78,6 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
         with(binding) {
             titleListBtn.setOnClickListener(this@AddNoteActivity)
             deadlineBtn.setOnClickListener(this@AddNoteActivity)
-            deadlineListBtn.setOnClickListener(this@AddNoteActivity)
             colorBtn.setOnClickListener(this@AddNoteActivity)
             fab.setOnClickListener(this@AddNoteActivity)
         }
@@ -89,10 +87,6 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
             // Получаем список занятий
             getListLessons().observe(this@AddNoteActivity, { listLessons ->
                 mListLessons = setVisibleBtn(binding.titleListBtn, listLessons)
-            })
-            // Получаем список deadline
-            getDeadline().observe(this@AddNoteActivity, { deadline ->
-                mListDeadline = setVisibleBtn(binding.deadlineListBtn, deadline)
             })
         }
     }
@@ -112,9 +106,6 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
                     mNote.mDeadline = date
                     setSelectedDate()
                 }
-            }
-            R.id.deadline_list_btn -> {
-                // TODO
             }
             R.id.color_btn -> {
                 showColorPickerDialog()

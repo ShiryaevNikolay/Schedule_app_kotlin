@@ -1,8 +1,11 @@
 package com.shiryaev.schedule.common.controllers
 
 import android.content.res.TypedArray
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.util.TypedValue
 import android.view.ViewGroup
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
@@ -23,6 +26,7 @@ class ItemNoteController : BindableItemController<Note, ItemNoteController.Holde
     inner class Holder(parent: ViewGroup) : BindableViewHolder<Note>(parent, R.layout.item_note) {
 
         private val mNoteCard: MaterialCardView = itemView.findViewById(R.id.note_card)
+        private val mNoteContainer: LinearLayoutCompat = itemView.findViewById(R.id.card_container)
         private val mTitle: MaterialTextView = itemView.findViewById(R.id.title_tv)
         private val mText: MaterialTextView = itemView.findViewById(R.id.text_tv)
         private val mDeadline: MaterialTextView = itemView.findViewById(R.id.deadline_tv)
@@ -42,7 +46,7 @@ class ItemNoteController : BindableItemController<Note, ItemNoteController.Holde
 
             with (mNoteCard) {
                 // Меняем цвет заметки
-                setCardBackgroundColor(setColor(data))
+                setColor(mNoteContainer, data)
 
                 // Слушатели нажатий
                 setOnClickListener { onClickNote?.invoke(data) }
@@ -53,15 +57,27 @@ class ItemNoteController : BindableItemController<Note, ItemNoteController.Holde
             }
         }
 
-        private fun setColor(note: Note): Int {
-            return if (note.mColor == "") {
-                val typedValue = TypedValue()
-                val typedArray: TypedArray = itemView.context.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorSurface))
-                val color = typedArray.getColor(0, 0)
-                typedArray.recycle()
-                color
+        private fun setColor(container: LinearLayoutCompat, note: Note) {
+            if (note.mColor == "") {
+//                val typedValue = TypedValue()
+//                val typedArray: TypedArray = itemView.context.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorSurface))
+//                val color = typedArray.getColor(0, 0)
+//                typedArray.recycle()
+                container.setBackgroundColor(Color.TRANSPARENT)
+//                card.setCardBackgroundColor(color)
             } else {
-                itemView.context.resources.getIntArray(R.array.color_pick)[note.mColor.toInt()]
+//                card.setCardBackgroundColor(itemView.context.resources.getIntArray(R.array.color_pick)[note.mColor.toInt()])
+                val gd = GradientDrawable().apply {
+                    colors = intArrayOf(
+                            itemView.context.resources.getIntArray(R.array.color_gradient)[note.mColor.toInt()],
+                            itemView.context.resources.getIntArray(R.array.color_pick)[note.mColor.toInt()]
+                    )
+                    gradientType = GradientDrawable.LINEAR_GRADIENT
+                    orientation = GradientDrawable.Orientation.BL_TR
+                    shape = GradientDrawable.RECTANGLE
+                }
+                container.background = gd
+//                card.setBackgroundDrawable(gd)
             }
         }
     }

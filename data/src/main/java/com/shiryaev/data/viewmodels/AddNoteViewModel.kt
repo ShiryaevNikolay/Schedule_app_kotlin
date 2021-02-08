@@ -20,8 +20,6 @@ class AddNoteViewModel : ViewModel() {
 
     fun getListLessons() = mRepository.getLessons()
 
-    fun getDeadline() = mRepository.getDeadline()
-
     fun setFabIsVisible(value: Boolean) { mFabIsVisible.value = value }
 
     fun getFabIsVisible() = mFabIsVisible

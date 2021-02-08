@@ -18,6 +18,45 @@
         <item>@color/orange_900</item>
         <item>@color/deep_orange_900</item>
         <item>@color/brown_900</item>
+        <item>@color/blue_gray_800</item>
+    </array>
+
+    <array name="color_gradient">
+<!--        <item>@color/red_800</item>-->
+<!--        <item>@color/pink_800</item>-->
+<!--        <item>@color/purple_800</item>-->
+<!--        <item>@color/deep_purple_800</item>-->
+<!--        <item>@color/indigo_800</item>-->
+<!--        <item>@color/blue_800</item>-->
+<!--        <item>@color/light_blue_800</item>-->
+<!--        <item>@color/cyan_800</item>-->
+<!--        <item>@color/teal_800</item>-->
+<!--        <item>@color/green_800</item>-->
+<!--        <item>@color/light_green_800</item>-->
+<!--        <item>@color/lime_800</item>-->
+<!--        <item>@color/yellow_800</item>-->
+<!--        <item>@color/amber_800</item>-->
+<!--        <item>@color/orange_800</item>-->
+<!--        <item>@color/deep_orange_800</item>-->
+<!--        <item>@color/brown_800</item>-->
+<!--        <item>@color/blue_gray_800</item>-->
+        <item>@color/red_1000</item>
+        <item>@color/pink_1000</item>
+        <item>@color/purple_1000</item>
+        <item>@color/deep_purple_1000</item>
+        <item>@color/indigo_1000</item>
+        <item>@color/blue_1000</item>
+        <item>@color/light_blue_1000</item>
+        <item>@color/cyan_1000</item>
+        <item>@color/teal_1000</item>
+        <item>@color/green_1000</item>
+        <item>@color/light_green_1000</item>
+        <item>@color/lime_1000</item>
+        <item>@color/yellow_1000</item>
+        <item>@color/amber_1000</item>
+        <item>@color/orange_1000</item>
+        <item>@color/deep_orange_1000</item>
+        <item>@color/brown_1000</item>
         <item>@color/blue_gray_900</item>
     </array>
 </resources>
