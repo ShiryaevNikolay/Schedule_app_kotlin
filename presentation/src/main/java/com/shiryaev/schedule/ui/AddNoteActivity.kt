@@ -1,6 +1,8 @@
 package com.shiryaev.schedule.ui
 
+import android.content.res.TypedArray
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -12,15 +14,18 @@ import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.utils.UtilsChecks
 import com.shiryaev.data.viewmodels.AddNoteViewModel
 import com.shiryaev.domain.models.Note
+import com.shiryaev.domain.models.Week
 import com.shiryaev.domain.utils.*
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.common.CallDialogs
 import com.shiryaev.schedule.databinding.ActivityAddNoteBinding
+import com.shiryaev.schedule.ui.dialogs.ColorPickerDialog
 import com.shiryaev.schedule.ui.dialogs.ListDialog
+import com.shiryaev.schedule.ui.dialogs.OnClickButtonDialogListener
 import com.shiryaev.schedule.utils.UtilsListData
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
-class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
+class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButtonDialogListener {
 
     private var mNote = Note()
     private var mListLessons: List<String> = listOf()
@@ -112,7 +117,7 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
                 // TODO
             }
             R.id.color_btn -> {
-                // TODO
+                showColorPickerDialog()
             }
             R.id.fab -> {
                 when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
@@ -128,6 +133,15 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
         super.onSaveInstanceState(outState)
         with(outState) {
             putSerializable(UtilsTable.NOTE, mNote)
+        }
+    }
+
+    override fun onClick(text: String, oldText: String, week: Week?, dialog: String) {
+        when (dialog) {
+            UtilsKeys.COLOR_PICK_DIALOG.name -> {
+                mNote.mColor = text
+                setColor()
+            }
         }
     }
 
@@ -147,6 +161,7 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
         if (mNote.mDeadline != null || mNote.mDeadline != "") {
             binding.deadlineBtn.text = mNote.mDeadline
         }
+        setColor()
     }
 
     private fun <T> setVisibleBtn(btn: AppCompatImageButton, newList: List<T>): List<T> {
@@ -166,6 +181,18 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
         binding.deadlineBtn.text = mNote.mDeadline
     }
 
+    private fun showColorPickerDialog() {
+        ColorPickerDialog()
+                .setHeader(resources.getString(R.string.choose_color))
+                .setButton(listOf(
+                        resources.getString(R.string.dumping),
+                        resources.getStringArray(R.array.button_dialog).first(),
+                        resources.getStringArray(R.array.button_dialog).last()
+                ))
+                .setData()
+                .show(supportFragmentManager, UtilsKeys.COLOR_PICK_DIALOG.name)
+    }
+
     private fun finishActivity() { finish() }
 
     private fun setTheme() {
@@ -174,6 +201,20 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener {
             listThemeMode.first() -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) }
             listThemeMode[1] -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) }
             listThemeMode.last() -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) }
+        }
+    }
+
+    private fun setColor() {
+        binding.colorBtn.background.apply {
+            if (mNote.mColor == "") {
+                val typedValue = TypedValue()
+                val typedArray: TypedArray = obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorSurface))
+                val color = typedArray.getColor(0, 0)
+                typedArray.recycle()
+                setTint(color)
+            } else {
+                setTint(resources.getIntArray(R.array.color_pick)[mNote.mColor.toInt()])
+            }
         }
     }
 }

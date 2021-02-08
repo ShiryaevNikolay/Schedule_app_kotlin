@@ -1,5 +1,7 @@
 package com.shiryaev.schedule.common.controllers
 
+import android.content.res.TypedArray
+import android.util.TypedValue
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
@@ -29,21 +31,37 @@ class ItemNoteController : BindableItemController<Note, ItemNoteController.Holde
             if (data.mTitle != null || data.mTitle != "") {
                 mTitle.text = data.mTitle
             }
-            mTitle.isVisible = data.mTitle != null || data.mTitle != ""
+            mTitle.isVisible = mTitle.text != ""
 
             mText.text = data.mText
 
             if (data.mDeadline != null || data.mDeadline != "") {
                 mDeadline.text = data.mDeadline
             }
-            mDeadline.isVisible = data.mDeadline != null || data.mDeadline != ""
+            mDeadline.isVisible = mDeadline.text != ""
 
             with (mNoteCard) {
+                // Меняем цвет заметки
+                setCardBackgroundColor(setColor(data))
+
+                // Слушатели нажатий
                 setOnClickListener { onClickNote?.invoke(data) }
                 setOnLongClickListener {
                     onLongClickNote?.invoke(data)
                     true
                 }
+            }
+        }
+
+        private fun setColor(note: Note): Int {
+            return if (note.mColor == "") {
+                val typedValue = TypedValue()
+                val typedArray: TypedArray = itemView.context.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorSurface))
+                val color = typedArray.getColor(0, 0)
+                typedArray.recycle()
+                color
+            } else {
+                itemView.context.resources.getIntArray(R.array.color_pick)[note.mColor.toInt()]
             }
         }
     }

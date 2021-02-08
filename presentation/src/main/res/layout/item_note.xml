@@ -33,8 +33,7 @@
                 android:id="@+id/text_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/main_text_size"
-                android:maxLines="5"/>
+                android:textSize="@dimen/main_text_size"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/deadline_tv"

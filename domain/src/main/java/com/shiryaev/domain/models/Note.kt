@@ -18,11 +18,11 @@ class Note : Serializable {
     @ColumnInfo(name = UtilsTable.NOTE_TEXT)
     var mText: String = ""
 
+    @ColumnInfo(name = UtilsTable.NOTE_COLOR)
+    var mColor: String = ""
+
     @ColumnInfo(name = UtilsTable.NOTE_DEADLINE)
     var mDeadline: String? = null
-
-    @ColumnInfo(name = UtilsTable.NOTE_CHECK)
-    var mIsChecked: Boolean = false
 
     @ColumnInfo(name = UtilsTable.NOTE_IMAGE_PATH)
     var mImagePath: String? = null

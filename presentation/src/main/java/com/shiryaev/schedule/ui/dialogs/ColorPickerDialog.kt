@@ -6,19 +6,24 @@ import com.shiryaev.domain.utils.UtilsKeys
 import com.shiryaev.schedule.common.controllers.ItemButtonDialogController
 import com.shiryaev.schedule.common.controllers.ItemHeaderDialogController
 import com.shiryaev.schedule.common.controllers.ItemListColorPickController
+import com.shiryaev.schedule.ui.fragments.WeeksSettingsFragment
 import ru.surfstudio.android.easyadapter.ItemList
 
 class ColorPickerDialog : CustomDialog() {
 
     private var mHeader: String? = null
     private var mButton: List<String>? = null
-    private lateinit var mWeek: Week
+    private var mColor = ""
     private lateinit var mItemButtonController: ItemButtonDialogController
     private lateinit var mOnClickListener: OnClickButtonDialogListener
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mOnClickListener = parentFragment as OnClickButtonDialogListener
+        mOnClickListener = if (parentFragment is WeeksSettingsFragment) {
+            parentFragment as OnClickButtonDialogListener
+        } else {
+            context as OnClickButtonDialogListener
+        }
     }
 
     fun setButton(button: List<String>): ColorPickerDialog {
@@ -34,9 +39,8 @@ class ColorPickerDialog : CustomDialog() {
         return this
     }
 
-    fun setData(week: Week): ColorPickerDialog {
-        mWeek = week
-        val colorPick = ItemListColorPickController { color -> mWeek.mColor = color.toString() }
+    fun setData(): ColorPickerDialog {
+        val colorPick = ItemListColorPickController { color -> mColor = color.toString() }
         val mDialogList = ItemList.create().apply {
             addIf(mHeader != null, mHeader, ItemHeaderDialogController())
             addIf(true,  0, colorPick)
@@ -49,12 +53,12 @@ class ColorPickerDialog : CustomDialog() {
     private fun clickBtn(text: String) {
         when(text) {
             mButton?.first() -> {
-                mWeek.mColor = ""
-                mOnClickListener.onClick(week = mWeek, dialog = UtilsKeys.COLOR_PICK_DIALOG.name)
+                mColor = ""
+                mOnClickListener.onClick(text = mColor, dialog = UtilsKeys.COLOR_PICK_DIALOG.name)
                 dismiss() }
             mButton?.get(1) -> { dismiss() }
             mButton?.last() -> {
-                mOnClickListener.onClick(week = mWeek, dialog = UtilsKeys.COLOR_PICK_DIALOG.name)
+                mOnClickListener.onClick(text = mColor, dialog = UtilsKeys.COLOR_PICK_DIALOG.name)
                 dismiss()
             }
         }

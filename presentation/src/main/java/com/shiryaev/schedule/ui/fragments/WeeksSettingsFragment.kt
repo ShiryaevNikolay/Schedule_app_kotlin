@@ -26,6 +26,8 @@ import ru.surfstudio.android.easyadapter.ItemList
 
 class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
 
+    private var mWeek: Week? = null
+
     private val mEasyAdapter = EasyAdapter()
 
     private var _binding: FrWeeksSettingsBinding? = null
@@ -117,6 +119,7 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
     }
 
     private fun showColorPickerDialog(week: Week) {
+        mWeek = week
         ColorPickerDialog()
                 .setHeader(mContext?.resources?.getString(R.string.choose_color)!!)
                 .setButton(listOf(
@@ -124,7 +127,7 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
                         mContext?.resources?.getStringArray(R.array.button_dialog)!!.first(),
                         mContext?.resources?.getStringArray(R.array.button_dialog)!!.last()
                 ))
-                .setData(week)
+                .setData()
                 .show(childFragmentManager, UtilsKeys.COLOR_PICK_DIALOG.name)
     }
 
@@ -143,9 +146,11 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
                 week?.let { mViewModel.deleteWeek(it) }
             }
             UtilsKeys.COLOR_PICK_DIALOG.name -> {
-                if (week != null) {
-                    mViewModel.updateWeek(week)
+                if (mWeek != null) {
+                    mWeek!!.mColor = text
+                    mViewModel.updateWeek(mWeek!!)
                 }
+                mWeek = null
             }
         }
     }
