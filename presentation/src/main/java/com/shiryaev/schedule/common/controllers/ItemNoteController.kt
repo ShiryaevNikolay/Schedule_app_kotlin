@@ -1,9 +1,6 @@
 package com.shiryaev.schedule.common.controllers
 
-import android.content.res.TypedArray
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
-import android.util.TypedValue
 import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isVisible
@@ -44,10 +41,10 @@ class ItemNoteController : BindableItemController<Note, ItemNoteController.Holde
             }
             mDeadline.isVisible = mDeadline.text != ""
 
-            with (mNoteCard) {
-                // Меняем цвет заметки
-                setColor(mNoteContainer, data)
+            // Меняем цвет заметки
+            mNoteContainer.setBackgroundColor(setColor(data))
 
+            with (mNoteCard) {
                 // Слушатели нажатий
                 setOnClickListener { onClickNote?.invoke(data) }
                 setOnLongClickListener {
@@ -57,27 +54,11 @@ class ItemNoteController : BindableItemController<Note, ItemNoteController.Holde
             }
         }
 
-        private fun setColor(container: LinearLayoutCompat, note: Note) {
-            if (note.mColor == "") {
-//                val typedValue = TypedValue()
-//                val typedArray: TypedArray = itemView.context.obtainStyledAttributes(typedValue.data, intArrayOf(R.attr.colorSurface))
-//                val color = typedArray.getColor(0, 0)
-//                typedArray.recycle()
-                container.setBackgroundColor(Color.TRANSPARENT)
-//                card.setCardBackgroundColor(color)
+        private fun setColor(note: Note): Int {
+            return if (note.mColor == "") {
+                Color.TRANSPARENT
             } else {
-//                card.setCardBackgroundColor(itemView.context.resources.getIntArray(R.array.color_pick)[note.mColor.toInt()])
-                val gd = GradientDrawable().apply {
-                    colors = intArrayOf(
-                            itemView.context.resources.getIntArray(R.array.color_gradient)[note.mColor.toInt()],
-                            itemView.context.resources.getIntArray(R.array.color_pick)[note.mColor.toInt()]
-                    )
-                    gradientType = GradientDrawable.LINEAR_GRADIENT
-                    orientation = GradientDrawable.Orientation.BL_TR
-                    shape = GradientDrawable.RECTANGLE
-                }
-                container.background = gd
-//                card.setBackgroundDrawable(gd)
+                itemView.context.resources.getIntArray(R.array.color_card)[note.mColor.toInt()]
             }
         }
     }

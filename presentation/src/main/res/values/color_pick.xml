@@ -21,7 +21,7 @@
         <item>@color/blue_gray_200</item>
     </array>
 
-    <array name="color_gradient">
+    <array name="color_card">
         <item>@color/red_100</item>
         <item>@color/pink_100</item>
         <item>@color/purple_100</item>

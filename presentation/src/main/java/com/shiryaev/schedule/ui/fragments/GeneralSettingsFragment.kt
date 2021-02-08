@@ -61,7 +61,7 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
             weeks.forEach { week ->
                 mListWeeks.add(week.mName)
             }
-            getCurrentWeek()
+            saveCurrentWeek()
         }
 
         mSetThemeMode = { value ->
