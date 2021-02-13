@@ -20,6 +20,7 @@
             app:mcv_dateTextAppearance="@style/CalendarDateTextAppearance"/>
 
         <com.shiryaev.schedule.ui.views.BottomSheet
+            android:id="@+id/note_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
