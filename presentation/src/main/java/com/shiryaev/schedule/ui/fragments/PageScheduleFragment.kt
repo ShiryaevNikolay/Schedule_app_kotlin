@@ -92,8 +92,8 @@ class PageScheduleFragment : Fragment() {
         initRecyclerView()
 
         when (parentFragment) {
-            is HomeScheduleFragment -> {
-                (parentFragment as HomeScheduleFragment).getViewModel().getHeightTopBar().observe(viewLifecycleOwner) { height ->
+            is ScheduleFragment -> {
+                (parentFragment as ScheduleFragment).getViewModel().getHeightTopBar().observe(viewLifecycleOwner) { height ->
                     setHeightDecoration(height)
                 }
                 PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext.resources?.getString(R.string.current_week_key), "")?.let {

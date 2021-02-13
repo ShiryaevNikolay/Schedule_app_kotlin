@@ -14,7 +14,7 @@ import com.shiryaev.domain.models.Schedule
 import com.shiryaev.domain.models.Week
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.ui.fragments.EditScheduleFragment
-import com.shiryaev.schedule.ui.fragments.HomeScheduleFragment
+import com.shiryaev.schedule.ui.fragments.ScheduleFragment
 import kotlinx.android.synthetic.main.custom_card_schedule.view.*
 
 @SuppressLint("ViewConstructor")
@@ -94,7 +94,7 @@ class CustomItemSchedule(
                     true
                 }
             }
-            HomeScheduleFragment.TAG -> {
+            ScheduleFragment.TAG -> {
                 mIndicatorWeek.isVisible = false
                 mIndicatorCardWeek.isVisible = false
             }

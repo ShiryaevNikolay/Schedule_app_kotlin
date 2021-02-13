@@ -6,7 +6,7 @@
         android:title="@string/settings" />
 
     <item
-        android:id="@+id/homeSchedule"
+        android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:title="@string/home_screen" />
 

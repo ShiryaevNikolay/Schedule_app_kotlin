@@ -28,7 +28,7 @@
             android:id="@+id/home_screen_bnv_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="@dimen/bar_elevation"
+            app:cardElevation="@dimen/bottom_bar_elevation"
             app:cardCornerRadius="@dimen/default_dimen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

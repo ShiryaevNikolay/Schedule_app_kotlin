@@ -4,6 +4,7 @@
     <dimen name="half_default_dimen">5dp</dimen>
     <dimen name="bar_elevation">5dp</dimen>
     <dimen name="elevation">3dp</dimen>
+    <dimen name="bottom_bar_elevation">20dp</dimen>
     <dimen name="icon_button_size">40dp</dimen>
     <dimen name="corner">15dp</dimen>
     <dimen name="fab_margin">16dp</dimen>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/home_graph"
+    app:startDestination="@id/homeScheduleFragment">
+
+    <fragment
+        android:id="@+id/homeScheduleFragment"
+        android:name="com.shiryaev.schedule.ui.fragments.ScheduleFragment"
+        android:label="HomeScheduleFragment" >
+        <action
+            android:id="@+id/action_homeScheduleFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.shiryaev.schedule.ui.fragments.CalendarFragment"
+        android:label="CalendarFragment" />
+</navigation>

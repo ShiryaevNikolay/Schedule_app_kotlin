@@ -23,6 +23,7 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
     private var mSetCurrentWeek: ((Int) -> Unit)? = null
     private var mContext: Context? = null
     private var mListWeeks = mutableListOf<String>()
+
     private lateinit var mListThemeMode: Array<String>
     private lateinit var mThemeMode: Preference
     private lateinit var mWeeks: Preference

@@ -3,7 +3,6 @@ package com.shiryaev.schedule.ui.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
@@ -21,12 +20,12 @@ class TopBarHome @JvmOverloads constructor(
 
     var onChangeCurrentItem: ((Int) -> Unit)? = null
     var onChangeHeight: ((Int) -> Unit)? = null
+    var onShowCalendar: (() -> Unit)? = null
 
     private var showTabs = false
 
     private val countPage: Int = context.resources.getStringArray(R.array.days_of_week).size
 
-    private lateinit var mCardLayout: MaterialCardView
     private lateinit var mDay: MaterialTextView
     private lateinit var mShowTabLayoutBtn: AppCompatImageButton
     private lateinit var mCalendarBtn: AppCompatImageButton
@@ -40,8 +39,6 @@ class TopBarHome @JvmOverloads constructor(
         initTabLayout()
 
         setClickListener()
-
-        onChangeHeight?.invoke(mCardLayout.height)
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -55,10 +52,9 @@ class TopBarHome @JvmOverloads constructor(
     }
 
     private fun initViews() {
-        mCardLayout = findViewById(R.id.top_bar_layout)
         mDay = findViewById(R.id.top_bar_title)
         mShowTabLayoutBtn = findViewById(R.id.top_bar_show_tabs_btn)
-        mCalendarBtn = findViewById(R.id.change_view_btn)
+        mCalendarBtn = findViewById(R.id.show_calendar)
         mTabLayout = findViewById(R.id.custom_tab_layout)
     }
 
@@ -91,8 +87,8 @@ class TopBarHome @JvmOverloads constructor(
                 showTabs = showTabs(context, mShowTabLayoutBtn, !showTabs)
                 mTabLayout.isVisible = showTabs
             }
-            R.id.change_view_btn -> {
-                // TODO: show calendar
+            R.id.show_calendar -> {
+                onShowCalendar?.invoke()
             }
         }
     }

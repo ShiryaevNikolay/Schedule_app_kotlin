@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.viewmodels.ScheduleViewModel
@@ -16,18 +18,19 @@ import com.shiryaev.schedule.tools.adapters.ViewPagerAdapter
 import com.shiryaev.schedule.ui.views.utils.*
 import java.util.*
 
-class HomeScheduleFragment : Fragment() {
+class ScheduleFragment : Fragment() {
 
     companion object {
-        val TAG = HomeScheduleFragment::class.simpleName
+        val TAG = ScheduleFragment::class.simpleName
     }
 
     private var mCountPage = 0
     private var _binding: FrHomeScheduleBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var vpAdapter: ViewPagerAdapter
+    private lateinit var mVpAdapter: ViewPagerAdapter
     private lateinit var mViewModel: ScheduleViewModel
+    private lateinit var mNavController: NavController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,7 +40,7 @@ class HomeScheduleFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vpAdapter = ViewPagerAdapter(this@HomeScheduleFragment).apply {
+        mVpAdapter = ViewPagerAdapter(this@ScheduleFragment).apply {
             // Устанавливаем колличество страниц viewPage2
             setCountPage(mCountPage)
             TAG?.let { setScreenTag(it) }
@@ -47,6 +50,8 @@ class HomeScheduleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding  = FrHomeScheduleBinding.inflate(inflater, container, false)
 
+        mNavController = NavHostFragment.findNavController(this)
+
         initViewPager(binding)
 
         binding.topBarHome.onChangeCurrentItem = { selectedTab ->
@@ -55,6 +60,10 @@ class HomeScheduleFragment : Fragment() {
 
         binding.topBarHome.onChangeHeight = { height ->
             mViewModel.setHeightTopBar(height)
+        }
+
+        binding.topBarHome.onShowCalendar = {
+            mNavController.navigate(R.id.action_homeScheduleFragment_to_calendarFragment)
         }
 
         setCurrentDay()
@@ -71,7 +80,7 @@ class HomeScheduleFragment : Fragment() {
 
     private fun initViewPager(_binding: FrHomeScheduleBinding) {
         with (_binding.homeScreenVp) {
-            adapter = vpAdapter
+            adapter = mVpAdapter
             registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     binding.topBarHome.setSelectedTab(position)

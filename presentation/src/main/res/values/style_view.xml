@@ -23,7 +23,7 @@
     </style>
 
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="cornerRadius">@dimen/default_dimen</item>
+        <item name="cornerRadius">@dimen/half_default_dimen</item>
     </style>
 
     <style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
@@ -45,5 +45,13 @@
         <item name="cornerFamily">rounded</item>
         <item name="clockIcon">@drawable/ic_baseline_access_time</item>
         <item name="keyboardIcon">@drawable/ic_keyboard</item>
+    </style>
+
+    <style name="CalendarDateTextAppearance" parent="">
+        <item name="textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 </resources>

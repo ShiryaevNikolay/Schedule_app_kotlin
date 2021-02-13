@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/homeSchedule">
+    app:startDestination="@id/home">
 
-    <fragment
-        android:id="@+id/homeSchedule"
-        android:name="com.shiryaev.schedule.ui.fragments.HomeScheduleFragment"
-        android:label="HomeScheduleFragment" />
     <fragment
         android:id="@+id/editSchedule"
         android:name="com.shiryaev.schedule.ui.fragments.EditScheduleFragment"
@@ -19,4 +15,8 @@
         android:id="@+id/note"
         android:name="com.shiryaev.schedule.ui.fragments.NoteFragment"
         android:label="NoteFragment" />
+    <fragment
+        android:id="@+id/home"
+        android:name="com.shiryaev.schedule.ui.fragments.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>
