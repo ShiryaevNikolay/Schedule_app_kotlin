@@ -10,6 +10,9 @@ interface NoteDao {
     @Query("SELECT * FROM ${UtilsTable.TABLE_NOTE}")
     fun getAllNote(): LiveData<List<Note>>
 
+    @Query("SELECT * FROM ${UtilsTable.TABLE_NOTE} WHERE ${UtilsTable.NOTE_DEADLINE} = :date")
+    fun getAllNoteByDate(date: String): LiveData<List<Note>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNote(note: Note)
 

@@ -1,6 +1,7 @@
 package com.shiryaev.schedule.ui.views
 
 import android.content.Context
+import android.content.res.Resources
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -25,9 +26,12 @@ class BottomSheet @JvmOverloads constructor(
 
     var onChangeState: ((Int) -> Unit)? = null
 
+    private var mMarginTop: Int = 112
+
     private val mEasyAdapter = EasyAdapter()
-    private val mBottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
-    private lateinit var mBottomSheet: MaterialCardView
+    private val mBottomSheetBehavior: BottomSheetBehavior<LinearLayoutCompat>
+    private lateinit var mBottomSheet: LinearLayoutCompat
+    private lateinit var mLayoutCard: MaterialCardView
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mProgress: CircularProgressIndicator
     private lateinit var mInfoError: LinearLayoutCompat
@@ -41,7 +45,7 @@ class BottomSheet @JvmOverloads constructor(
 
         mBottomSheetBehavior = BottomSheetBehavior.from(mBottomSheet).apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 340
+            peekHeight = 600
             isHideable = false
             addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -78,8 +82,19 @@ class BottomSheet @JvmOverloads constructor(
         mInfoError.isVisible = value
     }
 
+    fun setMarginTop(height: Int) {
+        val params = LinearLayoutCompat.LayoutParams(
+                LinearLayoutCompat.LayoutParams.MATCH_PARENT,
+                LinearLayoutCompat.LayoutParams.MATCH_PARENT
+        ).apply {
+            topMargin = 112.dp + height
+        }
+        mLayoutCard.layoutParams = params
+    }
+
     private fun initView() {
         mBottomSheet = findViewById(R.id.bottom_sheet)
+        mLayoutCard = findViewById(R.id.layout_card)
         mRecyclerView = findViewById(R.id.recycler_view)
         mProgress = findViewById(R.id.calendar_note_pb)
         mInfoError = findViewById(R.id.info_tv)
@@ -91,4 +106,7 @@ class BottomSheet @JvmOverloads constructor(
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
     }
+
+    private val Int.dp: Int
+        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 }

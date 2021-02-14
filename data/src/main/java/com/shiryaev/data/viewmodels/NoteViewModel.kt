@@ -29,6 +29,8 @@ class NoteViewModel : ViewModel() {
 
     fun getNotes() = mRepository.getNotes()
 
+    fun getNotesByDate(date: String) = mRepository.getNotesByDate(date)
+
     fun insertNote(note: Note) { mRepository.insertNote(note) }
 
     fun updateNote(note: Note) { mRepository.updateNote(note) }

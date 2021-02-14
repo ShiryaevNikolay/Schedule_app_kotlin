@@ -47,11 +47,11 @@
         <item name="keyboardIcon">@drawable/ic_keyboard</item>
     </style>
 
-    <style name="CalendarDateTextAppearance" parent="">
+    <style name="CalendarDateTextAppearance" parent="TextAppearance.MaterialCalendarWidget.Date">
         <item name="textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/main_text_size</item>
         <item name="android:letterSpacing">0</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/calendar_date_text_color</item>
     </style>
 </resources>

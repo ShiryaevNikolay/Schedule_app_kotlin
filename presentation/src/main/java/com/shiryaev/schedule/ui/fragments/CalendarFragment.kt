@@ -15,18 +15,24 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.shiryaev.data.common.CustomFactory
 import com.shiryaev.data.viewmodels.NoteViewModel
+import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrHomeCalendarBinding
+import com.shiryaev.schedule.ui.views.utils.CurrentDateDecorator
+import com.shiryaev.schedule.ui.views.utils.EventCalendarDecorator
 
 class CalendarFragment : Fragment() {
 
     private var _binding: FrHomeCalendarBinding? = null
     private val binding get() = _binding!!
 
+    private var mContext: Context? = null
+
     private lateinit var mNavController: NavController
     private lateinit var mViewModel: NoteViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        mContext = context
         mViewModel = ViewModelProvider(this, CustomFactory(NoteViewModel())).get(NoteViewModel::class.java)
     }
 
@@ -47,11 +53,10 @@ class CalendarFragment : Fragment() {
 
         initView()
 
-
         with (mViewModel) {
-            // Получаем список заметок
+            // Получаем список заметок для Event
             getNotes().observe(viewLifecycleOwner) { notes ->
-                mViewModel.setIsErrorVisible(binding.noteBottomSheet.setNoteList(notes))
+                binding.calendar.addDecorators(EventCalendarDecorator(requireActivity(), requireActivity().resources.getStringArray(R.array.month), notes))
             }
             // Проверяем progress
             getIsLoading().observe(viewLifecycleOwner) { value ->
@@ -64,15 +69,15 @@ class CalendarFragment : Fragment() {
             }
         }
 
-
         binding.topBarCalendar.getHeight = { heightTopBar ->
             val params = CoordinatorLayout.LayoutParams(
                     CoordinatorLayout.LayoutParams.WRAP_CONTENT,
                     CoordinatorLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                topMargin = heightTopBar
+                topMargin =  heightTopBar
             }
             binding.calendar.layoutParams = params
+            binding.noteBottomSheet.setMarginTop(heightTopBar)
         }
 
         binding.noteBottomSheet.onChangeState = { state ->
@@ -82,12 +87,14 @@ class CalendarFragment : Fragment() {
             }
         }
 
-        binding.calendar.setOnMonthChangedListener { widget, date ->
-            setDateToTopBar(date.year, date.month - 1)
-        }
-
-        binding.calendar.setOnDateChangedListener { widget, date, selected ->
-
+        with (binding.calendar) {
+            addDecorator(CurrentDateDecorator(requireActivity(), CalendarDay.today()))
+            setOnMonthChangedListener { widget, date ->
+                setDateToTopBar(date.year, date.month - 1)
+            }
+            setOnDateChangedListener { widget, date, selected ->
+                getNotes(date.year, date.month - 1, date.day)
+            }
         }
 
 //        binding.topBarCalendar.onShowSchedule = { mNavController.popBackStack() }
@@ -98,13 +105,24 @@ class CalendarFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        mContext = null
     }
 
     private fun initView() {
-        binding.calendar.apply {
+        with (binding.calendar) {
             topbarVisible = false
             selectedDate = CalendarDay.today()
             setDateToTopBar(currentDate.year, currentDate.month - 1)
+            getNotes(selectedDate!!.year, selectedDate!!.month - 1, selectedDate!!.day)
+        }
+    }
+
+    private fun getNotes(year: Int, month: Int, day: Int) {
+        var selectedDate: String = if (day < 10) "0$day, " else "$day, "
+        selectedDate += mContext?.resources?.getStringArray(R.array.month)!![month]
+        selectedDate += ", $year"
+        mViewModel.getNotesByDate(selectedDate).observe(viewLifecycleOwner) { notes ->
+            mViewModel.setIsErrorVisible(binding.noteBottomSheet.setNoteList(notes))
         }
     }
 

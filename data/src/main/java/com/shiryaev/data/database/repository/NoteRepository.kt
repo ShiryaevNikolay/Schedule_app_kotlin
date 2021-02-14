@@ -25,6 +25,8 @@ class NoteRepository {
 
     fun getNotes() = mNoteDao.getAllNote()
 
+    fun getNotesByDate(date: String) = mNoteDao.getAllNoteByDate(date)
+
     fun getLessons() = mScheduleDao.getLessons()
 
     fun insertNote(note: Note) {
