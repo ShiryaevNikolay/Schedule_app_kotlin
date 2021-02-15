@@ -99,7 +99,7 @@ class CalendarFragment : Fragment() {
             }
         }
 
-//        binding.topBarCalendar.onShowSchedule = { mNavController.popBackStack() }
+        binding.topBarCalendar.onShowSchedule = { mNavController.popBackStack() }
 
         return binding.root
     }

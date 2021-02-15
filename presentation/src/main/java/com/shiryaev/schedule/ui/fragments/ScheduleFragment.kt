@@ -38,19 +38,16 @@ class ScheduleFragment : Fragment() {
         mViewModel = ViewModelProvider(this, CustomFactory(ScheduleViewModel())).get(ScheduleViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding  = FrHomeScheduleBinding.inflate(inflater, container, false)
+
+        mNavController = NavHostFragment.findNavController(this)
+
         mVpAdapter = ViewPagerAdapter(this@ScheduleFragment).apply {
             // Устанавливаем колличество страниц viewPage2
             setCountPage(mCountPage)
             TAG?.let { setScreenTag(it) }
         }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding  = FrHomeScheduleBinding.inflate(inflater, container, false)
-
-        mNavController = NavHostFragment.findNavController(this)
 
         initViewPager(binding)
 
@@ -63,7 +60,7 @@ class ScheduleFragment : Fragment() {
         }
 
         binding.topBarHome.onShowCalendar = {
-            mNavController.navigate(R.id.action_homeScheduleFragment_to_calendarFragment)
+            mNavController.navigate(R.id.action_scheduleFragment_to_calendarFragment)
         }
 
         setCurrentDay()
