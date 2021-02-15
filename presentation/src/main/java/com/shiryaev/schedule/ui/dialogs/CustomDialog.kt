@@ -1,6 +1,5 @@
 package com.shiryaev.schedule.ui.dialogs
 
-import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shiryaev.schedule.common.controllers.ItemListDialogController
 import com.shiryaev.schedule.databinding.CustomLayoutDialogBinding
 import ru.surfstudio.android.easyadapter.EasyAdapter
 import ru.surfstudio.android.easyadapter.ItemList
@@ -30,7 +28,7 @@ open class CustomDialog : DialogFragment() {
         _binding = CustomLayoutDialogBinding.inflate(inflater, container, false)
 
         // Устанавливаем прозрачность в 80%
-        binding.layoutDialog.background.alpha = 204
+//        binding.layoutDialog.background.alpha = 204
 
         return binding.root
     }
