@@ -14,6 +14,10 @@
         android:name="com.shiryaev.data.AppDelegate"
         android:hardwareAccelerated="true">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
         <activity android:name=".ui.AddScheduleActivity"/>
         <activity android:name=".ui.AddNoteActivity"/>
         <activity android:name=".ui.MainActivity">
@@ -24,9 +28,8 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+        <activity android:name="com.google.adnroid.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
     </application>
 
 </manifest>
