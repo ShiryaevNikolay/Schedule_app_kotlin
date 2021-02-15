@@ -1,11 +1,12 @@
 package com.shiryaev.schedule.ui.views.utils
 
 import android.app.Activity
-import android.graphics.drawable.Drawable
+import android.text.style.ImageSpan
 import androidx.core.content.ContextCompat
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
+import com.prolificinteractive.materialcalendarview.spans.DotSpan
 import com.shiryaev.domain.models.Note
 import com.shiryaev.schedule.R
 
@@ -15,7 +16,7 @@ class EventCalendarDecorator(
         private var listNote: List<Note>
 ) : DayViewDecorator {
 
-    private val mDrawable: Drawable? = ContextCompat.getDrawable(context, R.drawable.ic_notebook)
+    private val mDotSpan: DotSpan = DotSpan(6F)
 
     override fun shouldDecorate(day: CalendarDay): Boolean {
         var flag = false
@@ -31,6 +32,6 @@ class EventCalendarDecorator(
     }
 
     override fun decorate(view: DayViewFacade) {
-        view.addSpan(mDrawable!!)
+        view.addSpan(mDotSpan)
     }
 }

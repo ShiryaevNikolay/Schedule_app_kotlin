@@ -13,7 +13,7 @@ class CurrentDateDecorator(
         private val mDay: CalendarDay
 ) : DayViewDecorator {
 
-    private val mDrawable: Drawable? = ContextCompat.getDrawable(context, R.drawable.current_date_decorator)
+    private val mDrawable: Drawable? = ContextCompat.getDrawable(context, R.drawable.today_decorator)
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {
         return day == mDay

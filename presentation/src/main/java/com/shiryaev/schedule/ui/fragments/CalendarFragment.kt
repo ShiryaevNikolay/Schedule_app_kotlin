@@ -1,6 +1,7 @@
 package com.shiryaev.schedule.ui.fragments
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,8 @@ import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.FrHomeCalendarBinding
 import com.shiryaev.schedule.ui.views.utils.CurrentDateDecorator
 import com.shiryaev.schedule.ui.views.utils.EventCalendarDecorator
+import android.view.ViewTreeObserver.OnGlobalLayoutListener as OnGlobalLayoutListener1
+
 
 class CalendarFragment : Fragment() {
 
@@ -26,6 +29,7 @@ class CalendarFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var mContext: Context? = null
+    private var mTopBarHeight: Int = 0
 
     private lateinit var mNavController: NavController
     private lateinit var mViewModel: NoteViewModel
@@ -37,23 +41,17 @@ class CalendarFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FrHomeCalendarBinding.inflate(inflater, container, false)
-
-//        // Синхронизируем xml с viewModel
-//        with(binding) {
-//            vm = mViewModel
-//            lifecycleOwner = this@CalendarFragment
-//        }
 
         mNavController = NavHostFragment.findNavController(this)
 
         initView()
 
-        with (mViewModel) {
+        with(mViewModel) {
             // Получаем список заметок для Event
             getNotes().observe(viewLifecycleOwner) { notes ->
                 binding.calendar.addDecorators(EventCalendarDecorator(requireActivity(), requireActivity().resources.getStringArray(R.array.month), notes))
@@ -70,6 +68,7 @@ class CalendarFragment : Fragment() {
         }
 
         binding.topBarCalendar.getHeight = { heightTopBar ->
+            mTopBarHeight = heightTopBar
             val params = CoordinatorLayout.LayoutParams(
                     CoordinatorLayout.LayoutParams.WRAP_CONTENT,
                     CoordinatorLayout.LayoutParams.WRAP_CONTENT
@@ -77,17 +76,20 @@ class CalendarFragment : Fragment() {
                 topMargin =  heightTopBar
             }
             binding.calendar.layoutParams = params
-            binding.noteBottomSheet.setMarginTop(heightTopBar)
         }
 
         binding.noteBottomSheet.onChangeState = { state ->
             when (state) {
-                BottomSheetBehavior.STATE_COLLAPSED -> { changeCalendarMode(CalendarMode.MONTHS) }
-                BottomSheetBehavior.STATE_EXPANDED -> { changeCalendarMode(CalendarMode.WEEKS) }
+                BottomSheetBehavior.STATE_COLLAPSED -> {
+                    changeCalendarMode(CalendarMode.MONTHS)
+                }
+                BottomSheetBehavior.STATE_EXPANDED -> {
+                    changeCalendarMode(CalendarMode.WEEKS)
+                }
             }
         }
 
-        with (binding.calendar) {
+        with(binding.calendar) {
             addDecorator(CurrentDateDecorator(requireActivity(), CalendarDay.today()))
             setOnMonthChangedListener { widget, date ->
                 setDateToTopBar(date.year, date.month - 1)
@@ -102,6 +104,23 @@ class CalendarFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Получаем высоту Fragment
+        binding.root.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener1 {
+            override fun onGlobalLayout() {
+                if (binding.root.height > 0 && binding.root.width > 0) {
+                    binding.noteBottomSheet.apply {
+                        setPeekHeight(binding.root.height - (mTopBarHeight + binding.calendar.height))
+                        setExpandedHeight(binding.root.height - (mTopBarHeight + 122.dp))
+                    }
+                    binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            }
+        })
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -109,7 +128,7 @@ class CalendarFragment : Fragment() {
     }
 
     private fun initView() {
-        with (binding.calendar) {
+        with(binding.calendar) {
             topbarVisible = false
             selectedDate = CalendarDay.today()
             setDateToTopBar(currentDate.year, currentDate.month - 1)
@@ -139,4 +158,7 @@ class CalendarFragment : Fragment() {
                 .setCalendarDisplayMode(mode)
                 .commit()
     }
+
+    private val Int.dp: Int
+        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 }
