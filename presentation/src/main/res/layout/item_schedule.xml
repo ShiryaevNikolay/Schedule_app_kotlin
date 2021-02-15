@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <com.shiryaev.schedule.ui.views.CustomTimeLine
+        <ru.shiryaev.schedule.ui.views.CustomTimeLine
             android:id="@+id/item_time_container"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>

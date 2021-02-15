@@ -9,11 +9,11 @@
 
         <variable
             name="schedule"
-            type="com.shiryaev.domain.models.Schedule" />
+            type="ru.shiryaev.domain.models.Schedule" />
         
         <variable
             name="VM"
-            type="com.shiryaev.data.viewmodels.AddScheduleViewModel" />
+            type="ru.shiryaev.data.viewmodels.AddScheduleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

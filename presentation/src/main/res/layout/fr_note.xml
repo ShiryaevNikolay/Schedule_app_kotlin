@@ -7,7 +7,7 @@
 
         <variable
             name="VM"
-            type="com.shiryaev.data.viewmodels.NoteViewModel" />
+            type="ru.shiryaev.data.viewmodels.NoteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

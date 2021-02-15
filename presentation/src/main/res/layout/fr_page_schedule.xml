@@ -9,7 +9,7 @@
 
         <variable
             name="VM"
-            type="com.shiryaev.data.viewmodels.PageScheduleViewModel" />
+            type="ru.shiryaev.data.viewmodels.PageScheduleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

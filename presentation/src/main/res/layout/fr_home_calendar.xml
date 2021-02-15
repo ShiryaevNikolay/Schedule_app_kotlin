@@ -20,12 +20,12 @@
             app:mcv_showOtherDates="all"
             app:mcv_dateTextAppearance="@style/CalendarDateTextAppearance"/>
 
-        <com.shiryaev.schedule.ui.views.BottomSheet
+        <ru.shiryaev.schedule.ui.views.BottomSheet
             android:id="@+id/note_bottom_sheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <com.shiryaev.schedule.ui.views.TopBarCalendar
+        <ru.shiryaev.schedule.ui.views.TopBarCalendar
             android:id="@+id/top_bar_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

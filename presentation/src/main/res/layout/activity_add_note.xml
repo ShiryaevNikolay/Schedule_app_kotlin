@@ -8,11 +8,11 @@
 
         <variable
             name="note"
-            type="com.shiryaev.domain.models.Note" />
+            type="ru.shiryaev.domain.models.Note" />
 
         <variable
             name="VM"
-            type="com.shiryaev.data.viewmodels.AddNoteViewModel" />
+            type="ru.shiryaev.data.viewmodels.AddNoteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

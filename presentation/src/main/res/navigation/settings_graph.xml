@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/generalSettings"
-        android:name="com.shiryaev.schedule.ui.fragments.GeneralSettingsFragment"
+        android:name="ru.shiryaev.schedule.ui.fragments.GeneralSettingsFragment"
         android:label="GeneralSettingsFragment" >
         <action
             android:id="@+id/action_generalSettings_to_weeksSettings"
@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/weeksSettings"
-        android:name="com.shiryaev.schedule.ui.fragments.WeeksSettingsFragment"
+        android:name="ru.shiryaev.schedule.ui.fragments.WeeksSettingsFragment"
         android:label="WeeksSettingsFragment" />
 </navigation>

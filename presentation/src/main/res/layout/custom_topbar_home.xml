@@ -61,7 +61,7 @@
                     tools:ignore="ContentDescription"/>
             </TableRow>
 
-            <com.shiryaev.schedule.ui.views.CustomTabLayout
+            <ru.shiryaev.schedule.ui.views.CustomTabLayout
                 android:id="@+id/custom_tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

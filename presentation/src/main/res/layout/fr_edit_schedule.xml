@@ -21,37 +21,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.shiryaev.schedule.ui.views.TopBarEdit
+        <ru.shiryaev.schedule.ui.views.TopBarEdit
             android:id="@+id/top_bar_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:id="@+id/pick_week_btn"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:clickable="true"-->
-<!--            app:cardElevation="@dimen/bar_elevation"-->
-<!--            app:cardUseCompatPadding="true"-->
-<!--            app:cardCornerRadius="@dimen/default_dimen"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/top_bar_edit"-->
-<!--            android:focusable="true">-->
-
-<!--            <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                android:layout_width="@dimen/icon_button_size"-->
-<!--                android:layout_height="@dimen/icon_button_size"-->
-<!--                android:gravity="center">-->
-
-<!--                <androidx.appcompat.widget.AppCompatImageView-->
-<!--                    android:layout_width="@dimen/icon_size"-->
-<!--                    android:layout_height="@dimen/icon_size"-->
-<!--                    android:src="@drawable/ic_form_select"/>-->
-<!--            </androidx.appcompat.widget.LinearLayoutCompat>-->
-<!--        </com.google.android.material.card.MaterialCardView>-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

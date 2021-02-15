@@ -7,7 +7,7 @@
 
         <variable
             name="VM"
-            type="com.shiryaev.data.viewmodels.WeekSettingsViewModel" />
+            type="ru.shiryaev.data.viewmodels.WeekSettingsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

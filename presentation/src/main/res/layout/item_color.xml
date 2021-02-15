@@ -5,7 +5,7 @@
 
     </data>
 
-    <com.shiryaev.schedule.ui.views.SquareImageView
+    <ru.shiryaev.schedule.ui.views.SquareImageView
         android:id="@+id/item_im"
         android:layout_width="@dimen/icon_button_size"
         android:layout_height="wrap_content"
