@@ -92,4 +92,6 @@ dependencies {
     // RxJava
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation "io.reactivex.rxjava3:rxjava:3.0.9"
+    // AdMod
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
 }

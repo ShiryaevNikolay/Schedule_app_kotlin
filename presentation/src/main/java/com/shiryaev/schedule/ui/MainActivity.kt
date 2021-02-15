@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.shiryaev.schedule.R
 import com.shiryaev.schedule.databinding.ActivityMainBinding
 
@@ -20,6 +22,12 @@ class MainActivity : AppCompatActivity() {
         setTheme()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        // Реклама - начало
+        MobileAds.initialize(this)
+        binding.adView.loadAd(AdRequest.Builder().build())
+        // Реклама - конец
+
         setContentView(binding.root)
 
         val host = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
