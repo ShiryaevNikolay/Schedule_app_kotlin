@@ -19,6 +19,7 @@ import ru.shiryaev.data.common.CustomFactory
 import ru.shiryaev.data.utils.UtilsChecks
 import ru.shiryaev.data.viewmodels.AddScheduleViewModel
 import ru.shiryaev.schedule.common.CallDialogs
+import ru.shiryaev.schedule.common.navigation.ActivityClass
 import ru.shiryaev.schedule.ui.dialogs.ListDialog
 import ru.shiryaev.schedule.utils.UtilsListData
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -54,9 +55,9 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         // Получение данных при краше активити или с intent
         if (savedInstanceState != null) { getData(savedInstanceState) }
         else {
-            when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
-                UtilsIntent.CREATE_LESSON.name -> mSchedule.mDay = intent.getIntExtra(UtilsKeys.POSITION_PAGE.name,0)
-                UtilsIntent.EDIT_LESSON.name -> mSchedule = intent.getSerializableExtra(UtilsTable.SCHEDULE) as Schedule
+            when(intent.getBundleExtra(UtilsKeys.BUNDLE.name)?.getString(UtilsKeys.REQUEST_CODE.name)) {
+                ActivityClass.CREATE_SCHEDULE.name -> mSchedule.mDay = intent.getBundleExtra(UtilsKeys.BUNDLE.name)!!.getInt(UtilsKeys.POSITION_PAGE.name, 0)
+                ActivityClass.EDIT_SCHEDULE.name -> mSchedule = intent.getBundleExtra(UtilsKeys.BUNDLE.name)?.getSerializable(UtilsTable.SCHEDULE) as Schedule
             }
         }
 
@@ -194,9 +195,9 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                     .show(supportFragmentManager, null)
             }
             R.id.fab -> {
-                when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
-                    UtilsIntent.CREATE_LESSON.name -> mViewModel.insertSchedule(mSchedule)
-                    UtilsIntent.EDIT_LESSON.name -> mViewModel.updateSchedule(mSchedule)
+                when(intent.getBundleExtra(UtilsKeys.BUNDLE.name)?.getString(UtilsKeys.REQUEST_CODE.name)) {
+                    ActivityClass.CREATE_SCHEDULE.name -> mViewModel.insertSchedule(mSchedule)
+                    ActivityClass.EDIT_SCHEDULE.name -> mViewModel.updateSchedule(mSchedule)
                 }
                 finishActivity()
             }
@@ -212,9 +213,9 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun initToolbar() {
         with(binding.toolbar) {
-            when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
-                UtilsIntent.CREATE_LESSON.name -> subtitle = this.resources.getString(R.string.create_lesson)
-                UtilsIntent.EDIT_LESSON.name -> subtitle = this.resources.getString(R.string.edit_lesson)
+            when(intent.getBundleExtra(UtilsKeys.BUNDLE.name)?.getString(UtilsKeys.REQUEST_CODE.name)) {
+                ActivityClass.CREATE_SCHEDULE.name -> subtitle = this.resources.getString(R.string.create_lesson)
+                ActivityClass.EDIT_SCHEDULE.name -> subtitle = this.resources.getString(R.string.edit_lesson)
             }
             title = this.resources.getStringArray(R.array.full_days_of_week)[mSchedule.mDay]
             setNavigationOnClickListener { finishActivity() }

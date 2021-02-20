@@ -6,5 +6,7 @@ enum class UtilsKeys {
     SCREEN,
     FIELD_DIALOG,
     INFO_DIALOG,
-    COLOR_PICK_DIALOG
+    COLOR_PICK_DIALOG,
+
+    BUNDLE
 }

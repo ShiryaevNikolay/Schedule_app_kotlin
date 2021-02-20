@@ -5,20 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import ru.shiryaev.data.common.CustomFactory
-import ru.shiryaev.data.common.Transfer
 import ru.shiryaev.data.viewmodels.ScheduleViewModel
-import ru.shiryaev.domain.utils.UtilsIntent
 import ru.shiryaev.domain.utils.UtilsKeys
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.databinding.FrEditScheduleBinding
 import ru.shiryaev.schedule.tools.adapters.ViewPagerAdapter
-import ru.shiryaev.schedule.ui.AddScheduleActivity
 import kotlinx.android.synthetic.main.fr_edit_schedule.view.*
+import ru.shiryaev.schedule.common.navigation.ActivityClass
+import ru.shiryaev.schedule.common.navigation.ActivityRouteCreateNote
+import ru.shiryaev.schedule.common.navigation.NavigationActivity
 
 class EditScheduleFragment : Fragment(), View.OnClickListener {
 
@@ -74,11 +73,11 @@ class EditScheduleFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when(v.id) {
             R.id.fab -> {
-                val options = Bundle().apply {
-                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.CREATE_LESSON.name)
+                val bundle = Bundle().apply {
+                    putString(UtilsKeys.REQUEST_CODE.name, ActivityClass.CREATE_SCHEDULE.name)
                     putInt(UtilsKeys.POSITION_PAGE.name, binding.homeScreenVp.currentItem)
                 }
-                Transfer.transferToActivity(requireActivity(), AddScheduleActivity::class.java, options)
+                NavigationActivity(requireContext()).navigate(ActivityRouteCreateNote(ActivityClass.CREATE_SCHEDULE), bundle)
             }
         }
     }

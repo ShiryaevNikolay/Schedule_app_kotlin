@@ -1,7 +1,6 @@
 package ru.shiryaev.schedule.ui.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,18 +10,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.shiryaev.data.common.CustomFactory
-import ru.shiryaev.data.common.Transfer
 import ru.shiryaev.data.viewmodels.PageScheduleViewModel
 import ru.shiryaev.domain.models.Schedule
 import ru.shiryaev.domain.models.Week
-import ru.shiryaev.domain.utils.UtilsIntent
 import ru.shiryaev.schedule.databinding.FrPageScheduleBinding
 import ru.shiryaev.schedule.common.controllers.ItemScheduleController
 import ru.shiryaev.domain.utils.UtilsKeys
 import ru.shiryaev.domain.utils.UtilsTable
 import ru.shiryaev.schedule.R
-import ru.shiryaev.schedule.ui.AddNoteActivity
-import ru.shiryaev.schedule.ui.AddScheduleActivity
+import ru.shiryaev.schedule.common.navigation.ActivityClass
+import ru.shiryaev.schedule.common.navigation.ActivityRouteCreateNote
+import ru.shiryaev.schedule.common.navigation.NavigationActivity
 import ru.shiryaev.schedule.ui.dialogs.ListDialog
 import ru.shiryaev.schedule.ui.views.utils.SpaceFirstItemDecoration
 import ru.shiryaev.schedule.utils.UtilsListData
@@ -85,7 +83,6 @@ class PageScheduleFragment : Fragment() {
                 addAll(schedules, mItemSchedule.apply { setCountItem(schedules.size) })
             }
             mEasyAdapter.setItems(listSchedule)
-            mEasyAdapter.notifyDataSetChanged()
             mViewModel.setIsErrorVisible(mEasyAdapter.itemCount == 0)
         }
 
@@ -139,22 +136,12 @@ class PageScheduleFragment : Fragment() {
         val arrayAction = requireContext().resources.getStringArray(R.array.list_dialog)
         when(arrayAction[action]) {
             arrayAction.first() -> {
-
-                // TODO: ИСПРАВИТЬ ПЕРЕХОД В ДРУГОЕ ACTIVITY
-
-//                val options = Bundle().apply {
-//                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_LESSON.name)
-//                    putInt(UtilsKeys.POSITION_PAGE.name, mPositionPage)
-//                    putSerializable(UtilsTable.SCHEDULE, schedule)
-//                }
-//                Transfer.transferToActivity(requireContext(), AddScheduleActivity::class.java, options)
-
-                val intent = Intent(requireActivity(), AddScheduleActivity::class.java).apply {
-                    putExtra(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_LESSON.name)
-                    putExtra(UtilsKeys.POSITION_PAGE.name, mPositionPage)
-                    putExtra(UtilsTable.SCHEDULE, schedule)
+                val bundle = Bundle().apply {
+                    putString(UtilsKeys.REQUEST_CODE.name, ActivityClass.EDIT_SCHEDULE.name)
+                    putInt(UtilsKeys.POSITION_PAGE.name, mPositionPage)
+                    putSerializable(UtilsTable.SCHEDULE, schedule)
                 }
-                requireActivity().startActivity(intent)
+                NavigationActivity(requireContext()).navigate(ActivityRouteCreateNote(ActivityClass.EDIT_SCHEDULE), bundle)
             }
             // Удаление занятия
             arrayAction.last() -> mViewModel.deleteSchedule(schedule)

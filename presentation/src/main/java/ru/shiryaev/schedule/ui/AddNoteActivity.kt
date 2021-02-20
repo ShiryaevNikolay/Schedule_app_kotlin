@@ -19,6 +19,7 @@ import ru.shiryaev.domain.models.Note
 import ru.shiryaev.domain.models.Week
 import ru.shiryaev.domain.utils.*
 import ru.shiryaev.schedule.common.CallDialogs
+import ru.shiryaev.schedule.common.navigation.ActivityClass
 import ru.shiryaev.schedule.ui.dialogs.ColorPickerDialog
 import ru.shiryaev.schedule.ui.dialogs.ListDialog
 import ru.shiryaev.schedule.ui.dialogs.OnClickButtonDialogListener
@@ -47,8 +48,8 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
         // Получение данных при краше активити или с intent
         if (savedInstanceState != null) { getData(savedInstanceState) }
         else{
-            when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
-                UtilsIntent.EDIT_NOTE.name -> mNote = intent.getSerializableExtra(UtilsTable.NOTE) as Note
+            when(intent.getBundleExtra(UtilsKeys.BUNDLE.name)?.getString(UtilsKeys.REQUEST_CODE.name)) {
+                ActivityClass.EDIT_NOTE.name -> mNote = intent.getBundleExtra(UtilsKeys.BUNDLE.name)?.getSerializable(UtilsTable.NOTE) as Note
             }
         }
 
@@ -111,9 +112,9 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
                 showColorPickerDialog()
             }
             R.id.fab -> {
-                when(intent.getStringExtra(UtilsKeys.REQUEST_CODE.name)) {
-                    UtilsIntent.CREATE_NOTE.name -> mViewModel.insertNote(mNote)
-                    UtilsIntent.EDIT_NOTE.name -> mViewModel.updateNote(mNote)
+                when(intent.getBundleExtra(UtilsKeys.BUNDLE.name)?.getString(UtilsKeys.REQUEST_CODE.name)) {
+                    ActivityClass.CREATE_NOTE.name -> mViewModel.insertNote(mNote)
+                    ActivityClass.EDIT_NOTE.name -> mViewModel.updateNote(mNote)
                 }
                 finishActivity()
             }

@@ -1,7 +1,6 @@
 package ru.shiryaev.schedule.ui.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ru.shiryaev.data.common.CustomFactory
-import ru.shiryaev.data.common.Transfer
 import ru.shiryaev.data.viewmodels.NoteViewModel
 import ru.shiryaev.domain.models.Note
-import ru.shiryaev.domain.utils.UtilsIntent
 import ru.shiryaev.domain.utils.UtilsKeys
 import ru.shiryaev.domain.utils.UtilsTable
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.common.controllers.ItemNoteController
+import ru.shiryaev.schedule.common.navigation.ActivityClass
+import ru.shiryaev.schedule.common.navigation.ActivityRouteCreateNote
+import ru.shiryaev.schedule.common.navigation.NavigationActivity
 import ru.shiryaev.schedule.databinding.FrNoteBinding
-import ru.shiryaev.schedule.ui.AddNoteActivity
 import ru.shiryaev.schedule.ui.dialogs.ListDialog
 import ru.shiryaev.schedule.utils.UtilsListData
 import ru.surfstudio.android.easyadapter.EasyAdapter
@@ -81,10 +80,10 @@ class NoteFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.fab -> {
-                val options = Bundle().apply {
-                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.CREATE_NOTE.name)
+                val bundle = Bundle().apply {
+                    putString(UtilsKeys.REQUEST_CODE.name, ActivityClass.CREATE_NOTE.name)
                 }
-                Transfer.transferToActivity(requireContext(), AddNoteActivity::class.java, options)
+                NavigationActivity(requireContext()).navigate(ActivityRouteCreateNote(ActivityClass.CREATE_NOTE), bundle)
             }
         }
     }
@@ -108,20 +107,11 @@ class NoteFragment : Fragment(), View.OnClickListener {
         val arrayAction = requireContext().resources.getStringArray(R.array.list_dialog)
         when(arrayAction[action]) {
             arrayAction.first() -> {
-
-                // TODO: ИСПРАВИТЬ ПЕРЕХОД В ДРУГОЕ ACTIVITY
-
-//                val options = Bundle().apply {
-//                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_NOTE.name)
-//                    putSerializable(UtilsTable.NOTE, note)
-//                }
-//                Transfer.transferToActivity(requireContext(), AddNoteActivity::class.java, options)
-
-                val intent = Intent(requireActivity(), AddNoteActivity::class.java).apply {
-                    putExtra(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_NOTE.name)
-                    putExtra(UtilsTable.NOTE, note)
+                val bundle = Bundle().apply {
+                    putString(UtilsKeys.REQUEST_CODE.name, ActivityClass.EDIT_NOTE.name)
+                    putSerializable(UtilsTable.NOTE, note)
                 }
-                requireActivity().startActivity(intent)
+                NavigationActivity(requireContext()).navigate(ActivityRouteCreateNote(ActivityClass.EDIT_NOTE), bundle)
             }
             // Удаление занятия
             arrayAction.last() -> mViewModel.deleteNote(note)
