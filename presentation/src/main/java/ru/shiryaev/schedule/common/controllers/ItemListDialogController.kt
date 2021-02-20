@@ -24,7 +24,8 @@ class ItemListDialogController(
         private val iconIv: AppCompatImageView = itemView.findViewById(R.id.icon_item_dialog)
 
         init {
-            itemView.setOnClickListener { onCLickListener.invoke(adapterPosition) }
+            itemView.setOnClickListener {
+                onCLickListener.invoke(adapterPosition) }
         }
 
         override fun bind(data: ItemDialog) {

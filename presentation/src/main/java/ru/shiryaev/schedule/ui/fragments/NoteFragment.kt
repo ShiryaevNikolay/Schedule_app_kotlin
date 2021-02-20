@@ -1,11 +1,11 @@
 package ru.shiryaev.schedule.ui.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -31,12 +31,10 @@ class NoteFragment : Fragment(), View.OnClickListener {
     private val binding get() = _binding!!
 
     private val mEasyAdapter = EasyAdapter()
-    private lateinit var mContext: Context
     private lateinit var mViewModel: NoteViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context
         mViewModel = ViewModelProvider(this, CustomFactory(NoteViewModel())).get(NoteViewModel::class.java)
     }
 
@@ -86,7 +84,7 @@ class NoteFragment : Fragment(), View.OnClickListener {
                 val options = Bundle().apply {
                     putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.CREATE_NOTE.name)
                 }
-                Transfer.transferToActivity(activity as AppCompatActivity, AddNoteActivity(), options)
+                Transfer.transferToActivity(requireContext(), AddNoteActivity::class.java, options)
             }
         }
     }
@@ -100,21 +98,30 @@ class NoteFragment : Fragment(), View.OnClickListener {
 
     private fun showListDialog(note: Note) {
         ListDialog()
-                .setData(UtilsListData.getListScheduleDialog(mContext)) { positionItem ->
+                .setData(UtilsListData.getListScheduleDialog(requireContext())) { positionItem ->
                     actionSchedule(note, positionItem)
                 }
                 .show(childFragmentManager, null)
     }
 
     private fun actionSchedule(note: Note, action: Int) {
-        val arrayAction = mContext.resources.getStringArray(R.array.list_dialog)
+        val arrayAction = requireContext().resources.getStringArray(R.array.list_dialog)
         when(arrayAction[action]) {
-            arrayAction.first() -> run {
-                val options = Bundle().apply {
-                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_NOTE.name)
-                    putSerializable(UtilsTable.NOTE, note)
+            arrayAction.first() -> {
+
+                // TODO: ИСПРАВИТЬ ПЕРЕХОД В ДРУГОЕ ACTIVITY
+
+//                val options = Bundle().apply {
+//                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_NOTE.name)
+//                    putSerializable(UtilsTable.NOTE, note)
+//                }
+//                Transfer.transferToActivity(requireContext(), AddNoteActivity::class.java, options)
+
+                val intent = Intent(requireActivity(), AddNoteActivity::class.java).apply {
+                    putExtra(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_NOTE.name)
+                    putExtra(UtilsTable.NOTE, note)
                 }
-                Transfer.transferToActivity(activity as AppCompatActivity, AddNoteActivity(), options)
+                requireActivity().startActivity(intent)
             }
             // Удаление занятия
             arrayAction.last() -> mViewModel.deleteNote(note)

@@ -73,12 +73,12 @@ class EditScheduleFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when(v.id) {
-            R.id.fab -> run {
+            R.id.fab -> {
                 val options = Bundle().apply {
                     putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.CREATE_LESSON.name)
                     putInt(UtilsKeys.POSITION_PAGE.name, binding.homeScreenVp.currentItem)
                 }
-                Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), options)
+                Transfer.transferToActivity(requireActivity(), AddScheduleActivity::class.java, options)
             }
         }
     }

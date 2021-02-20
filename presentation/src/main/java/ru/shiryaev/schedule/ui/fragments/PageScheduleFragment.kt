@@ -1,11 +1,11 @@
 package ru.shiryaev.schedule.ui.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
@@ -21,6 +21,7 @@ import ru.shiryaev.schedule.common.controllers.ItemScheduleController
 import ru.shiryaev.domain.utils.UtilsKeys
 import ru.shiryaev.domain.utils.UtilsTable
 import ru.shiryaev.schedule.R
+import ru.shiryaev.schedule.ui.AddNoteActivity
 import ru.shiryaev.schedule.ui.AddScheduleActivity
 import ru.shiryaev.schedule.ui.dialogs.ListDialog
 import ru.shiryaev.schedule.ui.views.utils.SpaceFirstItemDecoration
@@ -40,13 +41,11 @@ class PageScheduleFragment : Fragment() {
 
     private val mEasyAdapter = EasyAdapter()
 
-    private lateinit var mContext: Context
     private lateinit var mViewModel: PageScheduleViewModel
     private lateinit var mScreen: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context
         mViewModel = ViewModelProvider(this, CustomFactory(PageScheduleViewModel())).get(PageScheduleViewModel::class.java)
     }
 
@@ -86,6 +85,7 @@ class PageScheduleFragment : Fragment() {
                 addAll(schedules, mItemSchedule.apply { setCountItem(schedules.size) })
             }
             mEasyAdapter.setItems(listSchedule)
+            mEasyAdapter.notifyDataSetChanged()
             mViewModel.setIsErrorVisible(mEasyAdapter.itemCount == 0)
         }
 
@@ -96,7 +96,7 @@ class PageScheduleFragment : Fragment() {
                 (parentFragment as ScheduleFragment).getViewModel().getHeightTopBar().observe(viewLifecycleOwner) { height ->
                     setHeightDecoration(height)
                 }
-                PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext.resources?.getString(R.string.current_week_key), "")?.let {
+                PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(requireContext().resources.getString(R.string.current_week_key), "")?.let {
                     mViewModel.getSchedules(mPositionPage, it).observe(viewLifecycleOwner) { listSchedules ->
                         mViewModel.setListSchedule(listSchedules)
                     }
@@ -136,15 +136,25 @@ class PageScheduleFragment : Fragment() {
     }
 
     private fun actionSchedule(schedule: Schedule, action: Int) {
-        val arrayAction = mContext.resources.getStringArray(R.array.list_dialog)
+        val arrayAction = requireContext().resources.getStringArray(R.array.list_dialog)
         when(arrayAction[action]) {
-            arrayAction.first() -> run {
-                val options = Bundle().apply {
-                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_LESSON.name)
-                    putInt(UtilsKeys.POSITION_PAGE.name, mPositionPage)
-                    putSerializable(UtilsTable.SCHEDULE, schedule)
+            arrayAction.first() -> {
+
+                // TODO: ИСПРАВИТЬ ПЕРЕХОД В ДРУГОЕ ACTIVITY
+
+//                val options = Bundle().apply {
+//                    putString(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_LESSON.name)
+//                    putInt(UtilsKeys.POSITION_PAGE.name, mPositionPage)
+//                    putSerializable(UtilsTable.SCHEDULE, schedule)
+//                }
+//                Transfer.transferToActivity(requireContext(), AddScheduleActivity::class.java, options)
+
+                val intent = Intent(requireActivity(), AddScheduleActivity::class.java).apply {
+                    putExtra(UtilsKeys.REQUEST_CODE.name, UtilsIntent.EDIT_LESSON.name)
+                    putExtra(UtilsKeys.POSITION_PAGE.name, mPositionPage)
+                    putExtra(UtilsTable.SCHEDULE, schedule)
                 }
-                Transfer.transferToActivity(activity as AppCompatActivity, AddScheduleActivity(), options)
+                requireActivity().startActivity(intent)
             }
             // Удаление занятия
             arrayAction.last() -> mViewModel.deleteSchedule(schedule)
@@ -153,7 +163,7 @@ class PageScheduleFragment : Fragment() {
 
     private fun showListDialog(schedule: Schedule) {
         ListDialog()
-            .setData(UtilsListData.getListScheduleDialog(mContext)) { positionItem ->
+            .setData(UtilsListData.getListScheduleDialog(requireContext())) { positionItem ->
                 actionSchedule(schedule, positionItem)
             }
             .show(childFragmentManager, null)

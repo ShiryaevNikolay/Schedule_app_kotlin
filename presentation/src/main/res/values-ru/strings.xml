@@ -54,7 +54,6 @@
     </string-array>
 
     <!-- Preference Titles -->
-    <string name="general_header">Общие настройки</string>
     <string name="theme_mode">Темная тема</string>
     <string name="weeks">Недели</string>
 
