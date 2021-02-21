@@ -22,12 +22,10 @@ import ru.shiryaev.schedule.ui.views.utils.CurrentDateDecorator
 import ru.shiryaev.schedule.ui.views.utils.EventCalendarDecorator
 import android.view.ViewTreeObserver.OnGlobalLayoutListener as OnGlobalLayoutListener1
 
-
 class CalendarFragment : Fragment() {
 
     private var _binding: FrHomeCalendarBinding? = null
     private val binding get() = _binding!!
-
     private var mContext: Context? = null
     private var mTopBarHeight: Int = 0
 
@@ -36,7 +34,6 @@ class CalendarFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context
         mViewModel = ViewModelProvider(this, CustomFactory(NoteViewModel())).get(NoteViewModel::class.java)
     }
 
@@ -124,7 +121,6 @@ class CalendarFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        mContext = null
     }
 
     private fun initView() {

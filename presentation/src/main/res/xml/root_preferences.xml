@@ -15,6 +15,7 @@
         <Preference
             app:key="@string/current_week_key"
             app:icon="@drawable/ic_app_switch"
-            app:title="@string/current_week"/>
+            app:title="@string/current_week"
+            app:isPreferenceVisible="false"/>
     </PreferenceCategory>
 </PreferenceScreen>

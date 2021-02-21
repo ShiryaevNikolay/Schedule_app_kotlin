@@ -2,9 +2,7 @@ package ru.shiryaev.schedule.common.controllers
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TableRow
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.ui.views.CustomButtonDialog
@@ -38,6 +36,7 @@ class ItemButtonDialogController(
             }
         }
 
+        @SuppressLint("InflateParams")
         private fun getDivider() = LayoutInflater.from(itemView.context).inflate(R.layout.divider_button_dialog, null).apply {
             layoutParams = TableRow.LayoutParams(
                     1,

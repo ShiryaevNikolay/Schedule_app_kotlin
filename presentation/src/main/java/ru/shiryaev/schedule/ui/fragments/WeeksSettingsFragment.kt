@@ -33,19 +33,12 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
     private var _binding: FrWeeksSettingsBinding? = null
     private val binding get() = _binding!!
 
-    private var mContext: Context? = null
     private lateinit var mNavController: NavController
     private lateinit var mViewModel: WeekSettingsViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context
         mViewModel = ViewModelProvider(this, CustomFactory(WeekSettingsViewModel())).get(WeekSettingsViewModel::class.java)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mContext = null
     }
 
     override fun onCreateView(
@@ -76,6 +69,11 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun initRecyclerView() {
         with(binding.recyclerView) {
             adapter = mEasyAdapter
@@ -98,10 +96,10 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
 
     private fun showFieldDialog(week: Week? = null) {
         FieldDialog()
-            .setHeader(mContext?.resources?.getString(R.string.enter_the_name_of_the_week)!!)
+            .setHeader(requireContext().resources.getString(R.string.enter_the_name_of_the_week))
             .setButton(listOf(
-                    mContext?.resources?.getStringArray(R.array.button_dialog)!!.first(),
-                    mContext?.resources?.getStringArray(R.array.button_dialog)!!.last()
+                    requireContext().resources.getStringArray(R.array.button_dialog).first(),
+                    requireContext().resources.getStringArray(R.array.button_dialog).last()
             ))
             .setData(week = week)
             .show(childFragmentManager, UtilsKeys.FIELD_DIALOG.name)
@@ -109,10 +107,10 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
 
     private fun showRemoveDialog(week: Week) {
         InfoDialog()
-            .setHeader(mContext?.resources?.getString(R.string.delete_week)!!)
+            .setHeader(requireContext().resources.getString(R.string.delete_week))
             .setButton(listOf(
-                mContext?.resources?.getStringArray(R.array.button_dialog)!!.first(),
-                mContext?.resources?.getStringArray(R.array.button_dialog)!!.last()
+                requireContext().resources.getStringArray(R.array.button_dialog).first(),
+                requireContext().resources.getStringArray(R.array.button_dialog).last()
             ))
             .setData(week = week)
             .show(childFragmentManager, UtilsKeys.INFO_DIALOG.name)
@@ -121,11 +119,11 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
     private fun showColorPickerDialog(week: Week) {
         mWeek = week
         ColorPickerDialog()
-                .setHeader(mContext?.resources?.getString(R.string.choose_color)!!)
+                .setHeader(requireContext().resources.getString(R.string.choose_color))
                 .setButton(listOf(
-                        mContext?.resources?.getString(R.string.dumping)!!,
-                        mContext?.resources?.getStringArray(R.array.button_dialog)!!.first(),
-                        mContext?.resources?.getStringArray(R.array.button_dialog)!!.last()
+                        requireContext().resources.getString(R.string.dumping),
+                        requireContext().resources.getStringArray(R.array.button_dialog).first(),
+                        requireContext().resources.getStringArray(R.array.button_dialog).last()
                 ))
                 .setData()
                 .show(childFragmentManager, UtilsKeys.COLOR_PICK_DIALOG.name)

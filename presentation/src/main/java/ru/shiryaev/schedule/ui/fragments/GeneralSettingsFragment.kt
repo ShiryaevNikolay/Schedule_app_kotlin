@@ -21,7 +21,6 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
 
     private var mSetThemeMode: ((Int) -> Unit)? = null
     private var mSetCurrentWeek: ((Int) -> Unit)? = null
-    private var mContext: Context? = null
     private var mListWeeks = mutableListOf<String>()
 
     private lateinit var mListThemeMode: Array<String>
@@ -34,20 +33,14 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        mContext = context
         mListThemeMode = context.resources.getStringArray(R.array.theme_mode_entries)
         mViewModel = ViewModelProvider(this, CustomFactory(WeekSettingsViewModel())).get(WeekSettingsViewModel::class.java)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mContext = null
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-        mSharedPref = PreferenceManager.getDefaultSharedPreferences(mContext)
+        mSharedPref = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         mNavController = NavHostFragment.findNavController(this)
 
@@ -67,7 +60,7 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
 
         mSetThemeMode = { value ->
             mSharedPref.edit()
-                .putString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode[value])
+                .putString(requireContext().resources.getString(R.string.theme_key), mListThemeMode[value])
                 .apply()
             saveThemeMode()
             setThemeMode()
@@ -75,14 +68,14 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
 
         mSetCurrentWeek = { value ->
             mSharedPref.edit()
-                    .putString(mContext?.resources?.getString(R.string.current_week_key), mListWeeks[value])
+                    .putString(requireContext().resources.getString(R.string.current_week_key), mListWeeks[value])
                     .apply()
             saveCurrentWeek()
         }
 
         mThemeMode.setOnPreferenceClickListener {
             RadioDialog()
-                .setHeader(mContext?.resources?.getString(R.string.theme_mode)!!)
+                .setHeader(requireContext().resources.getString(R.string.theme_mode))
                 .setData(UtilsListData.getRadioListDialog(mListThemeMode, getThemeMode()!!)) { position ->
                     mSetThemeMode?.invoke(position)
                 }
@@ -106,9 +99,9 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun initItems() {
-        mThemeMode = findPreference(mContext?.resources?.getString(R.string.theme_key)!!)!!
-        mWeeks = findPreference(mContext?.resources?.getString(R.string.weeks_key)!!)!!
-        mCurrentWeeks = findPreference(mContext?.resources?.getString(R.string.current_week_key)!!)!!
+        mThemeMode = findPreference(requireContext().resources.getString(R.string.theme_key))!!
+        mWeeks = findPreference(requireContext().resources.getString(R.string.weeks_key))!!
+        mCurrentWeeks = findPreference(requireContext().resources.getString(R.string.current_week_key))!!
         saveThemeMode()
         saveCurrentWeek()
     }
@@ -122,14 +115,14 @@ class GeneralSettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setThemeMode() {
-        when(mSharedPref.getString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode.first())) {
+        when(mSharedPref.getString(requireContext().resources.getString(R.string.theme_key), mListThemeMode.first())) {
             mListThemeMode.first() -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) }
             mListThemeMode[1] -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) }
             mListThemeMode.last() -> { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) }
         }
     }
 
-    private fun getThemeMode() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.theme_key), mListThemeMode.first())
+    private fun getThemeMode() = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(requireContext().resources.getString(R.string.theme_key), mListThemeMode.first())
 
-    private fun getCurrentWeek() = PreferenceManager.getDefaultSharedPreferences(mContext).getString(mContext?.resources?.getString(R.string.current_week_key), if(mListWeeks.isEmpty()) "" else mListWeeks.first())
+    private fun getCurrentWeek() = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString(requireContext().resources.getString(R.string.current_week_key), if(mListWeeks.isEmpty()) "" else mListWeeks.first())
 }
