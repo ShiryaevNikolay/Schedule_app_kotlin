@@ -26,7 +26,6 @@ class CalendarFragment : Fragment() {
 
     private var _binding: FrHomeCalendarBinding? = null
     private val binding get() = _binding!!
-    private var mContext: Context? = null
     private var mTopBarHeight: Int = 0
 
     private lateinit var mNavController: NavController
@@ -134,7 +133,7 @@ class CalendarFragment : Fragment() {
 
     private fun getNotes(year: Int, month: Int, day: Int) {
         var selectedDate: String = if (day < 10) "0$day, " else "$day, "
-        selectedDate += mContext?.resources?.getStringArray(R.array.month)!![month]
+        selectedDate += requireContext().resources.getStringArray(R.array.month)[month]
         selectedDate += ", $year"
         mViewModel.getNotesByDate(selectedDate).observe(viewLifecycleOwner) { notes ->
             mViewModel.setIsErrorVisible(binding.noteBottomSheet.setNoteList(notes))
