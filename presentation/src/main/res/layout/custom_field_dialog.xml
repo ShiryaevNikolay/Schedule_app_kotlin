@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dialog_dimen">
+        android:padding="@dimen/margin_vertical">
 
         <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
             android:id="@+id/field"

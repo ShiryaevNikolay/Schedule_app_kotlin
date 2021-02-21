@@ -1,6 +1,10 @@
 package ru.shiryaev.schedule.common.controllers
 
+import android.annotation.SuppressLint
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TableRow
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.ui.views.CustomButtonDialog
@@ -17,16 +21,30 @@ class ItemButtonDialogController(
 
     inner class Holder(parent: ViewGroup) : BindableViewHolder<List<String>>(parent, R.layout.custom_layout_button_dialog) {
 
-        private val mLayoutBtn: TableRow = itemView.findViewById(R.id.layout_button)
         private var mData = listOf<String>()
+
+        private val mLayoutBtn: TableRow = itemView.findViewById(R.id.layout_button)
 
         override fun bind(data: List<String>) {
             mData = data
-            data.forEach { textBtn ->
+            data.forEachIndexed { index, textBtn ->
+                if (index > 0) {
+                    mLayoutBtn.addView(getDivider())
+                }
                 mLayoutBtn.addView(
                         CustomButtonDialog(itemView.context)
                                 .setText(textBtn) { text -> onClickListener.invoke(text) }
                 )
+            }
+        }
+
+        private fun getDivider() = LayoutInflater.from(itemView.context).inflate(R.layout.divider_button_dialog, null).apply {
+            layoutParams = TableRow.LayoutParams(
+                    1,
+                    TableRow.LayoutParams.MATCH_PARENT
+            ).apply {
+                topMargin = itemView.context.resources.getDimension(R.dimen.margin_vertical).toInt()
+                bottomMargin = itemView.context.resources.getDimension(R.dimen.margin_vertical).toInt()
             }
         }
     }
