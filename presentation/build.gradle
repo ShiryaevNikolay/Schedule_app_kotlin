@@ -76,8 +76,6 @@ dependencies {
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
     // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    // TextFieldBoxes
-    implementation 'com.github.HITGIF:TextFieldBoxes:1.4.5'
     // Material calendar
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
     // Blur view

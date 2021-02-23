@@ -1,13 +1,10 @@
 package ru.shiryaev.schedule.common.controllers
 
 import android.view.ViewGroup
-import android.widget.Toast
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.ui.views.TextField
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText
-import studio.carbonylgroup.textfieldboxes.TextFieldBoxes
 
 class ItemFieldDialogController(
         private val mHint: String = "",
