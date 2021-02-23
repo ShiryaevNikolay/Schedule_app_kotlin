@@ -17,6 +17,7 @@
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="android:colorBackground">@color/white</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="bottomNavigationStyle">@style/BNViewStyle</item>
         <item name="progressBarStyle">@style/ProgressBarStyle</item>
         <item name="materialButtonStyle">@style/ButtonStyle</item>

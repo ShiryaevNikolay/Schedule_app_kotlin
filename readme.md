@@ -19,6 +19,5 @@
 * __[RxJava]("https://github.com/ReactiveX/RxJava")__
 * __Room__
 * __Navigation architecture component__
-* __[TextFieldBoxes]("https://github.com/HITGIF/TextFieldBoxes")__
 * __[MaterialCalendarView]("https://github.com/prolificinteractive/material-calendarview")__
 * __[Easy Adapter]("https://github.com/surfstudio/EasyAdapter")__

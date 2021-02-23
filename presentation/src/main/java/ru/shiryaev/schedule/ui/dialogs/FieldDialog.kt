@@ -11,6 +11,7 @@ import ru.surfstudio.android.easyadapter.ItemList
 class FieldDialog : CustomDialog() {
 
     private var mWeek: Week? = null
+    private var mHint = ""
     private var mText = ""
     private var mOldWeek = ""
     private var mHeader: String? = null
@@ -28,6 +29,11 @@ class FieldDialog : CustomDialog() {
         return this
     }
 
+    fun setHint(hint: String): FieldDialog {
+        mHint = hint
+        return this
+    }
+
     fun setButton(button: List<String>): FieldDialog {
         mButton = button
         mItemButtonController = ItemButtonDialogController { textBtn ->
@@ -40,7 +46,7 @@ class FieldDialog : CustomDialog() {
         mWeek = week
         mText = mWeek?.mName ?: ""
         mOldWeek = mText
-        val itemField = ItemFieldDialogController { text ->
+        val itemField = ItemFieldDialogController(mHint) { text ->
             mText = text
             mWeek?.mName = text
         }

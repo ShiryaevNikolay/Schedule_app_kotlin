@@ -11,21 +11,15 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_vertical">
 
-        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        <ru.shiryaev.schedule.ui.views.TextField
             android:id="@+id/field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:labelText="@string/name_of_week"
+            android:theme="@style/TextInputStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:useDenseSpacing="true">
-
-            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                android:id="@+id/field_et"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+            style="@style/TextInputStyle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

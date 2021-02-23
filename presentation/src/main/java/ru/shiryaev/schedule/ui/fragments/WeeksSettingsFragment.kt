@@ -96,6 +96,7 @@ class WeeksSettingsFragment : Fragment(), OnClickButtonDialogListener {
 
     private fun showFieldDialog(week: Week? = null) {
         FieldDialog()
+            .setHint(requireContext().resources.getString(R.string.name_of_week))
             .setHeader(requireContext().resources.getString(R.string.enter_the_name_of_the_week))
             .setButton(listOf(
                     requireContext().resources.getStringArray(R.array.button_dialog).first(),

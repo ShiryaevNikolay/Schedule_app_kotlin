@@ -1,14 +1,17 @@
 package ru.shiryaev.schedule.common.controllers
 
 import android.view.ViewGroup
+import android.widget.Toast
 import ru.shiryaev.schedule.R
+import ru.shiryaev.schedule.ui.views.TextField
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes
 
 class ItemFieldDialogController(
-        private val onTextChanged: (String) -> Unit
+        private val mHint: String = "",
+        private val setTextChanged: (String) -> Unit
 ) : BindableItemController<String, ItemFieldDialogController.Holder>() {
 
     override fun createViewHolder(parent: ViewGroup) = Holder(parent)
@@ -17,13 +20,17 @@ class ItemFieldDialogController(
 
     inner class Holder(parent: ViewGroup) : BindableViewHolder<String>(parent, R.layout.custom_field_dialog) {
 
-        private val mField: TextFieldBoxes = itemView.findViewById(R.id.field)
-        private val mFiledEt: ExtendedEditText = itemView.findViewById(R.id.field_et)
+        private val mField: TextField = itemView.findViewById(R.id.field)
 
         override fun bind(data: String) {
-            mFiledEt.setText(data)
-            mField.setSimpleTextChangeWatcher { theNewText, isError ->
-                onTextChanged.invoke(theNewText)
+            with (mField) {
+                with (mEditText) {
+                    hint = mHint
+                    setText(data)
+                }
+                onTextChanged = { text ->
+                    setTextChanged.invoke(text)
+                }
             }
         }
     }
