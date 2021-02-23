@@ -6,10 +6,9 @@ import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.AppCompatImageButton
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.google.android.material.textfield.TextInputEditText
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.databinding.ActivityAddNoteBinding
 import ru.shiryaev.data.common.CustomFactory
@@ -23,8 +22,8 @@ import ru.shiryaev.schedule.common.navigation.ActivityClass
 import ru.shiryaev.schedule.ui.dialogs.ColorPickerDialog
 import ru.shiryaev.schedule.ui.dialogs.ListDialog
 import ru.shiryaev.schedule.ui.dialogs.OnClickButtonDialogListener
+import ru.shiryaev.schedule.ui.views.TextField
 import ru.shiryaev.schedule.utils.UtilsListData
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 
 class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButtonDialogListener {
 
@@ -64,20 +63,30 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
             note = mNote
         }
 
-        // Проверяем ввод полей
-        with(binding) {
-            titleField.setSimpleTextChangeWatcher { theNewText, isError ->
-                mNote.mTitle = theNewText
+        // Устанавливаем слушатели на поля ввода
+        with (binding.titleField) {
+            onTextChanged = { text ->
+                mNote.mTitle = text
             }
-            noteField.setSimpleTextChangeWatcher { theNewText, isError ->
-                mNote.mText = theNewText
+            onCLickEndIcon = {
+                ListDialog()
+                    .setData(UtilsListData.getListDialog(mListLessons)) { positionItem ->
+                        mNote.mTitle = mListLessons[positionItem]
+                        setFieldText(mEditText, mNote.mTitle ?: "")
+                    }
+                    .show(supportFragmentManager, null)
+            }
+        }
+
+        with (binding.noteField) {
+            onTextChanged = { text ->
+                mNote.mText = text
                 mViewModel.setFabIsVisible(UtilsChecks.checkAddNote(mNote.mText))
             }
         }
 
         // Устанавливаем случашели на кнопки
         with(binding) {
-            titleListBtn.setOnClickListener(this@AddNoteActivity)
             deadlineBtn.setOnClickListener(this@AddNoteActivity)
             colorBtn.setOnClickListener(this@AddNoteActivity)
             fab.setOnClickListener(this@AddNoteActivity)
@@ -87,21 +96,13 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
         with(mViewModel) {
             // Получаем список занятий
             getListLessons().observe(this@AddNoteActivity) { listLessons ->
-                mListLessons = setVisibleBtn(binding.titleListBtn, listLessons)
+                mListLessons = setVisibleBtn(binding.titleField, listLessons)
             }
         }
     }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.title_list_btn -> {
-                ListDialog()
-                        .setData(UtilsListData.getListDialog(mListLessons)) { positionItem ->
-                            mNote.mTitle = mListLessons[positionItem]
-                            setFieldText(binding.titleEditText, mNote.mTitle ?: "")
-                        }
-                        .show(supportFragmentManager, null)
-            }
             R.id.deadline_btn -> {
                 CallDialogs.callDatePickerDialog(this) { date ->
                     mNote.mDeadline = date
@@ -156,13 +157,13 @@ class AddNoteActivity : AppCompatActivity(), View.OnClickListener, OnClickButton
         setColor()
     }
 
-    private fun <T> setVisibleBtn(btn: AppCompatImageButton, newList: List<T>): List<T> {
+    private fun <T> setVisibleBtn(field: TextField, newList: List<T>): List<T> {
         val currentList = nonNullValues(newList.distinct())
-        btn.isVisible = currentList.isNotEmpty()
+        field.endIconVisible(currentList.isNotEmpty())
         return currentList
     }
 
-    private fun setFieldText(field: ExtendedEditText, text: String) {
+    private fun setFieldText(field: TextInputEditText, text: String) {
         with(field) {
             setText(text)
             setSelection(text.length)

@@ -15,7 +15,6 @@ import ru.shiryaev.domain.models.Week
 import ru.shiryaev.domain.utils.*
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.databinding.ActivityAddScheduleBinding
-import kotlinx.android.synthetic.main.activity_add_schedule.view.*
 import ru.shiryaev.data.common.CustomFactory
 import ru.shiryaev.data.utils.UtilsChecks
 import ru.shiryaev.data.viewmodels.AddScheduleViewModel

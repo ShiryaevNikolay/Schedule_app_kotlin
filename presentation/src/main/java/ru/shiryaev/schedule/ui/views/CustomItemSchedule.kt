@@ -15,7 +15,6 @@ import ru.shiryaev.domain.models.Week
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.ui.fragments.EditScheduleFragment
 import ru.shiryaev.schedule.ui.fragments.ScheduleFragment
-import kotlinx.android.synthetic.main.custom_card_schedule.view.*
 
 @SuppressLint("ViewConstructor")
 class CustomItemSchedule(
@@ -28,6 +27,7 @@ class CustomItemSchedule(
     var onLongClickListener: ((Schedule) -> Unit)? = null
     private var itemSchedule: Schedule? = null
 
+    private val mCardLayout: MaterialCardView
     private val lessonTv: AppCompatTextView
     private val teacherTv: AppCompatTextView
     private val auditTv: AppCompatTextView
@@ -39,6 +39,7 @@ class CustomItemSchedule(
     init {
         inflate(context, R.layout.custom_card_schedule, this)
 
+        mCardLayout = this.findViewById(R.id.item_card)
         lessonTv = this.findViewById(R.id.lesson_schedule_tv)
         teacherTv = this.findViewById(R.id.teacher_schedule_tv)
         auditTv = this.findViewById(R.id.audit_schedule_tv)
@@ -85,11 +86,11 @@ class CustomItemSchedule(
             }
         }
 
-        this.item_card.setOnClickListener { onClickListener?.invoke(data) }
+        mCardLayout.setOnClickListener { onClickListener?.invoke(data) }
 
         when(screen) {
             EditScheduleFragment.TAG -> {
-                this.item_card.setOnLongClickListener {
+                mCardLayout.setOnLongClickListener {
                     onLongClickListener?.invoke(data)
                     true
                 }

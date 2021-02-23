@@ -14,7 +14,6 @@ import ru.shiryaev.domain.utils.UtilsKeys
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.databinding.FrEditScheduleBinding
 import ru.shiryaev.schedule.tools.adapters.ViewPagerAdapter
-import kotlinx.android.synthetic.main.fr_edit_schedule.view.*
 import ru.shiryaev.schedule.common.navigation.ActivityClass
 import ru.shiryaev.schedule.common.navigation.ActivityRouteCreateNote
 import ru.shiryaev.schedule.common.navigation.NavigationActivity
