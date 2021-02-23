@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.google.android.material.textfield.TextInputEditText
 import ru.shiryaev.domain.models.Schedule
 import ru.shiryaev.domain.models.TimeAndWeek
 import ru.shiryaev.domain.models.Week
@@ -21,8 +22,8 @@ import ru.shiryaev.data.viewmodels.AddScheduleViewModel
 import ru.shiryaev.schedule.common.CallDialogs
 import ru.shiryaev.schedule.common.navigation.ActivityClass
 import ru.shiryaev.schedule.ui.dialogs.ListDialog
+import ru.shiryaev.schedule.ui.views.TextField
 import ru.shiryaev.schedule.utils.UtilsListData
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText
 import java.util.ArrayList
 
 class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
@@ -72,29 +73,66 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
             schedule = mSchedule
         }
 
-        // Проверяем ввод полей
-        with(binding) {
-            lessonField.setSimpleTextChangeWatcher { theNewText, isError ->
-                mSchedule.mLesson = theNewText
+        // Устанавливаем слушатели на поля ввода
+        with(binding.lessonField) {
+            onTextChanged = { lesson ->
+                mSchedule.mLesson = lesson
                 mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
             }
-            teacherField.setSimpleTextChangeWatcher { theNewText, isError ->
-                mSchedule.mTeacher = theNewText
+            onCLickEndIcon = {
+                ListDialog()
+                        .setData(UtilsListData.getListDialog(mListLessons)) { positionItem ->
+                            mSchedule.mLesson = mListLessons[positionItem]
+                            setFieldText(mEditText, mSchedule.mLesson)
+                        }
+                        .show(supportFragmentManager, null)
             }
-            auditField.setSimpleTextChangeWatcher { theNewText, isError ->
-                mSchedule.mAudit = theNewText
+        }
+
+        with(binding.teacherField) {
+            onTextChanged = { teacher ->
+                mSchedule.mTeacher = teacher
             }
-            examField.setSimpleTextChangeWatcher { theNewText, isError ->
-                mSchedule.mExam = theNewText
+            onCLickEndIcon = {
+                ListDialog()
+                        .setData(UtilsListData.getListDialog(mListTeachers)) { positionItem ->
+                            mSchedule.mTeacher = mListTeachers[positionItem]
+                            setFieldText(mEditText, mSchedule.mTeacher!!)
+                        }
+                        .show(supportFragmentManager, null)
+            }
+        }
+
+        with(binding.auditField) {
+            onTextChanged = { audit ->
+                mSchedule.mAudit = audit
+            }
+            onCLickEndIcon = {
+                ListDialog()
+                        .setData(UtilsListData.getListDialog(mListAudits)) { positionItem ->
+                            mSchedule.mAudit = mListAudits[positionItem]
+                            setFieldText(mEditText, mSchedule.mAudit!!)
+                        }
+                        .show(supportFragmentManager, null)
+            }
+        }
+
+        with(binding.examField) {
+            onTextChanged = { exam ->
+                mSchedule.mExam = exam
+            }
+            onCLickEndIcon = {
+                ListDialog()
+                        .setData(UtilsListData.getListDialog(mListExams)) { positionItem ->
+                            mSchedule.mExam = mListExams[positionItem]
+                            setFieldText(mEditText, mSchedule.mExam!!)
+                        }
+                        .show(supportFragmentManager, null)
             }
         }
 
         // Устанавливаем случашели на кнопки
         with(binding) {
-            lessonListBtn.setOnClickListener(this@AddScheduleActivity)
-            teacherListBtn.setOnClickListener(this@AddScheduleActivity)
-            auditListBtn.setOnClickListener(this@AddScheduleActivity)
-            examListBtn.setOnClickListener(this@AddScheduleActivity)
             timeBtn.setOnClickListener(this@AddScheduleActivity)
             timeListBtn.setOnClickListener(this@AddScheduleActivity)
             weekBtn.setOnClickListener(this@AddScheduleActivity)
@@ -113,19 +151,19 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
             }
             // Получаем список занятий
             getListLessons().observe(this@AddScheduleActivity) { listLessons ->
-                mListLessons = setVisibleBtn(binding.lessonListBtn, listLessons)
+                mListLessons = setVisibleFieldEndIconBtn(binding.lessonField, listLessons)
             }
             // Получаем список занятий
             getListTeachers().observe(this@AddScheduleActivity) { listTeachers ->
-                mListTeachers = setVisibleBtn(binding.teacherListBtn, listTeachers)
+                mListTeachers = setVisibleFieldEndIconBtn(binding.teacherField, listTeachers)
             }
             // Получаем список занятий
             getListAudits().observe(this@AddScheduleActivity) { listAudits ->
-                mListAudits = setVisibleBtn(binding.auditListBtn, listAudits)
+                mListAudits = setVisibleFieldEndIconBtn(binding.auditField, listAudits)
             }
             // Получаем список занятий
             getListExams().observe(this@AddScheduleActivity) { listExams ->
-                mListExams = setVisibleBtn(binding.examListBtn, listExams)
+                mListExams = setVisibleFieldEndIconBtn(binding.examField, listExams)
             }
             // Получаем список времени
             getListTimeStart().observe(this@AddScheduleActivity) { listTime ->
@@ -141,38 +179,6 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                     mSchedule.mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
                     setSelectedTime()
                 }.show(supportFragmentManager, null)
-            }
-            R.id.lesson_list_btn -> {
-                ListDialog()
-                    .setData(UtilsListData.getListDialog(mListLessons)) { positionItem ->
-                        mSchedule.mLesson = mListLessons[positionItem]
-                        setFieldText(binding.lessonEditText, mSchedule.mLesson)
-                    }
-                    .show(supportFragmentManager, null)
-            }
-            R.id.teacher_list_btn -> {
-                ListDialog()
-                    .setData(UtilsListData.getListDialog(mListTeachers)) { positionItem ->
-                        mSchedule.mTeacher = mListTeachers[positionItem]
-                        setFieldText(binding.teacherEditText, mSchedule.mTeacher!!)
-                    }
-                    .show(supportFragmentManager, null)
-            }
-            R.id.audit_list_btn -> {
-                ListDialog()
-                    .setData(UtilsListData.getListDialog(mListAudits)) { positionItem ->
-                        mSchedule.mAudit = mListAudits[positionItem]
-                        setFieldText(binding.auditEditText, mSchedule.mAudit!!)
-                    }
-                    .show(supportFragmentManager, null)
-            }
-            R.id.exam_list_btn -> {
-                ListDialog()
-                    .setData(UtilsListData.getListDialog(mListExams)) { positionItem ->
-                        mSchedule.mExam = mListExams[positionItem]
-                        setFieldText(binding.examEditText, mSchedule.mExam!!)
-                    }
-                    .show(supportFragmentManager, null)
             }
             R.id.time_list_btn -> {
                 ListDialog()
@@ -241,7 +247,13 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         return currentList
     }
 
-    private fun setFieldText(field: ExtendedEditText, text: String) {
+    private fun <T> setVisibleFieldEndIconBtn(field: TextField, newList: List<T>): List<T> {
+        val currentList = nonNullValues(newList.distinct())
+        field.endIconVisible(currentList.isNotEmpty())
+        return currentList
+    }
+
+    private fun setFieldText(field: TextInputEditText, text: String) {
         with(field) {
             setText(text)
             setSelection(text.length)

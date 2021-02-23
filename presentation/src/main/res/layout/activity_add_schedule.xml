@@ -45,112 +45,41 @@
                 android:layout_marginHorizontal="@dimen/default_dimen"
                 android:layout_marginVertical="@dimen/margin_vertical">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                        android:id="@+id/lesson_field"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:helperText="@string/obligatory_field"
-                        app:labelText="@string/lesson"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:useDenseSpacing="true">
-
-                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                            android:id="@+id/lesson_edit_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{schedule.MLesson}"/>
-                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/lesson_list_btn"
-                        android:layout_width="@dimen/icon_button_size"
-                        android:layout_height="@dimen/icon_button_size"
-                        android:layout_marginHorizontal="@dimen/elevation"
-                        android:layout_marginVertical="@dimen/icon_field_margin"
-                        android:background="?android:attr/actionBarItemBackground"
-                        android:src="@drawable/ic_baseline_notes"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ru.shiryaev.schedule.ui.views.TextField
+                    android:id="@+id/lesson_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical">
+                    android:theme="@style/TextInputStyle"
+                    app:endIconDrawable="@drawable/ic_arrow_drop_down"
+                    app:endIconMode="custom"
+                    app:helperText="@string/obligatory_field"
+                    app:hint="@string/lesson"
+                    app:textField="@{schedule.MLesson}"
+                    style="@style/TextInputStyle" />
 
-                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                        android:id="@+id/teacher_field"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:labelText="@string/teacher"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:useDenseSpacing="true">
-
-                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                            android:id="@+id/teacher_edit_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{schedule.MTeacher}"/>
-                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/teacher_list_btn"
-                        android:layout_width="@dimen/icon_button_size"
-                        android:layout_height="@dimen/icon_button_size"
-                        android:layout_marginHorizontal="@dimen/elevation"
-                        android:layout_marginVertical="@dimen/elevation"
-                        android:background="?android:attr/actionBarItemBackground"
-                        android:src="@drawable/ic_baseline_notes"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ru.shiryaev.schedule.ui.views.TextField
+                    android:id="@+id/teacher_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_vertical">
+                    android:layout_marginTop="@dimen/margin_vertical"
+                    android:theme="@style/TextInputStyle"
+                    app:endIconDrawable="@drawable/ic_arrow_drop_down"
+                    app:endIconMode="custom"
+                    app:hint="@string/teacher"
+                    app:textField="@{schedule.MTeacher}"
+                    style="@style/TextInputStyle" />
 
-                    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                        android:id="@+id/audit_field"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:labelText="@string/audit"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:useDenseSpacing="true">
-
-                        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                            android:id="@+id/audit_edit_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{schedule.MAudit}"/>
-                    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
-
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/audit_list_btn"
-                        android:layout_width="@dimen/icon_button_size"
-                        android:layout_height="@dimen/icon_button_size"
-                        android:layout_marginHorizontal="@dimen/elevation"
-                        android:layout_marginVertical="@dimen/elevation"
-                        android:background="?android:attr/actionBarItemBackground"
-                        android:src="@drawable/ic_baseline_notes"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <ru.shiryaev.schedule.ui.views.TextField
+                    android:id="@+id/audit_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_vertical"
+                    android:theme="@style/TextInputStyle"
+                    app:endIconDrawable="@drawable/ic_arrow_drop_down"
+                    app:endIconMode="custom"
+                    app:hint="@string/audit"
+                    app:textField="@{schedule.MAudit}"
+                    style="@style/TextInputStyle" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -165,39 +94,16 @@
                         android:layout_marginEnd="@dimen/default_dimen"
                         app:srcCompat="@drawable/ic_doc_success"/>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <ru.shiryaev.schedule.ui.views.TextField
+                        android:id="@+id/exam_field"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
-                            android:id="@+id/exam_field"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:labelText="@string/type_of_certification"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:useDenseSpacing="true">
-
-                            <studio.carbonylgroup.textfieldboxes.ExtendedEditText
-                                android:id="@+id/exam_edit_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@{schedule.MExam}"/>
-                        </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
-
-                        <androidx.appcompat.widget.AppCompatImageButton
-                            android:id="@+id/exam_list_btn"
-                            android:layout_width="@dimen/icon_button_size"
-                            android:layout_height="@dimen/icon_button_size"
-                            android:layout_marginHorizontal="@dimen/elevation"
-                            android:layout_marginVertical="@dimen/elevation"
-                            android:background="?android:attr/actionBarItemBackground"
-                            android:src="@drawable/ic_baseline_notes"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_height="wrap_content"
+                        android:theme="@style/TextInputStyle"
+                        app:endIconDrawable="@drawable/ic_arrow_drop_down"
+                        app:endIconMode="custom"
+                        app:hint="@string/audit"
+                        app:textField="@{schedule.MExam}"
+                        style="@style/TextInputStyle" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -224,7 +130,7 @@
                         android:layout_width="@dimen/icon_button_size"
                         android:layout_height="@dimen/icon_button_size"
                         android:background="?android:attr/actionBarItemBackground"
-                        android:src="@drawable/ic_baseline_notes"/>
+                        android:src="@drawable/ic_arrow_drop_down"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
