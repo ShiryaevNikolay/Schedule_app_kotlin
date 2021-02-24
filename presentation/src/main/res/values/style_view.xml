@@ -59,6 +59,8 @@
     <style name="TextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="shapeAppearance">@style/ShapeTextInput</item>
         <item name="boxBackgroundColor">@color/background_text_input</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
     </style>
 
     <style name="ShapeTextInput" parent="ShapeAppearance.MaterialComponents.SmallComponent">

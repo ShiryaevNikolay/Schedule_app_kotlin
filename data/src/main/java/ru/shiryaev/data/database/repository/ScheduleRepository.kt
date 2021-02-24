@@ -2,8 +2,8 @@ package ru.shiryaev.data.database.repository
 
 import ru.shiryaev.data.AppDelegate
 import ru.shiryaev.data.database.Storage
-import ru.shiryaev.data.database.schedule.ScheduleDao
-import ru.shiryaev.data.database.week.WeekDao
+import ru.shiryaev.data.database.dao.ScheduleDao
+import ru.shiryaev.data.database.dao.WeekDao
 import ru.shiryaev.domain.models.Schedule
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.schedulers.Schedulers

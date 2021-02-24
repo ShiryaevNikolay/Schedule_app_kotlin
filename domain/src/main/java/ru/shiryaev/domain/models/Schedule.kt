@@ -24,8 +24,8 @@ class Schedule : Serializable {
     @ColumnInfo(name = UtilsTable.SCHEDULE_COLUMN_TIMESTART)
     var mTimeStart: Int = -1
 
-//    @ColumnInfo(name = UtilsTableScheulde.SCHEDULE_COLUMN_TIMEEND)
-//    var mTimeEnd: Int,
+    @ColumnInfo(name = UtilsTable.SCHEDULE_COLUMN_TIMEEND)
+    var mTimeEnd: Int = -1
 
     @ColumnInfo(name = UtilsTable.SCHEDULE_COLUMN_WEEK)
     var mWeek: String = ""

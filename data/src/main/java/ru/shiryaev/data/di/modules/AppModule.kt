@@ -21,8 +21,8 @@ class AppModule(private val mApp: AppDelegate) {
     @Provides
     @Singleton
     fun provideStorage() = Room.databaseBuilder(mApp, Storage::class.java, UtilsDb.APP_DATABASE.name)
-                .fallbackToDestructiveMigration()
-                .build()
+            .addMigrations(Storage.MIGRATION_1_2)
+            .build()
 
     @Provides
     @Singleton

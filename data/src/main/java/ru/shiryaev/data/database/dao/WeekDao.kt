@@ -1,4 +1,4 @@
-package ru.shiryaev.data.database.week
+package ru.shiryaev.data.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
