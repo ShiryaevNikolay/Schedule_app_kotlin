@@ -132,8 +132,8 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         // Устанавливаем случашели на кнопки
         with(binding) {
-            timeBtn.setOnClickListener(this@AddScheduleActivity)
-            timeListBtn.setOnClickListener(this@AddScheduleActivity)
+            timeStartBtn.setOnClickListener(this@AddScheduleActivity)
+            timeStartListBtn.setOnClickListener(this@AddScheduleActivity)
             weekBtn.setOnClickListener(this@AddScheduleActivity)
             fab.setOnClickListener(this@AddScheduleActivity)
         }
@@ -166,20 +166,20 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
             }
             // Получаем список времени
             getListTimeStart().observe(this@AddScheduleActivity) { listTime ->
-                mListTime = setVisibleBtn(binding.timeListBtn, listTime)
+                mListTime = setVisibleBtn(binding.timeStartListBtn, listTime)
             }
         }
     }
 
     override fun onClick(v: View) {
         when(v.id) {
-            R.id.time_btn -> {
+            R.id.time_start_btn -> {
                 CallDialogs.callTimePicker(this@AddScheduleActivity, mSchedule.mWeek, mListTimeAndWeek) { hour, minute ->
                     mSchedule.mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
                     setSelectedTime()
                 }.show(supportFragmentManager, null)
             }
-            R.id.time_list_btn -> {
+            R.id.time_start_list_btn -> {
                 ListDialog()
                     .setData(UtilsListData.getListTimeDialog(mListTime)) { positionItem ->
                         mSchedule.mTimeStart = mListTime[positionItem]
@@ -235,7 +235,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setDataToView() {
         if (mSchedule.mTimeStart != UtilsChecks.TIME_DISABLE) {
-            binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
+            binding.timeStartBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
         }
         binding.weekBtn.text = mSchedule.mWeek
     }
@@ -260,7 +260,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setSelectedTime() {
-        binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
+        binding.timeStartBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
         mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
     }
 
