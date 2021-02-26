@@ -21,7 +21,7 @@
                 android:id="@+id/indicator_week"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
-                android:background="?android:attr/colorPrimary"/>
+                android:background="?android:attr/colorAccent"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -70,16 +70,43 @@
                             android:id="@+id/indicator_card_week"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="?android:attr/colorPrimary"
+                            android:backgroundTint="?android:attr/colorAccent"
                             app:shapeAppearanceOverlay="@style/CardCornerWeek"
-                            android:visibility="gone">
+                            app:cardElevation="0dp">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/week_schedule_tv"
+                            <androidx.appcompat.widget.LinearLayoutCompat
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/default_dimen"
-                                android:textSize="@dimen/bottom_bar_text_size"/>
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="@dimen/default_dimen">
+
+                                <androidx.appcompat.widget.LinearLayoutCompat
+                                    android:id="@+id/time_end_container"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/time_end_schedule_tv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/bottom_bar_text_size"/>
+
+                                    <com.google.android.material.card.MaterialCardView
+                                        android:id="@+id/divider"
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:backgroundTint="?android:attr/textColorSecondary"
+                                        android:layout_marginHorizontal="@dimen/default_dimen"
+                                        app:cardElevation="0dp"/>
+                                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/week_schedule_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/bottom_bar_text_size"/>
+                            </androidx.appcompat.widget.LinearLayoutCompat>
                         </com.google.android.material.card.MaterialCardView>
                     </FrameLayout>
 

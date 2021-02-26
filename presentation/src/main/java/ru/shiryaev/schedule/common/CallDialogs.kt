@@ -1,14 +1,12 @@
 package ru.shiryaev.schedule.common
 
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Context
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import ru.shiryaev.schedule.R
-import ru.shiryaev.data.utils.UtilsChecks
+import ru.shiryaev.domain.utils.UtilsChecks
 import ru.shiryaev.domain.models.TimeAndWeek
 import java.util.*
 import kotlin.collections.ArrayList
@@ -30,6 +28,17 @@ object CallDialogs {
                 }
             }
         }
+
+    fun callTimePicker(onSelectTime: (Int, Int) -> Unit) = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setHour(12)
+            .setMinute(0)
+            .build()
+            .apply {
+                addOnPositiveButtonClickListener {
+                    onSelectTime.invoke(hour, minute)
+                }
+            }
 
     fun callDatePickerDialog(context: Context, onSelectDate: (String) -> Unit) {
         val dayCurrent = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)

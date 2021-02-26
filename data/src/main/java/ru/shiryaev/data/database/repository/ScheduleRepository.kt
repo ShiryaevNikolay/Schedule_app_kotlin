@@ -37,7 +37,7 @@ class ScheduleRepository {
 
     fun getExams() = mScheduleDao.getExams()
 
-    fun getTimeStart() = mScheduleDao.getTimeStart()
+    fun getTime() = mScheduleDao.getTime()
 
     fun getTimeStartByDay(mDay: Int) = mScheduleDao.getTimeStartByDay(mDay)
 

@@ -5,7 +5,12 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import ru.shiryaev.schedule.R
+import ru.shiryaev.schedule.ui.fragments.EditScheduleFragment
+import ru.shiryaev.schedule.ui.fragments.HomeFragment
+import ru.shiryaev.schedule.ui.fragments.ScheduleFragment
 
 class CustomTimeLine @JvmOverloads constructor(
     context: Context,
@@ -13,35 +18,30 @@ class CustomTimeLine @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-//    private val container: MaterialCardView
-    private val mTextView: AppCompatTextView
-    private val mLineTop: FrameLayout
-    private val mLineBottom: FrameLayout
+    private val mTimeStart: AppCompatTextView
+    private val mTimeEnd: AppCompatTextView
+    private val mTimeEndContainer: FrameLayout
 
     init {
         inflate(context, R.layout.custom_timeline, this)
 
-//        container = findViewById(R.id.item_time_container)
-        mTextView = findViewById(R.id.item_time_tv)
-        mLineTop = findViewById(R.id.line_top)
-        mLineBottom = findViewById(R.id.line_bottom)
+        mTimeStart = findViewById(R.id.item_time_start_tv)
+        mTimeEnd = findViewById(R.id.item_time_end_tv)
+        mTimeEndContainer = findViewById(R.id.item_time_end_container)
     }
 
-    fun setText(text: String) { mTextView.text = text }
+    fun setTimeStart(text: String) { mTimeStart.text = text }
 
-    fun setLineTopIsVisible(value: Boolean) {
-        if (value) {
-            mLineTop.visibility = View.VISIBLE
-        } else {
-            mLineTop.visibility = View.INVISIBLE
-        }
+    fun setTimeEnd(text: String) {
+        mTimeEnd.text = text
     }
 
-    fun setLineBottomIsVisible(value: Boolean) {
-        if (value) {
-            mLineBottom.visibility = View.VISIBLE
-        } else {
-            mLineBottom.visibility = View.INVISIBLE
+    fun setTimeEndVisible(screen: String) {
+        when (screen) {
+            ScheduleFragment.TAG -> {
+                mTimeEndContainer.isVisible = mTimeEnd.text != ""
+            }
+            EditScheduleFragment.TAG -> { mTimeEndContainer.isVisible = false }
         }
     }
 }

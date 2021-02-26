@@ -12,5 +12,5 @@ object UtilsConvert {
 
     fun convertToCorrectTime(time: Int) = if(time % 100 < 10) "0${time % 100}" else "${time % 100}"
 
-    fun convertTimeIntToString(time: Int) = convertToCorrectTime(time / 100) + ":" + convertToCorrectTime(time % 100)
+    fun convertTimeIntToString(time: Int) = if (time != UtilsChecks.TIME_DISABLE) convertToCorrectTime(time / 100) + ":" + convertToCorrectTime(time % 100) else ""
 }

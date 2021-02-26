@@ -1,4 +1,4 @@
-package ru.shiryaev.data.utils
+package ru.shiryaev.domain.utils
 
 import ru.shiryaev.domain.models.TimeAndWeek
 

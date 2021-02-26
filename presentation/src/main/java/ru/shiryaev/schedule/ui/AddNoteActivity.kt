@@ -12,7 +12,7 @@ import com.google.android.material.textfield.TextInputEditText
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.databinding.ActivityAddNoteBinding
 import ru.shiryaev.data.common.CustomFactory
-import ru.shiryaev.data.utils.UtilsChecks
+import ru.shiryaev.domain.utils.UtilsChecks
 import ru.shiryaev.data.viewmodels.AddNoteViewModel
 import ru.shiryaev.domain.models.Note
 import ru.shiryaev.domain.models.Week
