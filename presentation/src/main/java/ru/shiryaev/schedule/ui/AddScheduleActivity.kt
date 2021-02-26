@@ -16,7 +16,7 @@ import ru.shiryaev.domain.utils.*
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.databinding.ActivityAddScheduleBinding
 import ru.shiryaev.data.common.CustomFactory
-import ru.shiryaev.data.utils.UtilsChecks
+import ru.shiryaev.domain.utils.UtilsChecks
 import ru.shiryaev.data.viewmodels.AddScheduleViewModel
 import ru.shiryaev.schedule.common.CallDialogs
 import ru.shiryaev.schedule.common.navigation.ActivityClass
@@ -90,7 +90,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         with(binding.teacherField) {
             onTextChanged = { teacher ->
-                mSchedule.mTeacher = teacher
+                mSchedule.mTeacher = if (teacher != "") teacher else null
             }
             onCLickEndIcon = {
                 ListDialog()
@@ -104,7 +104,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         with(binding.auditField) {
             onTextChanged = { audit ->
-                mSchedule.mAudit = audit
+                mSchedule.mAudit = if (audit != "") audit else null
             }
             onCLickEndIcon = {
                 ListDialog()
@@ -118,7 +118,7 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         with(binding.examField) {
             onTextChanged = { exam ->
-                mSchedule.mExam = exam
+                mSchedule.mExam = if (exam != "") exam else null
             }
             onCLickEndIcon = {
                 ListDialog()
@@ -132,8 +132,10 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
         // Устанавливаем случашели на кнопки
         with(binding) {
-            timeBtn.setOnClickListener(this@AddScheduleActivity)
-            timeListBtn.setOnClickListener(this@AddScheduleActivity)
+            timeStartBtn.setOnClickListener(this@AddScheduleActivity)
+            timeStartListBtn.setOnClickListener(this@AddScheduleActivity)
+            timeEndBtn.setOnClickListener(this@AddScheduleActivity)
+            timeEndListBtn.setOnClickListener(this@AddScheduleActivity)
             weekBtn.setOnClickListener(this@AddScheduleActivity)
             fab.setOnClickListener(this@AddScheduleActivity)
         }
@@ -165,27 +167,44 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
                 mListExams = setVisibleFieldEndIconBtn(binding.examField, listExams)
             }
             // Получаем список времени
-            getListTimeStart().observe(this@AddScheduleActivity) { listTime ->
-                mListTime = setVisibleBtn(binding.timeListBtn, listTime)
+            getListTime().observe(this@AddScheduleActivity) { listTime ->
+                mListTime = setVisibleBtn(binding.timeEndListBtn, listTime.toMutableList().apply {
+                    remove(UtilsChecks.TIME_DISABLE)
+                    sorted()
+                })
             }
         }
     }
 
     override fun onClick(v: View) {
         when(v.id) {
-            R.id.time_btn -> {
+            R.id.time_start_btn -> {
                 CallDialogs.callTimePicker(this@AddScheduleActivity, mSchedule.mWeek, mListTimeAndWeek) { hour, minute ->
                     mSchedule.mTimeStart = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
-                    setSelectedTime()
+                    setSelectedTimeStart()
                 }.show(supportFragmentManager, null)
             }
-            R.id.time_list_btn -> {
+            R.id.time_start_list_btn -> {
                 ListDialog()
                     .setData(UtilsListData.getListTimeDialog(mListTime)) { positionItem ->
                         mSchedule.mTimeStart = mListTime[positionItem]
-                        setSelectedTime()
+                        setSelectedTimeStart()
                     }
                     .show(supportFragmentManager, null)
+            }
+            R.id.time_end_btn -> {
+                CallDialogs.callTimePicker() { hour, minute ->
+                    mSchedule.mTimeEnd = ("$hour" + UtilsConvert.convertToCorrectTime(minute)).toInt()
+                    setSelectedTimeEnd()
+                }.show(supportFragmentManager, null)
+            }
+            R.id.time_end_list_btn -> {
+                ListDialog()
+                        .setData(UtilsListData.getListTimeDialog(mListTime)) { positionItem ->
+                            mSchedule.mTimeEnd = mListTime[positionItem]
+                            setSelectedTimeEnd()
+                        }
+                        .show(supportFragmentManager, null)
             }
             R.id.week_btn -> {
                 ListDialog()
@@ -235,12 +254,15 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun setDataToView() {
         if (mSchedule.mTimeStart != UtilsChecks.TIME_DISABLE) {
-            binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
+            binding.timeStartBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
+        }
+        if (mSchedule.mTimeEnd != UtilsChecks.TIME_DISABLE) {
+            binding.timeEndBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeEnd)
         }
         binding.weekBtn.text = mSchedule.mWeek
     }
 
-    private fun <T> setVisibleBtn(btn: AppCompatImageButton, newList: List<T>): List<T> {
+    private fun <T> setVisibleBtn(btn: AppCompatImageButton, newList: MutableList<T>): List<T> {
         val currentList = nonNullValues(newList.distinct())
         btn.isVisible = currentList.isNotEmpty()
         return currentList
@@ -259,9 +281,13 @@ class AddScheduleActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun setSelectedTime() {
-        binding.timeBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
+    private fun setSelectedTimeStart() {
+        binding.timeStartBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeStart)
         mViewModel.setFabIsVisible(UtilsChecks.checkAddSchedule(mSchedule.mLesson, mSchedule.mTimeStart))
+    }
+
+    private fun setSelectedTimeEnd() {
+        binding.timeEndBtn.text = UtilsConvert.convertTimeIntToString(mSchedule.mTimeEnd)
     }
 
     private fun setSelectedWeek() {

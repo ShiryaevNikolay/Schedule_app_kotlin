@@ -5,6 +5,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="background_text_input">@color/gray_200</color>
+    <color name="divider_color">@color/gray_200</color>
 
     <color name="blue_gray_50">#ECEFF1</color>
     <color name="blue_gray_100">#CFD8DC</color>

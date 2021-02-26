@@ -29,8 +29,10 @@ interface ScheduleDao {
     @Query("SELECT ${UtilsTable.SCHEDULE_COLUMN_EXAM} FROM ${UtilsTable.TABLE_SCHEDULE} ORDER BY ${UtilsTable.SCHEDULE_COLUMN_EXAM}" )
     fun getExams() : LiveData<List<String>>
 
-    @Query("SELECT ${UtilsTable.SCHEDULE_COLUMN_TIMESTART} FROM ${UtilsTable.TABLE_SCHEDULE} ORDER BY ${UtilsTable.SCHEDULE_COLUMN_TIMESTART}" )
-    fun getTimeStart() : LiveData<List<Int>>
+    @Query("SELECT ${UtilsTable.SCHEDULE_COLUMN_TIMESTART} FROM ${UtilsTable.TABLE_SCHEDULE} " +
+            "UNION " +
+            "SELECT ${UtilsTable.SCHEDULE_COLUMN_TIMEEND} FROM ${UtilsTable.TABLE_SCHEDULE}" )
+    fun getTime() : LiveData<List<Int>>
 
     @Query("SELECT ${UtilsTable.SCHEDULE_COLUMN_TIMESTART}, ${UtilsTable.SCHEDULE_COLUMN_WEEK} " +
             "FROM ${UtilsTable.TABLE_SCHEDULE} " +

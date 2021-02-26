@@ -119,14 +119,40 @@
                         app:srcCompat="@drawable/ic_baseline_access_time"/>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/time_btn"
+                        android:id="@+id/time_start_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/default_dimen"
                         android:hint="@string/time_start"/>
 
                     <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/time_list_btn"
+                        android:id="@+id/time_start_list_btn"
+                        android:layout_width="@dimen/icon_button_size"
+                        android:layout_height="@dimen/icon_button_size"
+                        android:background="?android:attr/actionBarItemBackground"
+                        android:src="@drawable/ic_arrow_drop_down"/>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/divider"
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/default_dimen"
+                        android:backgroundTint="@color/divider_color"
+                        app:cardElevation="0dp"
+                        app:cardCornerRadius="1dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/time_end_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/default_dimen"
+                        android:hint="@string/time_end"/>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/time_end_list_btn"
                         android:layout_width="@dimen/icon_button_size"
                         android:layout_height="@dimen/icon_button_size"
                         android:background="?android:attr/actionBarItemBackground"

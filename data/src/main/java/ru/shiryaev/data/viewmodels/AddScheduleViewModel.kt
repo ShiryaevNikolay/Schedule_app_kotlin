@@ -32,7 +32,7 @@ class AddScheduleViewModel : ViewModel() {
 
     fun getFabIsVisible() = mFabIsVisible
 
-    fun getListTimeStart() = mRepository.getTimeStart()
+    fun getListTime() = mRepository.getTime()
 
     fun getTimeStartByDay(mDay: Int) = mRepository.getTimeStartByDay(mDay)
 
