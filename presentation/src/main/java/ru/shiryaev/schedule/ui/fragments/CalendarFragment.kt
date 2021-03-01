@@ -109,7 +109,7 @@ class CalendarFragment : Fragment() {
                 if (binding.root.height > 0 && binding.root.width > 0) {
                     binding.noteBottomSheet.apply {
                         setPeekHeight(binding.root.height - (mTopBarHeight + binding.calendar.height))
-                        setExpandedHeight(binding.root.height - (mTopBarHeight + 122.dp))
+                        setExpandedHeight(binding.root.height - (mTopBarHeight + resources.getDimension(R.dimen.default_dimen).toInt() + 2 * (binding.root.width / 7)))
                     }
                     binding.root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 }
@@ -153,7 +153,4 @@ class CalendarFragment : Fragment() {
                 .setCalendarDisplayMode(mode)
                 .commit()
     }
-
-    private val Int.dp: Int
-        get() = (this * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 }

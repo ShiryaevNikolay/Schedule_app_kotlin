@@ -35,7 +35,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/divider"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="1dp"
                     android:layout_marginHorizontal="@dimen/default_dimen"
                     android:backgroundTint="@color/divider_color"
                     app:cardElevation="0dp"
