@@ -18,7 +18,7 @@ class ItemListColorPickController(
 
     override fun getItemId(data: Any) = data.hashCode().toString()
 
-    inner class Holder(parent: ViewGroup) : BindableViewHolder<Any>(parent, R.layout.layout_recycler_view) {
+    inner class Holder(parent: ViewGroup) : BindableViewHolder<Any>(parent) {
 
         private val mRecyclerView: RecyclerView = itemView.findViewById(R.id.recycler_view)
         private val mEasyAdapter = EasyAdapter()

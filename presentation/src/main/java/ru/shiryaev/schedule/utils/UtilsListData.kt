@@ -10,7 +10,7 @@ import java.util.ArrayList
 object UtilsListData {
 
     fun getListScheduleDialog(context: Context) = arrayListOf(
-        ItemDialog(icon = R.drawable.ic_pencil_outline, text = context.resources.getStringArray(R.array.list_dialog)[0]),
+        ItemDialog(icon = R.drawable.ic_edit, text = context.resources.getStringArray(R.array.list_dialog)[0]),
         ItemDialog(icon = R.drawable.ic_trash_can_outline, text = context.resources.getStringArray(R.array.list_dialog)[1])
     )
 

@@ -40,7 +40,7 @@ class CustomItemSchedule(
     private val mDivider: MaterialCardView
 
     init {
-        inflate(context, R.layout.custom_card_schedule, this)
+        inflate(context, R.layout.card_schedule, this)
 
         mCardLayout = this.findViewById(R.id.item_card)
         lessonTv = this.findViewById(R.id.lesson_schedule_tv)
