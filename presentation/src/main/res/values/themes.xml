@@ -28,5 +28,6 @@
         <item name="materialTimePickerTheme">@style/MaterialTimePickerTheme</item>
         <item name="materialTimePickerStyle">@style/MaterialTimePickerTheme</item>
         <item name="floatingActionButtonStyle">@style/FabStyle</item>
+        <item name="extendedFloatingActionButtonStyle">@style/ExtendedFabStyle</item>
     </style>
 </resources>

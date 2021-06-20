@@ -9,7 +9,7 @@
     <dimen name="corner">15dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="icon_field_margin">25dp</dimen>
-    <dimen name="margin_vertical">15dp</dimen>
+    <dimen name="margin_vertical">10dp</dimen>
     <dimen name="margin_card">12dp</dimen>
     <dimen name="icon_size">24dp</dimen>
     <dimen name="dialog_dimen">20dp</dimen>

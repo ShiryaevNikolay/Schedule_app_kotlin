@@ -8,15 +8,13 @@ object NavigationFragment {
 
     fun navigate(controller: NavController, fragmentRoute: FragmentRoute, bundle: Bundle) {
         when (fragmentRoute) {
-            is CreateScheduleFragmentRoute,
-            is EditScheduleFragmentRoute-> {
+            is CreateScheduleFragmentRoute -> {
                 controller.navigate(
                     R.id.action_mainScreen_to_addScheduleScreen,
                     bundle
                 )
             }
-            is CreateNoteFragmentRoute,
-            is EditNoteFragmentRoute-> {
+            is CreateNoteFragmentRoute -> {
                 controller.navigate(
                     R.id.action_mainScreen_to_addNoteScreen,
                     bundle

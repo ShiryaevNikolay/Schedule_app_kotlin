@@ -8,7 +8,7 @@
     <string name="lesson">Lesson</string>
     <string name="teacher">Teacher</string>
     <string name="audit">Auditorium</string>
-    <string name="time_start">Start</string>
+    <string name="time_start">*Start</string>
     <string name="time_end">End</string>
     <string name="type_of_certification">Type of certification</string>
     <string name="every_week">Every week</string>

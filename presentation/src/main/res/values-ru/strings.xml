@@ -9,7 +9,7 @@
     <string name="lesson">Занятие</string>
     <string name="teacher">Преподаватель</string>
     <string name="audit">Аудитория</string>
-    <string name="time_start">Начало</string>
+    <string name="time_start">*Начало</string>
     <string name="time_end">Конец</string>
     <string name="type_of_certification">Тип аттестации</string>
     <string name="every_week">Каждую неделю</string>

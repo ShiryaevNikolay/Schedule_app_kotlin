@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import ru.shiryaev.domain.utils.UtilsKeys
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.common.adapters.ViewPagerAdapter
-import ru.shiryaev.schedule.common.navigation.CreateNoteFragmentRoute
+import ru.shiryaev.schedule.common.navigation.CreateScheduleFragmentRoute
 import ru.shiryaev.schedule.common.navigation.FragmentClass
 import ru.shiryaev.schedule.common.navigation.NavigationFragment
 import ru.shiryaev.schedule.databinding.FrEditPageBinding
@@ -69,7 +69,7 @@ class EditPageFragment: Fragment(), View.OnClickListener {
                 )
                 NavigationFragment.navigate(
                     navControllerMain!!,
-                    CreateNoteFragmentRoute(FragmentClass.CREATE_SCHEDULE),
+                    CreateScheduleFragmentRoute(FragmentClass.CREATE_SCHEDULE),
                     bundle
                 )
             }
