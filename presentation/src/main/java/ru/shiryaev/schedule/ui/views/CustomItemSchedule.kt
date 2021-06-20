@@ -97,17 +97,17 @@ class CustomItemSchedule(
 
         mCardLayout.setOnClickListener { onClickListener?.invoke(data) }
 
-        when(screen) {
-            EditScheduleFragment.TAG -> {
-                mCardLayout.setOnLongClickListener {
-                    onLongClickListener?.invoke(data)
-                    true
-                }
-            }
-            ScheduleFragment.TAG -> {
-                mIndicatorWeek.isVisible = false
-                mIndicatorCardWeek.isVisible = false
-            }
-        }
+//        when(screen) {
+//            EditScheduleFragment.TAG -> {
+//                mCardLayout.setOnLongClickListener {
+//                    onLongClickListener?.invoke(data)
+//                    true
+//                }
+//            }
+//            ScheduleFragment.TAG -> {
+//                mIndicatorWeek.isVisible = false
+//                mIndicatorCardWeek.isVisible = false
+//            }
+//        }
     }
 }

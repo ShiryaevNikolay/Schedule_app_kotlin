@@ -10,7 +10,6 @@ import ru.shiryaev.domain.utils.UtilsConvert
 import ru.shiryaev.domain.utils.sortWeeks
 import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.ui.views.CustomItemSchedule
-import ru.shiryaev.schedule.ui.views.CustomTimeLine
 import ru.surfstudio.android.easyadapter.controller.BindableItemController
 import ru.surfstudio.android.easyadapter.holder.BindableViewHolder
 
@@ -34,42 +33,42 @@ class ItemScheduleController(
 
     inner class Holder(parent: ViewGroup) : BindableViewHolder<ArrayList<Schedule>>(parent, R.layout.item_schedule) {
 
-        private val mTimeContainer = itemView.findViewById<CustomTimeLine>(R.id.item_time_container)
+//        private val mTimeContainer = itemView.findViewById<CustomTimeLine>(R.id.item_time_container)
         private val mContainer = itemView.findViewById<LinearLayoutCompat>(R.id.item_container)
         private val mLineTop = itemView.findViewById<FrameLayout>(R.id.line_top)
         private val mLineBottom = itemView.findViewById<FrameLayout>(R.id.line_bottom)
 
         override fun bind(data: ArrayList<Schedule>) {
-            mTimeContainer.apply {
-                setTimeStart(UtilsConvert.convertTimeIntToString(data.first().mTimeStart))
-                setTimeEnd(UtilsConvert.convertTimeIntToString(data.first().mTimeEnd))
-                setTimeEndVisible(screen)
-            }
+//            mTimeContainer.apply {
+//                setTimeStart(UtilsConvert.convertTimeIntToString(data.first().mTimeStart))
+//                setTimeEnd(UtilsConvert.convertTimeIntToString(data.first().mTimeEnd))
+//                setTimeEndVisible(screen)
+//            }
 
             when {
                 countItem == 1 -> {
-                    mTimeContainer.apply {
-                        mLineTop.visibility = View.INVISIBLE
-                        mLineBottom.visibility = View.INVISIBLE
-                    }
+//                    mTimeContainer.apply {
+//                        mLineTop.visibility = View.INVISIBLE
+//                        mLineBottom.visibility = View.INVISIBLE
+//                    }
                 }
                 adapterPosition == 0 -> {
-                    mTimeContainer.apply {
-                        mLineTop.visibility = View.INVISIBLE
-                        mLineBottom.visibility = View.VISIBLE
-                    }
+//                    mTimeContainer.apply {
+//                        mLineTop.visibility = View.INVISIBLE
+//                        mLineBottom.visibility = View.VISIBLE
+//                    }
                 }
                 adapterPosition == countItem - 1 -> {
-                    mTimeContainer.apply {
-                        mLineTop.visibility = View.VISIBLE
-                        mLineBottom.visibility = View.INVISIBLE
-                    }
+//                    mTimeContainer.apply {
+//                        mLineTop.visibility = View.VISIBLE
+//                        mLineBottom.visibility = View.INVISIBLE
+//                    }
                 }
                 else -> {
-                    mTimeContainer.apply {
-                        mLineTop.visibility = View.VISIBLE
-                        mLineBottom.visibility = View.VISIBLE
-                    }
+//                    mTimeContainer.apply {
+//                        mLineTop.visibility = View.VISIBLE
+//                        mLineBottom.visibility = View.VISIBLE
+//                    }
                 }
             }
 

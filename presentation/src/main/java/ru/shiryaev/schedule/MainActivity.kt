@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         val host = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = host.navController
-        binding.homeScreenBnv.setupWithNavController(navController)
+//        binding.homeScreenBnv.setupWithNavController(navController)
     }
 
     private fun setTheme() {

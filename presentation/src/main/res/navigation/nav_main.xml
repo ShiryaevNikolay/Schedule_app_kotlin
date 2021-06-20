@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/nav_main"
+    app:startDestination="@id/mainScreen">
+
+    <fragment
+        android:id="@+id/mainScreen"
+        android:name="ru.shiryaev.schedule.ui.fragments.screens.MainScreenFragment"
+        android:label="MainScreenFragment" >
+        <action
+            android:id="@+id/action_mainScreen_to_addScheduleScreen"
+            app:destination="@id/addScheduleScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_addNoteScreen"
+            app:destination="@id/addNoteScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/addScheduleScreen"
+        android:name="ru.shiryaev.schedule.ui.fragments.screens.AddScheduleScreenFragment"
+        android:label="AddScheduleScreenFragment" />
+    <fragment
+        android:id="@+id/addNoteScreen"
+        android:name="ru.shiryaev.schedule.ui.fragments.screens.AddNoteScreenFragment"
+        android:label="AddNoteScreenFragment" />
+</navigation>
