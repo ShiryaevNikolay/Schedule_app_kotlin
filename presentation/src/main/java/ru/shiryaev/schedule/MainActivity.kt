@@ -1,14 +1,12 @@
-package ru.shiryaev.schedule.ui
+package ru.shiryaev.schedule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
-import ru.shiryaev.schedule.R
 import ru.shiryaev.schedule.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +22,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         // Реклама - начало
-        MobileAds.initialize(this)
-        binding.adView.loadAd(AdRequest.Builder().build())
+//        MobileAds.initialize(this)
+//        binding.adView.loadAd(AdRequest.Builder().build())
         // Реклама - конец
 
         setContentView(binding.root)

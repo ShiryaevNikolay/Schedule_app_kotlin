@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_vertical">
+        android:padding="@dimen/default_dimen">
 
         <ru.shiryaev.schedule.ui.views.TextField
             android:id="@+id/field"

@@ -1,12 +1,10 @@
 package ru.shiryaev.schedule.ui.dialogs
 
 import android.content.Context
-import ru.shiryaev.domain.models.Week
 import ru.shiryaev.domain.utils.UtilsKeys
 import ru.shiryaev.schedule.common.controllers.ItemButtonDialogController
 import ru.shiryaev.schedule.common.controllers.ItemHeaderDialogController
 import ru.shiryaev.schedule.common.controllers.ItemListColorPickController
-import ru.shiryaev.schedule.ui.fragments.WeeksSettingsFragment
 import ru.surfstudio.android.easyadapter.ItemList
 
 class ColorPickerDialog : CustomDialog() {

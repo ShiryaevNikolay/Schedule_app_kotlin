@@ -17,7 +17,7 @@ class ItemListDialogController(
 
     override fun getItemId(data: ItemDialog) = data.text.hashCode().toString()
 
-    inner class Holder(parent: ViewGroup) : BindableViewHolder<ItemDialog>(parent, R.layout.custom_item_dialog) {
+    inner class Holder(parent: ViewGroup) : BindableViewHolder<ItemDialog>(parent, R.layout.item_dialog) {
 
         private lateinit var data: ItemDialog
         private val textTv: AppCompatTextView = itemView.findViewById(R.id.text_item_dialog)

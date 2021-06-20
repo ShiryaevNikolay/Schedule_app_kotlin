@@ -12,7 +12,7 @@ class ItemHeaderDialogController : BindableItemController<String, ItemHeaderDial
 
     override fun getItemId(data: String) = data.hashCode().toString()
 
-    inner class Holder(parent: ViewGroup) : BindableViewHolder<String>(parent, R.layout.custom_header_dialog) {
+    inner class Holder(parent: ViewGroup) : BindableViewHolder<String>(parent, R.layout.header_dialog) {
 
         private val headerTv: MaterialTextView = itemView.findViewById(R.id.header_tv)
 

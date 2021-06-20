@@ -3,7 +3,6 @@ package ru.shiryaev.schedule.tools.adapters
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import ru.shiryaev.schedule.ui.fragments.PageScheduleFragment
 import ru.shiryaev.domain.utils.UtilsKeys
 
 class ViewPagerAdapter(

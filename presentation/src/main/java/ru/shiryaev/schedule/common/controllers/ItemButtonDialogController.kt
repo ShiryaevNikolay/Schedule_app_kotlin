@@ -17,7 +17,7 @@ class ItemButtonDialogController(
 
     override fun getItemId(data: List<String>) = data.hashCode().toString()
 
-    inner class Holder(parent: ViewGroup) : BindableViewHolder<List<String>>(parent, R.layout.custom_layout_button_dialog) {
+    inner class Holder(parent: ViewGroup) : BindableViewHolder<List<String>>(parent, R.layout.layout_button_dialog) {
 
         private var mData = listOf<String>()
 

@@ -15,7 +15,7 @@ class ItemFieldDialogController(
 
     override fun getItemId(data: String) = data.hashCode().toString()
 
-    inner class Holder(parent: ViewGroup) : BindableViewHolder<String>(parent, R.layout.custom_field_dialog) {
+    inner class Holder(parent: ViewGroup) : BindableViewHolder<String>(parent, R.layout.field_dialog) {
 
         private val mField: TextField = itemView.findViewById(R.id.field)
 

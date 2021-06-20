@@ -3,16 +3,12 @@ package ru.shiryaev.schedule.common.controllers
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.fragment.app.Fragment
 import ru.shiryaev.domain.models.Schedule
 import ru.shiryaev.domain.models.Week
 import ru.shiryaev.domain.utils.UtilsConvert
 import ru.shiryaev.domain.utils.sortWeeks
 import ru.shiryaev.schedule.R
-import ru.shiryaev.schedule.ui.fragments.EditScheduleFragment
-import ru.shiryaev.schedule.ui.fragments.HomeFragment
 import ru.shiryaev.schedule.ui.views.CustomItemSchedule
 import ru.shiryaev.schedule.ui.views.CustomTimeLine
 import ru.surfstudio.android.easyadapter.controller.BindableItemController

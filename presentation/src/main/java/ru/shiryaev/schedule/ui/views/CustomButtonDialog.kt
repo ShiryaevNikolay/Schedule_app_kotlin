@@ -18,7 +18,7 @@ class CustomButtonDialog(context: Context) : TableRow(context) {
                 1F
         )
 
-        inflate(context, R.layout.custom_button_dialog, this)
+        inflate(context, R.layout.button_dialog, this)
 
         mButton = this.findViewById(R.id.item_btn)
         mTextBtn = this.findViewById(R.id.text_btn)

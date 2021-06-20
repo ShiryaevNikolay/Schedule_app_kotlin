@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.util.TypedValue
 import android.view.View
 import android.widget.TableRow
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isVisible
@@ -17,8 +16,6 @@ import ru.shiryaev.domain.models.Week
 import ru.shiryaev.domain.utils.UtilsChecks
 import ru.shiryaev.domain.utils.UtilsConvert
 import ru.shiryaev.schedule.R
-import ru.shiryaev.schedule.ui.fragments.EditScheduleFragment
-import ru.shiryaev.schedule.ui.fragments.ScheduleFragment
 
 @SuppressLint("ViewConstructor")
 class CustomItemSchedule(

@@ -10,7 +10,7 @@
         android:id="@+id/layout_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/corner"
+        app:cardCornerRadius="@dimen/default_dimen"
         app:cardUseCompatPadding="true"
         app:cardElevation="0dp">
 

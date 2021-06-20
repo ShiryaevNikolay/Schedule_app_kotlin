@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:navigationBarColor" tools:targetApi="1">?android:attr/colorBackground</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
-        <item name="android:colorBackground">@color/black_background</item>
+        <item name="android:colorBackground">@color/bg_dark</item>
         <item name="bottomNavigationStyle">@style/BNViewStyle</item>
         <item name="materialButtonStyle">@style/ButtonStyle</item>
         <item name="buttonBarButtonStyle">@style/ButtonStyle</item>

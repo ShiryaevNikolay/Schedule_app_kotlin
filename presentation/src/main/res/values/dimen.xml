@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="default_dimen">10dp</dimen>
+    <dimen name="default_dimen">16dp</dimen>
     <dimen name="half_default_dimen">5dp</dimen>
     <dimen name="bar_elevation">5dp</dimen>
     <dimen name="elevation">3dp</dimen>
@@ -18,7 +18,7 @@
     <dimen name="timeline_width">60dp</dimen>
     <dimen name="margin_text">5dp</dimen>
 
-    <dimen name="text_secondary">13sp</dimen>
+    <dimen name="text_secondary">14sp</dimen>
 
     <dimen name="toolbar_title_size">18sp</dimen>
     <dimen name="toolbar_subtitle_size">14sp</dimen>

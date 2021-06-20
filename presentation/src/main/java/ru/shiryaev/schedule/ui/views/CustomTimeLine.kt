@@ -2,15 +2,10 @@ package ru.shiryaev.schedule.ui.views
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import ru.shiryaev.schedule.R
-import ru.shiryaev.schedule.ui.fragments.EditScheduleFragment
-import ru.shiryaev.schedule.ui.fragments.HomeFragment
-import ru.shiryaev.schedule.ui.fragments.ScheduleFragment
 
 class CustomTimeLine @JvmOverloads constructor(
     context: Context,
