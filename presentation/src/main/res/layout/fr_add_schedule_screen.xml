@@ -45,6 +45,17 @@
                     app:endIconMode="custom"/>
 
                 <ru.shiryaev.schedule.ui.views.TextField
+                    android:id="@+id/ty_of_lesson_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextInputStyle"
+                    style="@style/TextInputStyle"
+                    android:layout_marginTop="@dimen/margin_vertical"
+                    app:hint="@string/type_of_lesson"
+                    app:endIconDrawable="@drawable/ic_arrow_drop_down"
+                    app:endIconMode="custom"/>
+
+                <ru.shiryaev.schedule.ui.views.TextField
                     android:id="@+id/teacher_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

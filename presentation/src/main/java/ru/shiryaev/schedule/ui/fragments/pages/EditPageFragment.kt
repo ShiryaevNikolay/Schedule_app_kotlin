@@ -19,7 +19,7 @@ import ru.shiryaev.schedule.databinding.FrEditPageBinding
 
 class EditPageFragment: Fragment(), View.OnClickListener {
 
-    private var mCountPage = 6
+    private var mCountPage = 7
 
     private var _binding: FrEditPageBinding? = null
     private val binding get() = _binding!!

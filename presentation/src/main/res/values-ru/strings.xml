@@ -7,6 +7,7 @@
     <string name="notes">Заметки</string>
     <string name="add_schedule">Добавить занятие</string>
     <string name="lesson">Занятие</string>
+    <string name="type_of_lesson">Тип занятия</string>
     <string name="teacher">Преподаватель</string>
     <string name="audit">Аудитория</string>
     <string name="time_start">*Начало</string>
