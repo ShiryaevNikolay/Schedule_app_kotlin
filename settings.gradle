@@ -1,2 +1,3 @@
-rootProject.name = "Schedule_app_kotlin"
+apply from: 'config.gradle'
+
 include ':app'
