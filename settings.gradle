@@ -1,4 +1,2 @@
-include ':domain'
-include ':data'
-include ':presentation'
-rootProject.name = "Schedule"
+rootProject.name = "Schedule_app_kotlin"
+include ':app'
