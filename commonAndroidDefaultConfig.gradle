@@ -9,7 +9,7 @@ android {
     defaultConfig {
         minSdkVersion meta.minSdkVersion
         targetSdkVersion meta.targetSdkVersion
-        vertorDrawable.useSupportLibrary = true
+        vectorDrawables.useSupportLibrary = true
     }
 
     lintOptions {
