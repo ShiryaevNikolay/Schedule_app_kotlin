@@ -1,3 +1,4 @@
 apply from: 'config.gradle'
 
-include ':app'
+include ':app',
+        ':domain'
