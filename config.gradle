@@ -1,0 +1,53 @@
+ext {
+    applicationName = "Timetable for classes"
+
+    versions = [
+            gradlePluginVersion        : '4.2.2',
+            buildToolsVersion          : '30.0.3',
+            kotlinVersion              : '1.5.20',
+            jetbrainsAnnotationsVersion: '21.0.1',
+            androidxVersion            : '1.3.0',
+            androidxAnnotationVersion  : '1.2.0'
+    ]
+
+    app = [
+            applicationId: "ru.shiryaev.schedule",
+            versionName  : "1.0",
+            versionCode  : 1
+    ]
+
+    meta = [
+            minSdkVersion    : 21,
+            targetSdkVersion : 30,
+            compileSdkVersion: 30,
+    ]
+
+    build = [
+            plugin: [
+                    tools: "com.android.tools.build:gradle:${versions.gradlePluginVersion}"
+            ]
+    ]
+
+    lang = [
+            kotlinStdLib        : "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlinVersion}",
+            jetbrainsAnnotations: "org.jetbrains:annotations:${versions.jetbrainsAnnotationsVersion}",
+            plugin      : [
+                    kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlinVersion}"
+            ]
+    ]
+
+    di = []
+
+    androidX = [
+            appcompat : "androidx.appcompat:appcompat:${versions.androidxVersion}",
+            annotation: "androidx.annotation:annotation:${versions.androidxAnnotationVersion}"
+    ]
+
+    okHttp = []
+
+    retrofit = []
+
+    rxBinding2 = []
+
+    view = []
+}
