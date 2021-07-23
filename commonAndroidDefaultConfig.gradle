@@ -4,11 +4,12 @@ apply from: '../config.gradle'
 
 android {
     compileSdkVersion meta.compileSdkVersion
-    buildToolsVersion buildToolsVersion
+    buildToolsVersion versions.buildToolsVersion
 
     defaultConfig {
         minSdkVersion meta.minSdkVersion
         targetSdkVersion meta.targetSdkVersion
+//        buildConfigField "String", "YANDEX_METRICA_KEY", '"8fceaafe-2675-4c38-bb35-49af39a71a53"'
         vectorDrawables.useSupportLibrary = true
     }
 

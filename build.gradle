@@ -1,34 +1,71 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+//// Top-level build file where you can add configuration options common to all sub-projects/modules.
+//buildscript {
+//    ext.kotlin_version = "1.5.21"
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath "com.android.tools.build:gradle:4.2.2"
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//
+//        // NOTE: Do not place your application dependencies here; they belong
+//        // in the individual module build.gradle files
+//    }
+//}
+//
+//allprojects {
+//    repositories {
+//        google()
+//        mavenCentral()
+//        jcenter() // Warning: this repository is going to shut down soon
+//    }
+//}
+//
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
+
 buildscript {
     apply from: 'config.gradle'
 
     repositories {
         google()
-        mavenCentral()
+//        jcenter()
+        maven { url 'https://plugins.gradle.org/m2/' }
         maven { url 'https://artifactory.surfstudio.ru/artifactory/libs-release-local' }
+//        maven { url 'http://developer.huawei.com/repo/' }
     }
+
     dependencies {
         classpath lang.plugin.kotlin
         classpath build.plugin.tools
-
-//        if (!gradle.ext.androidStandart.debugEnabled) {
-//            classpath "ru.surfstudio.android:version-plugin:${versions.androidStandartVersion}"
-//        }
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath build.plugin.scan
+        classpath build.plugin.services
+        classpath firebase.plugin.crashlytics
+        classpath firebase.plugin.appDistribution
+        classpath firebase.plugin.perfomanceMonitor
+//        classpath huawei.agcp
+        if (!gradle.ext.androidStandard.debugEnabled) {
+            classpath "ru.surfstudio.android:version-plugin:${versions.androidStandardVersion}"
+        }
     }
 }
 
 allprojects {
     repositories {
         google()
-        mavenCentral()
-//        jcenter() // Warning: this repository is going to shut down soon
-        maven { url 'https://artifactory.surfstudio.ru/artifactory/libs-release-local' }
+//        jcenter()
+        maven { url "https://artifactory.surfstudio.ru/artifactory/libs-release-local" }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://developer.huawei.com/repo/' }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+apply from: "scripts/dependenciesModules.gradle"
+apply from: "scripts/ktFormatter.gradle"
+apply from: "androidStandardPlugin.gradle"

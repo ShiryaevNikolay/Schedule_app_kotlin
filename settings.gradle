@@ -1,4 +1,6 @@
 apply from: 'config.gradle'
 
-include ':app',
-        ':domain'
+include ':app'
+
+apply from: 'android-standard/androidStandardSettings.gradle'
+apply from: 'buildCache.gradle'

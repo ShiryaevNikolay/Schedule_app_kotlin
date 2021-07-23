@@ -1,22 +1,22 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-
-apply from: '../config.gradle'
-
-apply from: '../commonAndroidDefaultConfig.gradle'
-
-android {
-    defaultConfig {
-        applicationId meta.applicationId
-
-        versionCode app.versionCode
-        versionName app.versionName
-
-        setProperty("archivesBaseName", "$applicationName-$versionName-($versionCode)")
-    }
-
+//plugins {
+//    id 'com.android.application'
+//    id 'kotlin-android'
+//}
+//
+//android {
+//    compileSdkVersion 30
+//    buildToolsVersion "30.0.3"
+//
+//    defaultConfig {
+//        applicationId "ru.shiryaev.schedule"
+//        minSdkVersion 21
+//        targetSdkVersion 30
+//        versionCode 1
+//        versionName "1.0"
+//
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+//    }
+//
 //    buildTypes {
 //        release {
 //            minifyEnabled false
@@ -30,14 +30,105 @@ android {
 //    kotlinOptions {
 //        jvmTarget = '1.8'
 //    }
+//}
+//
+//dependencies {
+//
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    implementation 'androidx.core:core-ktx:1.6.0'
+//    implementation 'androidx.appcompat:appcompat:1.3.0'
+//    implementation 'com.google.android.material:material:1.4.0'
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+//}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.appdistribution'
+apply plugin: 'com.google.firebase.firebase-perf'
+
+apply from: '../config.gradle'
+
+apply from: '../setLabelToIcon.gradle'
+apply from: '../validateCrossFeatureRoutes.gradle.kts'
+apply from: '../keystore/signingConfigs.gradle'
+apply from: '../buildTypes.gradle'
+apply from: '../commonAndroidDefaultConfig.gradle'
+apply from: '../androidTestConfiguration.gradle'
+
+android {
+
+    defaultConfig {
+        applicationId meta.applicationId
+
+        versionCode app.versionCode
+        versionName app.versionName
+
+        setProperty("archivesBaseName", "$applicationName-$versionName-($versionCode)")
+
+        testBuildType 'qa'
+//        manifestPlaceholders = [YANDEX_CLIENT_ID: "e045ad799d164d529dc5d764e0f128c5"]
+    }
 }
 
 dependencies {
+//    implementation project(":i-push-notification")
+//    implementation project(":f-auth")
+//    implementation project(":f-main")
+//    implementation project(":f-splash")
+//    implementation project(":f-catalog")
+//    implementation project(":f-brand")
+//    implementation project(":f-feed")
+//    implementation project(":f-profile")
+//    implementation project(":f-onboard")
+//    implementation project(":f-change-city")
+//    implementation project(':f-dadata')
+//    implementation project(":f-card")
+//    implementation project(":f-orders")
+//    implementation project(":f-products")
+//    implementation project(":f-product-details")
+//    implementation project(":f-purchase")
+//    implementation project(":f-map")
+//    implementation project(":f-place")
+//    implementation project(":f-promotions")
+//    implementation project(":f-promotion-details")
+//    implementation project(":f-filter")
+//    implementation project(":f-favorite")
+//    implementation project(":f-webview")
+//    implementation project(":f-address")
+//    implementation project(":f-gift-card")
+//    implementation project(":f-checkout")
+//    implementation project(":f-card-payment")
+//    implementation project(":f-cart")
+//    implementation project(":f-cart-correction")
+//    implementation project(":f-components")
+//    implementation project(":f-new-discount-card")
+//    implementation project(":f-my-discount-cards")
+//    implementation project(":f-range-picker")
+//    implementation project(":f-card-payment")
+//    implementation project(":f-search")
+//    implementation project(":f-force-update")
+//    implementation project(":cf-add-to-cart")
+//    implementation project(":cf-location")
+//    implementation project(":cf-otp")
+//    implementation project(":cf-promocode")
+//    implementation project(':cf-variants-carousel')
+//    implementation project(':cf-variants-dialog')
+
     implementation lang.kotlinStdLib
     implementation lang.jetbrainsAnnotations
 
+    implementation di.dagger
+    kapt di.daggerKapt
+
     implementation androidX.annotation
     implementation androidX.appcompat
+
+    implementation huawei.core
 }
 
 configurations.all {
@@ -45,6 +136,8 @@ configurations.all {
     resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
 }
 
+apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.huawei.agconnect'
 //agcp {
 //    mappingUpload = true
 //    debug = true

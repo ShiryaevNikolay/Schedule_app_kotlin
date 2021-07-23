@@ -6,9 +6,20 @@ apply from: '../config.gradle'
 apply from: '../commonAndroidDefaultConfig.gradle'
 
 android {
+
     buildTypes {
+        qa {
+            multiDexEnabled true
+            minifyEnabled true
+            debuggable = true
+            // сопоставление buildType.qa к buildType.release для корректного подключения локального android-standard
+            matchingFallbacks = ['release']
+
+            buildConfigField "boolean", "IS_DEBUG", "true"
+        }
+
         debug {
-            multiDexEnable true
+            multiDexEnabled true
             debuggable = true
 
             buildConfigField "boolean", "IS_DEBUG", "true"
@@ -25,7 +36,7 @@ android {
         main {
             java.srcDirs += 'src/main/kotlin/'
             test.java.srcDirs += 'src/test/kotlin'
-            androidTest.java.srcDird += 'src/androidTest/kotlin'
+            androidTest.java.srcDirs += 'src/androidTest/kotlin'
         }
     }
 }
@@ -33,5 +44,5 @@ android {
 dependencies {
     implementation lang.kotlinStdLib
     implementation lang.annimonStream
-//    implementation di.javaInject
+    implementation di.javaInject
 }
