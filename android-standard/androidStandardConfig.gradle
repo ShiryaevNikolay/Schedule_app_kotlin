@@ -32,35 +32,35 @@ try {
 gradle.ext {
     androidStandard = [
             debugDir : androidStandardDebugDir,
-            debugMode: androidStandardDebugMode
+            debugMode: androidStandardDebugMode,
     ]
 
     // Флаг, проверяющий, активирован ли режим локальной загрузки модулей android-standard
     androidStandard.debugEnabled = gradle.ext.androidStandard.debugDir != null && gradle.ext.androidStandard.debugMode
 
     /**
-     * Функции для подключения модулей android-standard
-     * @peram context                контекст вызова функции
-     * @peram androidStandardVersion версия подключаемых модулей android-standard
-     * @peram modules                список подключаемых модулей android-standard
-     * @peram closure                функция, которая будет вызвана для каждого модуля;
+     * Функция для подключения модулей android-standard
+     * @param context                контекст вызова функции
+     * @param androidStandardVersion версия подключаемых модулей android-standard
+     * @param modules                список подключаемых модулей android-standard
+     * @param closure                функция, которая будет вызвана для каждого модуля;
      * может использоваться для настройки подключения модулей, например: { exclude group: 'groupname' }
-     * @peram sourceType             тип подключения модулей android-standard
+     * @param sourceType             тип подключения модулей android-standard
      */
     androidStandard.api = {
         context,
         modules,
         closure = null,
-        sourceType = ModuleSourceType.SETTINGS_DEFINED.toString () ->
+        sourceType = ModuleSourceType.SETTINGS_DEFINED.toString() ->
 
             def isRemoteModules
 
             switch (sourceType.toUpperCase() as ModuleSourceType) {
                 case ModuleSourceType.SETTINGS_DEFINED:
-                    isRemoteModules = !grable.ext.androidStandard.debugEnabled
+                    isRemoteModules = !gradle.ext.androidStandard.debugEnabled
                     break
                 case ModuleSourceType.LOCAL:
-                    isRemoteModules = true
+                    isRemoteModules = false
                     break
                 case ModuleSourceType.REMOTE:
                     isRemoteModules = true
@@ -100,14 +100,14 @@ gradle.ext {
 }
 
 /**
- * Перечисление, задающее источник, откуда будут подключаться домули android-standard
+ * Перечисление, задающее источник, откуда будут подключаться модули android-standard
  */
 enum ModuleSourceType {
 
     // подключение модулей из artifactory
     REMOTE("REMOTE"),
 
-    // локальное подулючение модулей
+    // локальное подключение модулей
     LOCAL("LOCAL"),
 
     // подключение модулей в соответствии с настройками файла androidStandard.properties

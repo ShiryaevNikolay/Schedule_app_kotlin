@@ -1,5 +1,5 @@
 apply plugin: 'kotlin-kapt'
-apply from: 'unitTestTaskExtensions.gradle'
+apply from: '../unitTestTaskExtensions.gradle'
 android {
     testOptions {
         unitTests {

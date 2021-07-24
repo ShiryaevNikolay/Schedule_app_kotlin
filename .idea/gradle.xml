@@ -11,6 +11,27 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base_feature" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/f-auth" />
+            <option value="$PROJECT_DIR$/f-debug" />
+            <option value="$PROJECT_DIR$/f-debug-no-op" />
+            <option value="$PROJECT_DIR$/f-feed" />
+            <option value="$PROJECT_DIR$/f-main" />
+            <option value="$PROJECT_DIR$/f-onboarding" />
+            <option value="$PROJECT_DIR$/f-profile" />
+            <option value="$PROJECT_DIR$/f-search" />
+            <option value="$PROJECT_DIR$/f-splash" />
+            <option value="$PROJECT_DIR$/i-auth" />
+            <option value="$PROJECT_DIR$/i-initialization" />
+            <option value="$PROJECT_DIR$/i-network" />
+            <option value="$PROJECT_DIR$/i-onboarding" />
+            <option value="$PROJECT_DIR$/i-push-notification" />
+            <option value="$PROJECT_DIR$/i-session" />
+            <option value="$PROJECT_DIR$/i-token" />
+            <option value="$PROJECT_DIR$/small-test-utils" />
+            <option value="$PROJECT_DIR$/v-message-controller-top" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

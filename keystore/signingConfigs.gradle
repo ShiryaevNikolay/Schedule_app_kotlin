@@ -2,6 +2,7 @@
 
 android {
     signingConfigs {
+        //todo настроить релизную подпись приложения
         release {
             apply from: '../keystore/keystoreConfig.gradle'
 
@@ -12,10 +13,10 @@ android {
         }
 
         test {
-//            storeFile file("../keystore/test.keystore")
-//            storePassword "qatest"
-//            keyAlias "test"
-//            keyPassword "qatest"
+            storeFile file("../keystore/test.keystore")
+            storePassword "qatest"
+            keyAlias "test"
+            keyPassword "qatest"
         }
     }
 }

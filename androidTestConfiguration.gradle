@@ -7,7 +7,7 @@ android {
 
 dependencies {
     //instrumental test
-//    androidTestImplementation project(":base")
+    androidTestImplementation project(":base")
     androidTestImplementation androidTest.core
     androidTestImplementation androidTest.extJunit
     androidTestImplementation androidTest.testRunner

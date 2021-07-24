@@ -1,22 +1,20 @@
 import groovy.util.slurpersupport.GPathResult
-import org.w3c.dom.Document
-import org.w3c.dom.Element
 
+import javax.xml.parsers.*
+import javax.xml.transform.*
+import javax.xml.transform.dom.*
+import javax.xml.transform.stream.*
+import org.w3c.dom.*
 import javax.imageio.ImageIO
-import javax.xml.parsers.DocumentBuilder
-import javax.xml.parsers.DocumentBuilderFactory
-import javax.xml.parsers.ParserConfigurationException
-import javax.xml.transform.OutputKeys
-import javax.xml.transform.Transformer
-import javax.xml.transform.TransformerException
-import javax.xml.transform.TransformerFactory
-import javax.xml.transform.dom.DOMSource
-import javax.xml.transform.stream.StreamResult
-import java.awt.*
+import java.awt.Color
+import java.awt.Font
+import java.awt.FontMetrics
+import java.awt.Graphics2D
+import java.awt.RenderingHints
 import java.awt.image.BufferedImage
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
-import java.util.List
+import org.slf4j.Logger
 
 task changeIcon
 
@@ -26,7 +24,7 @@ tasks.whenTaskAdded { Task task ->
         if (task.name.contains("merge${Utils.capitalize(buildVariant)}Resources")) {
             task.dependsOn(changeIcon)
             changeIcon.doFirst {
-                new IconService(buildVariant, logger).change()
+                new IconService(buildVariant, app.versionName, logger).change()
                 android.sourceSets.findByName(buildVariant).res.srcDir(
                         new File("${project.buildDir}/$IconService.GENERATED_PATH/$buildVariant/res")
                 )
@@ -41,13 +39,14 @@ tasks.whenTaskAdded { Task task ->
  * It works only with png images and Surf architecture
  *
  * @param buildVariant - gradle build variant
+ * @param versionName - application's version
  */
 class IconService {
     public final static String[] BUILD_VARIANTS = [DEBUG_BUILD_VARIANT, QA_BUILD_VARIANT]
     public final static GENERATED_PATH = "generated/iconlauncher"
 
     private final static BUILD_GENERATED_PATH = "build/$GENERATED_PATH"
-    private final static APP_INJECTOR_DIR_NAME = "app"
+    private final static APP_DIR_NAME = "app"
     private final static TEMPLATE_DIR_NAME = "template"
     private final static RES_PATH = "src/main/res/"
     private final static MANIFEST_PATH = "src/main/AndroidManifest.xml"
@@ -65,15 +64,17 @@ class IconService {
     private final static QA_BUILD_VARIANT = "qa"
     private final static VECTOR_ICON_SUFFIX = "_ic_lnr"
 
-    private File appInjectorDir = null
+    private File appDir = null
     private File overlayImage = null
     private File variantDir = null
 
     private final String buildVariant
+    private final String versionName
     private final Logger logger
 
-    IconService(String buildVariant, Logger logger) {
+    IconService(String buildVariant, String versionName, Logger logger) {
         this.buildVariant = buildVariant
+        this.versionName = versionName
         this.logger = logger
     }
 
@@ -81,9 +82,9 @@ class IconService {
      * Start process to change launcher icon
      */
     void change() {
-        appInjectorDir = getAppInjectorDir()
-        if (appInjectorDir == null) {
-            logger.debug("app-injector directory not found")
+        appDir = getAppDir()
+        if (appDir == null) {
+            logger.debug("app directory not found")
             return
         }
 
@@ -111,10 +112,10 @@ class IconService {
      * @param iconPath - launcher icon path
      */
     private void processIcon(IconPath iconPath) {
-        File resDir = new File("${appInjectorDir.path}/${RES_PATH}")
+        File resDir = new File("${appDir.path}/${RES_PATH}")
         if (!resDir.exists()) return
 
-        variantDir = new File("${appInjectorDir.path}/$BUILD_GENERATED_PATH/$buildVariant")
+        variantDir = new File("${appDir.path}/$BUILD_GENERATED_PATH/$buildVariant")
         File variantResDir = new File("${variantDir.path}/res")
 
         overlayImage = generateOverlayImage(variantResDir)
@@ -291,12 +292,15 @@ class IconService {
      * @return overlay image
      */
     private File generateOverlayImage(File variantResDir) {
+        List<String> texts = new ArrayList()
+
         def width = 192
         def height = 192
+        def textWidth = 100
 
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
         Graphics2D g2d = img.createGraphics()
-        Font font = new Font("Arial", Font.PLAIN, 24)
+        Font font = new Font("Arial", Font.PLAIN, 28)
         g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY)
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
         g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY)
@@ -308,17 +312,33 @@ class IconService {
         g2d.setFont(font)
         FontMetrics fm = g2d.getFontMetrics()
 
-        String buildVariant = this.buildVariant.toLowerCase()
+        int startIndex = 0
+        for (int i = 0; i < versionName.length(); i++) {
+            if (fm.stringWidth(versionName.substring(startIndex, i)) > textWidth) {
+                texts.add(versionName.substring(startIndex, i - 1))
+                startIndex = i - 1
+            }
+            if (i == versionName.length() - 1) {
+                texts.add(versionName.substring(startIndex, i + 1))
+            }
+        }
 
-        int textWidth = fm.stringWidth(buildVariant).toInteger()
-
-        int labelSize = fm.getAscent()
+        int labelSize = fm.getAscent() * texts.size()
         int x = ((width - textWidth) / 2).toInteger()
-        int y = ((height - labelSize) * 3 / 4).toInteger()
+        int y = ((height - labelSize) / 2).toInteger()
 
-        Color textColor = buildVariant.contains("debug") ? Color.GREEN : Color.BLACK
-        g2d.setColor(textColor)
-        g2d.drawString(buildVariant, x, y + fm.getAscent())
+        if (buildVariant == QA_BUILD_VARIANT) {
+            g2d.setColor(new Color(103, 86, 255, 150))
+        } else {
+            g2d.setColor(new Color(255, 66, 66, 150))
+        }
+
+        g2d.fillRect(x, y, textWidth, labelSize)
+
+        g2d.setColor(Color.BLACK)
+        for (def i = 0; i < texts.size(); i++) {
+            g2d.drawString(texts[i], x, y + fm.getAscent() * (i + 1))
+        }
 
         g2d.dispose()
         try {
@@ -334,15 +354,15 @@ class IconService {
     }
 
     /**
-     * Find app-injector directory
+     * Find app directory
      *
-     * @return app-injector directory
+     * @return app directory
      */
-    static File getAppInjectorDir() {
-        File appInjector = new File("./${APP_INJECTOR_DIR_NAME}")
+    static File getAppDir() {
+        File appInjector = new File("./${APP_DIR_NAME}")
         if (appInjector.exists()) return appInjector
 
-        appInjector = new File("./${TEMPLATE_DIR_NAME}/${APP_INJECTOR_DIR_NAME}")
+        appInjector = new File("./${TEMPLATE_DIR_NAME}/${APP_DIR_NAME}")
         if (appInjector.exists()) return appInjector
 
         return null
@@ -354,7 +374,7 @@ class IconService {
      * @return icon
      */
     private Icon getIcon() {
-        File manifestFile = new File("${appInjectorDir.path}/$MANIFEST_PATH")
+        File manifestFile = new File("${appDir.path}/$MANIFEST_PATH")
         if (!manifestFile.exists()) return null
 
         GPathResult manifestXml = new XmlSlurper().parse(manifestFile)

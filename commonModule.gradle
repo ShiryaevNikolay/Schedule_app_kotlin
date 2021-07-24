@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 apply from: '../config.gradle'
 apply from: '../commonAndroidDefaultConfig.gradle'
@@ -9,27 +8,28 @@ android {
 
     buildTypes {
         qa {
+            buildConfigField "String", "BASE_URL", '""'
             multiDexEnabled true
             minifyEnabled true
             debuggable = true
             // сопоставление buildType.qa к buildType.release для корректного подключения локального android-standard
             matchingFallbacks = ['release']
-
-            buildConfigField "boolean", "IS_DEBUG", "true"
         }
 
         debug {
+            buildConfigField "String", "BASE_URL", '""'
             multiDexEnabled true
             debuggable = true
-
-            buildConfigField "boolean", "IS_DEBUG", "true"
         }
 
         release {
+            buildConfigField "String", "BASE_URL", '""'
             minifyEnabled true
-
-            buildConfigField "boolean", "IS_DEBUG", "false"
         }
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     sourceSets {
