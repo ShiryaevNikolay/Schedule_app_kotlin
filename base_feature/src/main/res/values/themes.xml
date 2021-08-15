@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="Theme.Timetable.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Timetable.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Timetable.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

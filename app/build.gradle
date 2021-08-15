@@ -1,62 +1,43 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-//apply plugin: 'com.google.firebase.crashlytics' todo uncoment for real app
-//apply plugin: 'com.google.firebase.appdistribution' todo uncoment for real app
-
-apply from: '../config.gradle'
-
-apply from: '../setLabelToIcon.gradle'
-apply from: '../validateCrossFeatureRoutes.gradle.kts'
-apply from: '../keystore/signingConfigs.gradle'
-apply from: '../buildTypes.gradle'
-apply from: '../commonAndroidDefaultConfig.gradle'
-apply from: '../androidTestConfiguration.gradle'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
 
 android {
+    compileSdk 30
 
     defaultConfig {
-        applicationId meta.applicationId
+        applicationId "ru.shiryaev.timetable"
+        minSdk 21
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
 
-        versionCode meta.versionCode
-        versionName meta.versionName
-
-        //setProperty("archivesBaseName", "$applicationName-$versionName-($versionCode)") //todo uncomment for real app
-
-        testBuildType 'debug' //todo replace to 'qa' for real app
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    packagingOptions {
-        pickFirst 'META-INF/LICENSE.md'
-        pickFirst 'META-INF/LICENSE-notice.md'
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
 dependencies {
-    implementation project(":i-push-notification")
-    implementation project(":f-onboarding")
-    implementation project(":f-auth")
-    implementation project(":f-main")
-    implementation project(":f-splash")
-    implementation project(":f-search")
-    implementation project(":f-feed")
-    implementation project(":f-profile")
 
-    implementation lang.kotlinStdLib
-    implementation lang.jetbrainsAnnotations
-
-    implementation di.dagger
-    kapt di.daggerKapt
-
-    implementation androidX.annotation
-    implementation androidX.appcompat
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
-
-configurations.all {
-    resolutionStrategy.cacheDynamicVersionsFor 1, 'seconds'
-    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
-    resolutionStrategy.force 'org.objenesis:objenesis:2.6'
-    resolutionStrategy.force 'io.github.classgraph:classgraph:4.8.54'
-}
-
-//todo uncoment for real app
-//apply plugin: 'com.google.gms.google-services'
