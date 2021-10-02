@@ -1,4 +1,4 @@
-package ru.shiryaev.base_feature.ui.theme
+package ru.shiryaev.timetable.base_feature.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
