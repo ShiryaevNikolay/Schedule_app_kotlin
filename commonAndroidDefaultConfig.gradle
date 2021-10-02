@@ -9,9 +9,6 @@ android {
     defaultConfig {
         minSdk config["minSdkVersion"]
         targetSdk config["targetSdkVersion"]
-
-        versionCode config["versionCode"]
-        versionName config["versionName"]
     }
 
     compileOptions {
