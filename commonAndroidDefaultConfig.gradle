@@ -1,14 +1,18 @@
 // Основная конфигурация Android
 
 apply from: '../config.gradle'
-def config = extensions.getByName("ext")
 
 android {
-    compileSdk config["compileSdkVersion"]
+    compileSdk compileSdkVersion
 
     defaultConfig {
-        minSdk config["minSdkVersion"]
-        targetSdk config["targetSdkVersion"]
+        minSdk minSdkVersion
+        targetSdk targetSdkVersion
+
+        consumerProguardFiles "consumer-rules.pro"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     compileOptions {
@@ -18,5 +22,12 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
+        useIR = true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
