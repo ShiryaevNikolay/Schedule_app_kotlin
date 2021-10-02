@@ -11,7 +11,7 @@ ext {
     gradlePluginVersion = "7.0.2"
 
     // lang
-    kotlinVersion = "1.5.31"
+    kotlinGradleVersion = "1.5.31"
 
     composeVersion = '1.0.0'
 
