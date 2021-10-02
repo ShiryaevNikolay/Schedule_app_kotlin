@@ -6,6 +6,6 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "Timetable"
-include ':app'
-include ':base_feature'
+rootProject.name = "Timetable for student"
+include ':app',
+        ':base_feature'
