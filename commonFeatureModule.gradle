@@ -1,5 +1,17 @@
 apply from: '../commonModule.gradle'
 
+android {
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion composeVersion
+        kotlinCompilerVersion kotlinCompilerVersion
+    }
+}
+
 dependencies {
     implementation project(":base_feature")
 }
