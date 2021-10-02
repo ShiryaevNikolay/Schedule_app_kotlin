@@ -8,4 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Timetable for student"
 include ':app',
+        ':base',
         ':base_feature'
