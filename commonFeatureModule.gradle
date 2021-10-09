@@ -1,4 +1,5 @@
 apply from: '../commonModule.gradle'
+def config = extensions.getByName("ext")
 
 android {
 
@@ -7,8 +8,8 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion composeVersion
-        kotlinCompilerVersion kotlinCompilerVersion
+        kotlinCompilerExtensionVersion config["composeVersion"]
+        kotlinCompilerVersion config["kotlinCompilerVersion"]
     }
 }
 

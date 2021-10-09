@@ -1,13 +1,14 @@
 // Основная конфигурация Android
 
 apply from: '../config.gradle'
+def config = extensions.getByName("ext")
 
 android {
-    compileSdk compileSdkVersion
+    compileSdk config["compileSdkVersion"]
 
     defaultConfig {
-        minSdk minSdkVersion
-        targetSdk targetSdkVersion
+        minSdk config["minSdkVersion"]
+        targetSdk config["targetSdkVersion"]
 
         consumerProguardFiles "consumer-rules.pro"
         vectorDrawables {

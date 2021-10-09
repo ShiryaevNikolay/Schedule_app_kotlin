@@ -4,11 +4,13 @@ apply plugin: 'kotlin-android'
 apply from: '../config.gradle'
 apply from: '../commonAndroidDefaultConfig.gradle'
 
+def config = extensions.getByName("ext")
+
 android {
 
     defaultConfig {
-        versionCode versionCode
-        versionName versionName
+        versionCode config["versionCode"]
+        versionName config["versionName"]
     }
 
     buildTypes {
