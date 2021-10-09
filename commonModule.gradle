@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-apply from: '../config.gradle'
-apply from: '../commonAndroidDefaultConfig.gradle'
+apply from: "$rootDir/config.gradle"
+apply from: "$rootDir/commonAndroidDefaultConfig.gradle"
 
 def config = extensions.getByName("ext")
 

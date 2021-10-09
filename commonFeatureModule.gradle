@@ -1,4 +1,4 @@
-apply from: '../commonModule.gradle'
+apply from: "$rootDir/commonModule.gradle"
 def config = extensions.getByName("ext")
 
 android {
