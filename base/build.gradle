@@ -1,4 +1,4 @@
-apply from: '../commonModule.gradle'
+apply from: "$rootDir/commonModule.gradle"
 
 dependencies {
     api project(":domain")

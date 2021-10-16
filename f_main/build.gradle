@@ -1,4 +1,4 @@
-apply from: '../commonFeatureModule.gradle'
+apply from: "$rootDir/commonFeatureModule.gradle"
 
 dependencies {
 }

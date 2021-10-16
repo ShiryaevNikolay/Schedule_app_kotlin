@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 
-apply from: '../config.gradle'
-apply from: '../commonAndroidDefaultConfig.gradle'
+apply from: "$rootDir/config.gradle"
+apply from: "$rootDir/commonAndroidDefaultConfig.gradle"
 
 def config = extensions.getByName("ext")
 
@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation project(":f_main")
 
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"

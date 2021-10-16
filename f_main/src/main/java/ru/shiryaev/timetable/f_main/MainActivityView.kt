@@ -8,16 +8,16 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import ru.shiryaev.timetable.f_main.ui.theme.TimetableForStudentTheme
+import ru.shiryaev.timetable.base_feature.ui.theme.TimetableForStudentTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivityView : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             TimetableForStudentTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting2("Android")
+                    Greeting("Android")
                 }
             }
         }
@@ -25,14 +25,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting2(name: String) {
+fun Greeting(name: String) {
     Text(text = "Hello $name!")
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview2() {
+fun DefaultPreview() {
     TimetableForStudentTheme {
-        Greeting2("Android")
+        Greeting("Android")
     }
 }

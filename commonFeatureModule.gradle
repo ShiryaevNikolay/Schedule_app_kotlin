@@ -1,17 +1,4 @@
 apply from: "$rootDir/commonModule.gradle"
-def config = extensions.getByName("ext")
-
-android {
-
-    buildFeatures {
-        compose true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion config["composeVersion"]
-        kotlinCompilerVersion config["kotlinCompilerVersion"]
-    }
-}
 
 dependencies {
     implementation project(":base_feature")
