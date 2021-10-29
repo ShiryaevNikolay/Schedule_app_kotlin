@@ -12,7 +12,6 @@ ext {
 
     // lang
     kotlinGradleVersion = "1.5.21"
-    kotlinCompilerVersion = "1.5.21"
 
     composeVersion = '1.0.1'
 
